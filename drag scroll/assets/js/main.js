@@ -16,17 +16,14 @@ if (isTouch === true)
     startX = e.touches[0].pageX - slider.offsetLeft;
     scrollLeft = slider.scrollLeft;
   });
-  
-  slider.addEventListener('touchcancel', () => {
-    isDown = false;
-    console.log('touchleft');
-    slider.classList.remove('active');
-  });
-  
+
   slider.addEventListener('touchend', () => {
     isDown = false;
-    console.log('touchuped');
-    slider.classList.remove('active');
+    if (slider.scrollLeft % 333 !== 0) {
+      let lockSlide = Math.round(slider.scrollLeft / 333) * 345;
+      console.log(`slider.offsetLeft = ${slider.offsetLeft}`);
+      return slider.scrollTo({left:lockSlide, behavior:'smooth'});
+      }
   });
   
   slider.addEventListener('touchmove', (e) => {
@@ -35,6 +32,10 @@ if (isTouch === true)
     const x = e.touches[0].pageX - slider.offsetLeft;
     const walk = (x - startX) * 3;
     slider.scrollLeft = scrollLeft - walk;
+
+    console.log(`slider.offsetLeft = ${slider.offsetLeft}`);
+
+    console.log(`slider.scrollLeft = ${slider.scrollLeft}`);
   });
 }
 else
