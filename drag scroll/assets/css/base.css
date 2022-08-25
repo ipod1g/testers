@@ -44,6 +44,7 @@ body {
   will-change: transform;
   position: relative;
   font-size: 0;
+  touch-action: none;
 }
 
 .card.active {

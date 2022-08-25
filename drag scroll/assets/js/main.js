@@ -3,28 +3,66 @@ let isDown = false;
 let startX;
 let scrollLeft;
 
-slider.addEventListener('mousedown', (e) => {
-  isDown = true;
-  slider.classList.add('active');
-  startX = e.pageX - slider.offsetLeft;
-  scrollLeft = slider.scrollLeft;
-});
 
-slider.addEventListener('mouseleave', () => {
-  isDown = false;
-  slider.classList.remove('active');
-});
+var isTouch = (('ontouchstart' in window) || (navigator.msMaxTouchPoints > 0));
 
-slider.addEventListener('mouseup', () => {
-  isDown = false;
-  slider.classList.remove('active');
-});
 
-slider.addEventListener('mousemove', (e) => {
-  if (!isDown) return;  // stop the fn from running
-  e.preventDefault();
-  const x = e.pageX - slider.offsetLeft;
-  const walk = (x - startX) * 3;
-  slider.scrollLeft = scrollLeft - walk;
-  // startX = e.pageX - slider.offsetLeft;
-});
+if (isTouch === true)
+{
+  // content for touch-screen (mobile) devices
+  slider.addEventListener('touchstart', (e) => {
+    isDown = true;
+    //adding touches[0] defined the pageX
+    startX = e.touches[0].pageX - slider.offsetLeft;
+    scrollLeft = slider.scrollLeft;
+  });
+  
+  slider.addEventListener('touchcancel', () => {
+    isDown = false;
+    console.log('touchleft');
+    slider.classList.remove('active');
+  });
+  
+  slider.addEventListener('touchend', () => {
+    isDown = false;
+    console.log('touchuped');
+    slider.classList.remove('active');
+  });
+  
+  slider.addEventListener('touchmove', (e) => {
+    if (!isDown) return;  // stop the fn from running
+    e.preventDefault();
+    const x = e.touches[0].pageX - slider.offsetLeft;
+    const walk = (x - startX) * 3;
+    slider.scrollLeft = scrollLeft - walk;
+  });
+}
+else
+{
+  // everything else (desktop)
+  slider.addEventListener('mousedown', (e) => {
+    isDown = true;
+    slider.classList.add('active');
+    startX = e.pageX - slider.offsetLeft;
+    scrollLeft = slider.scrollLeft;
+  });
+  
+  slider.addEventListener('mouseleave', () => {
+    isDown = false;
+    slider.classList.remove('active');
+  });
+  
+  slider.addEventListener('mouseup', () => {
+    isDown = false;
+    slider.classList.remove('active');
+  });
+  
+  slider.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - slider.offsetLeft;
+    const walk = (x - startX) * 3;
+    slider.scrollLeft = scrollLeft - walk;
+  });
+}
+
