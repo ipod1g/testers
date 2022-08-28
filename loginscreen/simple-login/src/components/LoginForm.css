@@ -1,0 +1,45 @@
+.username {
+    color: red;
+}
+
+.logo-main {
+    display: flex;
+    justify-content: center;
+}
+
+.sign-in {
+
+}
+
+.form-main{
+}
+
+.form-inner {
+    box-sizing: border-box;
+    height: 97vh;
+    display: flex;
+    flex-direction: column;
+    border: 1px coral solid;
+    max-width: 390px;
+    padding: 10px;
+    align-items: center;
+}
+
+.form-group > input {
+    width: 280px;
+    height: 45px;
+    border: 0px none;
+    border-radius: 3px;
+    background-color: rgb(225, 225, 225);
+    margin: 8px;
+}
+
+input::placeholder {
+    font-size: 8px;
+}
+
+ul.login-routes {
+    padding-inline-start: 0;
+    display: flex;
+    gap: 4px;
+}

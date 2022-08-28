@@ -1,0 +1,6 @@
+.hero-section {
+    background-image: url('../assets/udyr_art.jpg');
+    background-size: 1300px 750px;
+    background-repeat: no-repeat;
+    width:100%;
+}
