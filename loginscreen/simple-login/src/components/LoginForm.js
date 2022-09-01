@@ -1,17 +1,61 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, Component } from "react";
 import "./LoginForm.css";
-import windowSizeInfo from "./Dimensions";
 
-function LoginForm({ Login, error }) {
+function LoginForm({ Login, errorMsg, error }) {
    const [details, setDetails] = useState({ name: "", password: "" });
    const [value, setValue] = useState("");
    const [isIdActive, setIdActive] = useState(false);
    const [isPwActive, setPwActive] = useState(false);
+   const [passwordShown, setPasswordShown] = useState(false);
+   const [isError, setIsError] = useState(false);
 
    const submitHandler = (e) => {
       e.preventDefault();
+      // console.log("submit handle fired");
+      // console.log("ES= " + isError);
       Login(details);
+      setIsError(true);
    };
+
+   if (isError === true) {
+      console.log("final 1");
+      document.documentElement.style.setProperty(
+         "--inputfield-color",
+         "#efb7f36e"
+      );
+      document.documentElement.style.setProperty(
+         "--inputfield-border-color",
+         "#e3b4e3"
+      );
+      document.documentElement.style.setProperty("--border-width", "2px");
+      document.documentElement.style.setProperty(
+         "--inputfield-focus-color",
+         "#efb7f36e"
+      );
+      document.documentElement.style.setProperty(
+         "--inputfield-focus-border",
+         "#e3b4e3"
+      );
+   } else {
+      console.log("final 2");
+      document.documentElement.style.setProperty(
+         "--inputfield-color",
+         "rgba(236, 236, 236, 0.612)"
+      );
+      document.documentElement.style.setProperty(
+         "--inputfield-border-color",
+         "transparent"
+      );
+      document.documentElement.style.setProperty("--border-width", "0px");
+      document.documentElement.style.setProperty(
+         "--inputfield-focus-color",
+         "#fff"
+      );
+      document.documentElement.style.setProperty(
+         "--inputfield-focus-border",
+         "black"
+      );
+   }
 
    const handleTextChange = (text) => {
       setValue(text);
@@ -31,7 +75,43 @@ function LoginForm({ Login, error }) {
       }
    };
 
-   const height = windowSizeInfo();
+   const togglePassword = () => {
+      setPasswordShown(!passwordShown);
+   };
+
+   const isInputFilled = () => {
+      if (isIdActive === true && isPwActive === true) {
+         document.documentElement.style.setProperty(
+            "--border-color",
+            "rgb(197 0 0)"
+         );
+         document.documentElement.style.setProperty(
+            "--bg-color",
+            "rgb(197 0 0)"
+         );
+         document.documentElement.style.setProperty("--arrow-color", "#fff");
+         document.documentElement.style.setProperty("--btn-opacity", "0.9");
+         document.documentElement.style.setProperty("--pointer-on", "all");
+      } else {
+         document.documentElement.style.setProperty(
+            "--border-color",
+            "#a3a3a3"
+         );
+         document.documentElement.style.setProperty(
+            "--bg-color",
+            "rgba(255, 255, 255, 0)"
+         );
+         document.documentElement.style.setProperty("--arrow-color", "#a3a3a3");
+         document.documentElement.style.setProperty("--btn-opacity", "0.3");
+         document.documentElement.style.setProperty("--pointer-on", "none");
+      }
+   };
+
+   useEffect(() => {
+      // console.log("useEffect ran");
+      isInputFilled();
+      return;
+   }, [value]);
 
    return (
       <section className="form-main">
@@ -42,10 +122,10 @@ function LoginForm({ Login, error }) {
                alt="Riot games logo"
             />
             <h2 className="sign-in">Sign in</h2>
-            {error !== "" ? (
+            {isError !== false ? (
                <div className="error-shadow">
                   <span className="error-box">
-                     <span className="error-msg">{error}</span>
+                     <span className="error-msg">{errorMsg}</span>
                   </span>
                </div>
             ) : (
@@ -64,6 +144,10 @@ function LoginForm({ Login, error }) {
                      onChange={(e) => {
                         handleTextChange(e.target.value);
                         setDetails({ ...details, name: e.target.value });
+                        setIsError(false);
+                        // isInputFilled();
+                        // console.log("E= " + error);
+                        // console.log("ES= " + isError);
                      }}
                      value={details.name}
                   />
@@ -74,12 +158,14 @@ function LoginForm({ Login, error }) {
 
                <div className="form-group">
                   <input
-                     type="password"
+                     type={passwordShown ? "text" : "password"}
                      name="password"
                      id="password"
                      onChange={(e) => {
                         handlePasswordChange(e.target.value);
                         setDetails({ ...details, password: e.target.value });
+                        setIsError(false);
+                        // isInputFilled();
                      }}
                      value={details.password}
                   />
@@ -91,6 +177,9 @@ function LoginForm({ Login, error }) {
                   </label>
                </div>
             </form>
+            <button className="toggle-btn" onClick={togglePassword}>
+               👁
+            </button>
             <ul className="login-routes">
                <button className="button-fb">
                   <img
@@ -125,9 +214,13 @@ function LoginForm({ Login, error }) {
                <div className="login-btn-wrapper">
                   <input
                      form="main-form"
-                     className="login-btn"
+                     className={
+                        isIdActive && isPwActive
+                           ? "login-btn-on"
+                           : "login-btn-off"
+                     }
                      type="submit"
-                     value="LOGIN"
+                     value=" "
                   />
                </div>
             </div>

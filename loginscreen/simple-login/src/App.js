@@ -12,7 +12,8 @@ function App() {
    //----TEMP DATABASE ----//
 
    const [user, setUser] = useState({ name: "" });
-   const [error, setError] = useState("");
+   const [errorMsg, setError] = useState("");
+   const [isError, setIsError] = useState(false);
 
    const Login = (details) => {
       if (
@@ -20,10 +21,12 @@ function App() {
          details.password === adminUser.password
       ) {
          console.log("Logged in");
+         setIsError(false);
          setUser({
             name: details.name,
          });
       } else {
+         setIsError(true);
          setError(
             "Your login credentials don't match an account in our system."
          );
@@ -45,7 +48,7 @@ function App() {
                <button onClick={Logout}>Logout</button>
             </div>
          ) : (
-            <LoginForm Login={Login} error={error} />
+            <LoginForm Login={Login} errorMsg={errorMsg} error={isError} />
          )}
          <Hero />
       </div>
