@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Component } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./LoginForm.css";
 
 function LoginForm({ Login, errorMsg, error }) {
@@ -8,6 +8,9 @@ function LoginForm({ Login, errorMsg, error }) {
    const [isPwActive, setPwActive] = useState(false);
    const [passwordShown, setPasswordShown] = useState(false);
    const [isError, setIsError] = useState(false);
+   const [isIdFocused, setIsIdFocused] = useState(false);
+   const [isPwFocused, setIsPwFocused] = useState(false);
+   const inputRef = useRef(null);
 
    const submitHandler = (e) => {
       e.preventDefault();
@@ -77,6 +80,8 @@ function LoginForm({ Login, errorMsg, error }) {
 
    const togglePassword = () => {
       setPasswordShown(!passwordShown);
+      // something to return back to input field
+      inputRef.current.focus();
    };
 
    const isInputFilled = () => {
@@ -113,6 +118,13 @@ function LoginForm({ Login, errorMsg, error }) {
       return;
    }, [value]);
 
+   // FIX THIS PART
+   useEffect(() => {
+      inputRef.current.selectionStart = inputRef.current.value.length;
+      inputRef.current.selectionEnd = inputRef.current.value.length;
+      return;
+   }, [passwordShown]);
+
    return (
       <section className="form-main">
          <div className="form-outer">
@@ -136,7 +148,11 @@ function LoginForm({ Login, errorMsg, error }) {
                onSubmit={submitHandler}
                className="form-inner"
             >
-               <div className="form-group">
+               <div
+                  className={
+                     isIdFocused ? "form-group form-group-focus" : "form-group"
+                  }
+               >
                   <input
                      type="text"
                      name="name"
@@ -149,6 +165,8 @@ function LoginForm({ Login, errorMsg, error }) {
                         // console.log("E= " + error);
                         // console.log("ES= " + isError);
                      }}
+                     onFocus={() => setIsIdFocused(true)}
+                     onBlur={() => setIsIdFocused(false)}
                      value={details.name}
                   />
                   <label className={isIdActive ? "Active" : ""} htmlFor="name">
@@ -156,7 +174,11 @@ function LoginForm({ Login, errorMsg, error }) {
                   </label>
                </div>
 
-               <div className="form-group">
+               <div
+                  className={
+                     isPwFocused ? "form-group form-group-focus" : "form-group"
+                  }
+               >
                   <input
                      type={passwordShown ? "text" : "password"}
                      name="password"
@@ -167,19 +189,37 @@ function LoginForm({ Login, errorMsg, error }) {
                         setIsError(false);
                         // isInputFilled();
                      }}
-                     value={details.password}
+                     onFocus={() => setIsPwFocused(true)}
+                     onBlur={() => setIsPwFocused(false)}
+                     ref={inputRef}
+                     value={isError === true ? "" : details.password}
                   />
                   <label
-                     className={isPwActive ? "Active" : ""}
+                     className={isPwActive && isError !== true ? "Active" : ""}
                      htmlFor="password"
                   >
                      Password
                   </label>
                </div>
             </form>
-            <button className="toggle-btn" onClick={togglePassword}>
-               👁
-            </button>
+            <button
+               className={
+                  isPwFocused
+                     ? passwordShown
+                        ? "toggle-btn toggle-btn-show"
+                        : "toggle-btn toggle-btn-hide"
+                     : "invis-btn"
+               }
+               onClick={togglePassword}
+               onFocus={() => {
+                  setIsPwFocused(true);
+                  setPwActive(true);
+               }}
+               onBlur={() => {
+                  setIsPwFocused(false);
+                  // setPwActive(false);
+               }}
+            ></button>
             <ul className="login-routes">
                <button className="button-fb">
                   <img
