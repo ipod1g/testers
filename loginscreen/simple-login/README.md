@@ -1,3 +1,77 @@
+# Riot game login screen project
+
+<aside>
+💡 Login screen inspired by Riot Game Client
+
+</aside>
+
+# Summary
+
+---
+
+### Skills used
+
+-  HTML
+-  CSS
+-  JavaScript
+-  React
+-  npm
+-  Netlify
+
+### Notable functions
+
+-  Replica of Riot Games Client
+-  Local login authorization (update with axios soon)
+-  Interactive UI
+
+# Process
+
+---
+
+### Initial
+
+-  Started with importing necessary assets and building the login form
+-  Made various states to replicate the behavior of the interaction
+   -  Error message and UI
+   -  Focus interaction - on floating label animation
+   -  Password toggle view
+-  Added personal touch on maintaining the aspect ratio of the hero art upon responsive rescaling
+
+### Problems
+
+-  Faced difficulties on constructing input handler + animation - tried to use components to simplify the code blocks but the life cycle was confusing
+   -  callback functions not put to use in the end
+-  Using onChange the inputs are recognized 1 input later than wanted, hence brought useEffect to play
+-  Overuse of useState and useEffect due to difficulties with child-parent communication
+   -  Caused confusions when trying to manage crowded changes on interaction
+   -  Error was checked on parent but the cycle was immutable? on child upon passing
+-  Had bug after pressing button and using keyboard input causing a random border appearing on it → :focus-visible had inherent outline
+   -  Introduced focus state
+
+### Lessons
+
+-  Introduction to component based coding with React
+-  Utilized React Hooks for manageable code
+-  Review - htmlFor? class extends? this.current constructor? super props? → Solvable with REDUX
+
+# Version check
+
+---
+
+-  v1.0.0
+   -  Deployed on 3 Sep 2022
+   -  Complete login form interactions and resolved all known bugs
+      -  Does not include version button yet
+   -  Simple authorization in hard coded data base
+   -  Partially responsive design
+
+# Future implementation
+
+---
+
+-  Will upgrade to use back end for database management in the future
+-  Support fully responsive design by adding my touch - since source login screen doesn’t support responsive design
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
