@@ -128,6 +128,10 @@ function LoginForm({ Login, errorMsg, error }) {
       return;
    }, [passwordShown]);
 
+   const loginRoutes = () => {
+      alert("Logined with link");
+   };
+
    return (
       <section className="form-main">
          <div className="form-outer">
@@ -222,23 +226,24 @@ function LoginForm({ Login, errorMsg, error }) {
                   setIsPwFocused(false);
                   // setPwActive(false);
                }}
+               tabIndex="-1"
             ></button>
             <ul className="login-routes">
-               <button className="button-fb">
+               <button className="button-fb" onClick={loginRoutes}>
                   <img
                      className="fblogo"
                      src={require("../assets/fbicon.png")}
                      alt="fb login"
                   />
                </button>
-               <button className="button-google">
+               <button className="button-google" onClick={loginRoutes}>
                   <img
                      className="googlelogo"
                      src={require("../assets/googleicon.png")}
                      alt="google login"
                   />
                </button>
-               <button className="button-apple">
+               <button className="button-apple" onClick={loginRoutes}>
                   <img
                      className="applelogo"
                      src={require("../assets/appleicon.png")}
