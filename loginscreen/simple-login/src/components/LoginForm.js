@@ -11,6 +11,7 @@ function LoginForm({ Login, errorMsg, error }) {
    const [isIdFocused, setIsIdFocused] = useState(false);
    const [isPwFocused, setIsPwFocused] = useState(false);
    const inputRef = useRef(null);
+   const [isFirstRun, setIsFirstRun] = useState(true);
 
    const submitHandler = (e) => {
       e.preventDefault();
@@ -21,7 +22,6 @@ function LoginForm({ Login, errorMsg, error }) {
    };
 
    if (isError === true) {
-      console.log("final 1");
       document.documentElement.style.setProperty(
          "--inputfield-color",
          "#efb7f36e"
@@ -40,7 +40,6 @@ function LoginForm({ Login, errorMsg, error }) {
          "#e3b4e3"
       );
    } else {
-      console.log("final 2");
       document.documentElement.style.setProperty(
          "--inputfield-color",
          "rgba(236, 236, 236, 0.612)"
@@ -81,7 +80,7 @@ function LoginForm({ Login, errorMsg, error }) {
    const togglePassword = () => {
       setPasswordShown(!passwordShown);
       // something to return back to input field
-      inputRef.current.focus();
+      // inputRef.current?.setSelectionRange(value.length, value.length);
    };
 
    const isInputFilled = () => {
@@ -118,10 +117,14 @@ function LoginForm({ Login, errorMsg, error }) {
       return;
    }, [value]);
 
-   // FIX THIS PART
    useEffect(() => {
-      inputRef.current.selectionStart = inputRef.current.value.length;
-      inputRef.current.selectionEnd = inputRef.current.value.length;
+      if (isFirstRun === true) {
+         setIsFirstRun(false);
+         return;
+      } else {
+         console.log("Password state changed");
+         inputRef.current.focus();
+      }
       return;
    }, [passwordShown]);
 
