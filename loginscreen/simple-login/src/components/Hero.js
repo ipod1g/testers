@@ -1,5 +1,5 @@
 //For settings and account icon
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./Hero.css";
 import Background from "../assets/udyr_art.jpg";
 import windowSizeInfo from "./Dimensions";
