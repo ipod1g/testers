@@ -1,7 +1,7 @@
-# Riot game login screen project
+# Riot games login screen project
 
 <aside>
-💡 Login screen inspired by Riot Game Client
+💡 Login screen inspired by Riot Games Client
 
 </aside>
 
@@ -47,12 +47,16 @@
    -  Error was checked on parent but the cycle was immutable? on child upon passing
 -  Had bug after pressing button and using keyboard input causing a random border appearing on it → :focus-visible had inherent outline
    -  Introduced focus state
+-  Faced troubles with deployment, but fixed with creating netlify.toml file locally
+   -  Had to include not only redirect but build command here too
+-  Issues with non secured http font link… solved by using import/link to @fontface
+-  setSelectionRange was not working by function of onClick → useEffect resolved it without using it for cursor focus
 
 ### Lessons
 
 -  Introduction to component based coding with React
--  Utilized React Hooks for manageable code
--  Review - htmlFor? class extends? this.current constructor? super props? → Solvable with REDUX
+   -  Refactored after achieveing the result interaction
+-  Utilized React Hooks and knowledge of React components for more manageable code
 
 # Version check
 
@@ -61,9 +65,13 @@
 -  v1.0.0
    -  Deployed on 3 Sep 2022
    -  Complete login form interactions and resolved all known bugs
-      -  Does not include version button yet
+      -  Does not include version button and touch interactions yet
    -  Simple authorization in hard coded data base
    -  Partially responsive design
+-  v1.1.0
+   -  Updated on 5 Sep 2022
+   -  Started refactoring for cleaner and efficient code → Utilize more of React components and less complexity in jsx file
+      -  Live-shared with Sim Ho for review session
 
 # Future implementation
 
@@ -71,6 +79,8 @@
 
 -  Will upgrade to use back end for database management in the future
 -  Support fully responsive design by adding my touch - since source login screen doesn’t support responsive design
+
+---
 
 # Getting Started with Create React App
 

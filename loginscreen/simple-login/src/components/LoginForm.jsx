@@ -1,25 +1,27 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./LoginForm.css";
+import SocialLoginButton from "./SocialLoginButton";
 
-function LoginForm({ Login, errorMsg, error }) {
+function LoginForm({ Login, errorMsg }) {
    const [details, setDetails] = useState({ name: "", password: "" });
-   const [value, setValue] = useState("");
-   const [isIdActive, setIdActive] = useState(false);
-   const [isPwActive, setPwActive] = useState(false);
    const [passwordShown, setPasswordShown] = useState(false);
    const [isError, setIsError] = useState(false);
-   const [isIdFocused, setIsIdFocused] = useState(false);
    const [isPwFocused, setIsPwFocused] = useState(false);
-   const inputRef = useRef(null);
+   const passwordInputRef = useRef(null);
    const [isFirstRun, setIsFirstRun] = useState(true);
 
    const submitHandler = (e) => {
       e.preventDefault();
-      // console.log("submit handle fired");
-      // console.log("ES= " + isError);
       Login(details);
       setIsError(true);
+      setDetails((prev) => {
+         const updatedDetails = { ...prev, password: "" };
+         return updatedDetails;
+      });
    };
+   useEffect(() => {
+      console.log(details.password && details.name);
+   }, [details]);
 
    if (isError === true) {
       document.documentElement.style.setProperty(
@@ -59,32 +61,8 @@ function LoginForm({ Login, errorMsg, error }) {
       );
    }
 
-   const handleTextChange = (text) => {
-      setValue(text);
-      if (text !== "") {
-         setIdActive(true);
-      } else {
-         setIdActive(false);
-      }
-   };
-
-   const handlePasswordChange = (text) => {
-      setValue(text);
-      if (text !== "") {
-         setPwActive(true);
-      } else {
-         setPwActive(false);
-      }
-   };
-
-   const togglePassword = () => {
-      setPasswordShown(!passwordShown);
-      // something to return back to input field
-      // inputRef.current?.setSelectionRange(value.length, value.length);
-   };
-
    const isInputFilled = () => {
-      if (isIdActive === true && isPwActive === true) {
+      if (details.name && details.password) {
          document.documentElement.style.setProperty(
             "--border-color",
             "rgb(197 0 0)"
@@ -111,21 +89,18 @@ function LoginForm({ Login, errorMsg, error }) {
       }
    };
 
-   useEffect(() => {
-      // console.log("useEffect ran");
-      isInputFilled();
-      return;
-   }, [value]);
+   // useEffect(() => {
+   //    // console.log("useEffect ran");
+   //    isInputFilled();
+   //    return;
+   // }, [details]);
 
    useEffect(() => {
-      if (isFirstRun === true) {
+      if (isFirstRun) {
          setIsFirstRun(false);
-         return;
       } else {
-         console.log("Password state changed");
-         inputRef.current.focus();
+         passwordInputRef.current.focus();
       }
-      return;
    }, [passwordShown]);
 
    const loginRoutes = () => {
@@ -155,102 +130,95 @@ function LoginForm({ Login, errorMsg, error }) {
                onSubmit={submitHandler}
                className="form-inner"
             >
-               <div
-                  className={
-                     isIdFocused ? "form-group form-group-focus" : "form-group"
-                  }
-               >
+               <div className="form-group">
                   <input
                      type="text"
                      name="name"
                      id="name"
                      onChange={(e) => {
-                        handleTextChange(e.target.value);
-                        setDetails({ ...details, name: e.target.value });
                         setIsError(false);
-                        // isInputFilled();
+                        setDetails((prev) => {
+                           const updatedDetails = {
+                              ...prev,
+                              name: e.target.value,
+                           };
+                           return updatedDetails;
+                        });
+                        isInputFilled();
                         // console.log("E= " + error);
                         // console.log("ES= " + isError);
                      }}
-                     onFocus={() => setIsIdFocused(true)}
-                     onBlur={() => setIsIdFocused(false)}
                      value={details.name}
                   />
-                  <label className={isIdActive ? "Active" : ""} htmlFor="name">
+                  <label
+                     className={details.name ? "Active" : ""}
+                     htmlFor="name"
+                  >
                      Username
                   </label>
                </div>
 
-               <div
-                  className={
-                     isPwFocused ? "form-group form-group-focus" : "form-group"
-                  }
-               >
+               <div className="form-group">
                   <input
                      type={passwordShown ? "text" : "password"}
                      name="password"
                      id="password"
                      onChange={(e) => {
-                        handlePasswordChange(e.target.value);
-                        setDetails({ ...details, password: e.target.value });
+                        setDetails((prev) => {
+                           const updatedDetails = {
+                              ...prev,
+                              password: e.target.value,
+                           };
+                           return updatedDetails;
+                        });
                         setIsError(false);
-                        // isInputFilled();
+                        isInputFilled();
                      }}
                      onFocus={() => setIsPwFocused(true)}
                      onBlur={() => setIsPwFocused(false)}
-                     ref={inputRef}
-                     value={isError === true ? "" : details.password}
+                     ref={passwordInputRef}
+                     value={details.password}
                   />
                   <label
-                     className={isPwActive && isError !== true ? "Active" : ""}
+                     className={details.password ? "Active" : ""}
                      htmlFor="password"
                   >
                      Password
                   </label>
                </div>
+
+               <button
+                  type="button"
+                  className={
+                     isPwFocused
+                        ? passwordShown
+                           ? "toggle-btn toggle-btn-show"
+                           : "toggle-btn toggle-btn-hide"
+                        : "invis-btn"
+                  }
+                  onClick={() => {
+                     setPasswordShown(!passwordShown);
+                  }}
+                  onFocus={() => {
+                     setIsPwFocused(true);
+                  }}
+                  onBlur={() => {
+                     setIsPwFocused(false);
+                  }}
+                  tabIndex="-1"
+               ></button>
             </form>
-            <button
-               className={
-                  isPwFocused
-                     ? passwordShown
-                        ? "toggle-btn toggle-btn-show"
-                        : "toggle-btn toggle-btn-hide"
-                     : "invis-btn"
-               }
-               onClick={togglePassword}
-               onFocus={() => {
-                  setIsPwFocused(true);
-                  setPwActive(true);
-               }}
-               onBlur={() => {
-                  setIsPwFocused(false);
-                  // setPwActive(false);
-               }}
-               tabIndex="-1"
-            ></button>
+
             <ul className="login-routes">
-               <button className="button-fb" onClick={loginRoutes}>
-                  <img
-                     className="fblogo"
-                     src={require("../assets/fbicon.png")}
-                     alt="fb login"
+               {["fb", "google", "apple"].map((social) => (
+                  <SocialLoginButton
+                     key={social}
+                     social={social}
+                     loginRoutes={loginRoutes}
                   />
-               </button>
-               <button className="button-google" onClick={loginRoutes}>
-                  <img
-                     className="googlelogo"
-                     src={require("../assets/googleicon.png")}
-                     alt="google login"
-                  />
-               </button>
-               <button className="button-apple" onClick={loginRoutes}>
-                  <img
-                     className="applelogo"
-                     src={require("../assets/appleicon.png")}
-                     alt="apple login"
-                  />
-               </button>
+               ))}
             </ul>
+
             <label className="stay-container">
                <input type="checkbox" value="stay" />
                Stay signed in
@@ -263,7 +231,7 @@ function LoginForm({ Login, errorMsg, error }) {
                   <input
                      form="main-form"
                      className={
-                        isIdActive && isPwActive
+                        details.name && details.password
                            ? "login-btn-on"
                            : "login-btn-off"
                      }

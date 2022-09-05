@@ -1,123 +1,141 @@
-@font-face {font-family: "MarkW05-NarrowMedium";
-    src: url("https://db.onlinewebfonts.com/t/cd7289a9fdf45fdef61c8d0839429b2d.eot"); /* IE9*/
-    src: url("https://db.onlinewebfonts.com/t/cd7289a9fdf45fdef61c8d0839429b2d.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
-    url("https://db.onlinewebfonts.com/t/cd7289a9fdf45fdef61c8d0839429b2d.woff2") format("woff2"), /* chrome firefox */
-    url("https://db.onlinewebfonts.com/t/cd7289a9fdf45fdef61c8d0839429b2d.woff") format("woff"), /* chrome firefox */
-    url("https://db.onlinewebfonts.com/t/cd7289a9fdf45fdef61c8d0839429b2d.ttf") format("truetype"), /* chrome firefox opera Safari, Android, iOS 4.2+*/
-    url("https://db.onlinewebfonts.com/t/cd7289a9fdf45fdef61c8d0839429b2d.svg#MarkW05-NarrowMedium") format("svg"); /* iOS 4.1- */
+@font-face {
+   font-family: "MarkW05-NarrowMedium";
+   src: url("https://db.onlinewebfonts.com/t/cd7289a9fdf45fdef61c8d0839429b2d.eot"); /* IE9*/
+   src: url("https://db.onlinewebfonts.com/t/cd7289a9fdf45fdef61c8d0839429b2d.eot?#iefix")
+         format("embedded-opentype"),
+      /* IE6-IE8 */
+         url("https://db.onlinewebfonts.com/t/cd7289a9fdf45fdef61c8d0839429b2d.woff2")
+         format("woff2"),
+      /* chrome firefox */
+         url("https://db.onlinewebfonts.com/t/cd7289a9fdf45fdef61c8d0839429b2d.woff")
+         format("woff"),
+      /* chrome firefox */
+         url("https://db.onlinewebfonts.com/t/cd7289a9fdf45fdef61c8d0839429b2d.ttf")
+         format("truetype"),
+      /* chrome firefox opera Safari, Android, iOS 4.2+*/
+         url("https://db.onlinewebfonts.com/t/cd7289a9fdf45fdef61c8d0839429b2d.svg#MarkW05-NarrowMedium")
+         format("svg"); /* iOS 4.1- */
 }
 
-@font-face {font-family: "FF Mark";
-    src: url("https://db.onlinewebfonts.com/t/54be3aa133abb31c88bdaa9e042481aa.eot"); /* IE9*/
-    src: url("https://db.onlinewebfonts.com/t/54be3aa133abb31c88bdaa9e042481aa.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
-    url("https://db.onlinewebfonts.com/t/54be3aa133abb31c88bdaa9e042481aa.woff2") format("woff2"), /* chrome firefox */
-    url("https://db.onlinewebfonts.com/t/54be3aa133abb31c88bdaa9e042481aa.woff") format("woff"), /* chrome firefox */
-    url("https://db.onlinewebfonts.com/t/54be3aa133abb31c88bdaa9e042481aa.ttf") format("truetype"), /* chrome firefox opera Safari, Android, iOS 4.2+*/
-    url("https://db.onlinewebfonts.com/t/54be3aa133abb31c88bdaa9e042481aa.svg#FF Mark") format("svg"); /* iOS 4.1- */
+@font-face {
+   font-family: "FF Mark";
+   src: url("https://db.onlinewebfonts.com/t/54be3aa133abb31c88bdaa9e042481aa.eot"); /* IE9*/
+   src: url("https://db.onlinewebfonts.com/t/54be3aa133abb31c88bdaa9e042481aa.eot?#iefix")
+         format("embedded-opentype"),
+      /* IE6-IE8 */
+         url("https://db.onlinewebfonts.com/t/54be3aa133abb31c88bdaa9e042481aa.woff2")
+         format("woff2"),
+      /* chrome firefox */
+         url("https://db.onlinewebfonts.com/t/54be3aa133abb31c88bdaa9e042481aa.woff")
+         format("woff"),
+      /* chrome firefox */
+         url("https://db.onlinewebfonts.com/t/54be3aa133abb31c88bdaa9e042481aa.ttf")
+         format("truetype"),
+      /* chrome firefox opera Safari, Android, iOS 4.2+*/
+         url("https://db.onlinewebfonts.com/t/54be3aa133abb31c88bdaa9e042481aa.svg#FF Mark")
+         format("svg"); /* iOS 4.1- */
 }
 
 a {
-    text-decoration: none;
-    color: rgba(136, 136, 136, 0.662);
-    font-weight: 800;
+   text-decoration: none;
+   color: rgba(136, 136, 136, 0.662);
+   font-weight: 800;
 }
 
 a:hover {
-    color: black;
+   color: black;
 }
 
-.form-main{
-    /* font-family: 'Hind Siliguri', sans-serif; */
-    font-family: "MarkW05-NarrowMedium", sans-serif;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+.form-main {
+   /* font-family: 'Hind Siliguri', sans-serif; */
+   font-family: "MarkW05-NarrowMedium", sans-serif;
+   height: 100%;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
 }
 
 :root {
-    --border-color: #a3a3a3;
-    --arrow-color: #a3a3a3;
-    --bg-color: rgba(255, 255, 255, 0);
-    --btn-opacity: 0.3;
-    --pointer-on: none;
-    --inputfield-color: rgba(236, 236, 236, 0.612);
-    --inputfield-border-color: transparent;
-    --border-width: 0px;
-    --inputfield-focus-color:#fff;
-    --inputfield-focus-border:black;
+   --border-color: #a3a3a3;
+   --arrow-color: #a3a3a3;
+   --bg-color: rgba(255, 255, 255, 0);
+   --btn-opacity: 0.3;
+   --pointer-on: none;
+   --inputfield-color: rgba(236, 236, 236, 0.612);
+   --inputfield-border-color: transparent;
+   --border-width: 0px;
+   --inputfield-focus-color: #fff;
+   --inputfield-focus-border: black;
 }
 
 /****TOP BOARD ****/
 .logo-main {
-    width: 115px;
-    margin: 50px;
+   width: 115px;
+   margin: 50px;
 }
 
 .sign-in {
-    font-weight: 800;
+   font-weight: 800;
 }
 
 /****TOP BOARD ****/
 
-
 /****FORM****/
 :focus-visible {
-    outline: transparent;
+   outline: transparent;
 }
 
 .form-outer {
-    width: 400px;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-    align-items: center;
+   width: 400px;
+   box-sizing: border-box;
+   display: flex;
+   flex-direction: column;
+   padding: 10px;
+   align-items: center;
 }
 
 .form-group {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-  }
-  
-.form-group label {
-    position: absolute;
-    pointer-events: none;
-    transform: translate(0, 23px) scale(1);
-    transform-origin: top left;
-    transition: 200ms cubic-bezier(0, 0, 0.2, 1) 0ms;
-    /* top: 0px; */
-    left: 20px;
-    font-size: 10.7px;
-    font-weight: 800;
-    padding-left: 8px;
-    color:rgba(152, 152, 152, 0.91);
-    text-transform: uppercase;
-    font-family: "FF+Mark", sans-serif;
+   position: relative;
+   display: flex;
+   flex-direction: column;
 }
 
-  
-  .form-group:focus-within label {
-    transform: translate(-10px, 11px) scale(0.8);
+.form-group label {
+   position: absolute;
+   pointer-events: none;
+   transform: translate(0, 23px) scale(1);
+   transform-origin: top left;
+   transition: 200ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+   /* top: 0px; */
+   left: 20px;
+   font-size: 10.7px;
+   font-weight: 800;
+   padding-left: 8px;
+   color: rgba(152, 152, 152, 0.91);
+   text-transform: uppercase;
+   font-family: "FF+Mark", sans-serif;
 }
-  
-  .form-group input {
-    font-family: "MarkW05-NarrowMedium", sans-serif;    
-    box-sizing: border-box;
-    width: 295px;
-    height: 49px;
-    border: var(--border-width) solid var(--inputfield-border-color);
-    border-radius: 4px;
-    background-color: var(--inputfield-color);
-    margin: 8px;
-    padding: 10px 10px 1px 10px;
-    line-height: 1;
-    font-size: 14px;
-    font-weight: 700;
-    outline: none;
-    box-shadow: none;
-    transition: 100ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+
+.form-group:focus-within label {
+   transform: translate(-10px, 11px) scale(0.8);
+}
+
+.form-group input {
+   font-family: "MarkW05-NarrowMedium", sans-serif;
+   box-sizing: border-box;
+   width: 295px;
+   height: 49px;
+   border: var(--border-width) solid var(--inputfield-border-color);
+   border-radius: 4px;
+   background-color: var(--inputfield-color);
+   margin: 8px;
+   padding: 10px 10px 1px 10px;
+   line-height: 1;
+   font-size: 14px;
+   font-weight: 700;
+   outline: none;
+   box-shadow: none;
+   transition: 100ms cubic-bezier(0, 0, 0.2, 1) 0ms;
 }
 
 /* .form-group:focus-within input {
@@ -125,342 +143,337 @@ a:hover {
     border: 2px var(--inputfield-focus-border) solid;
 } */
 
-.form-group-focus input{
-    background-color:var(--inputfield-focus-color);  
-    border: 2px var(--inputfield-focus-border) solid;
+.form-group input:focus{
+   background-color: var(--inputfield-focus-color);
+   border: 2px var(--inputfield-focus-border) solid;
 }
 
-
 .form-group .Active {
-    transform: translate(-10px, 11px) scale(0.8);
+   transform: translate(-10px, 11px) scale(0.8);
 }
 
 .toggle-btn {
-    position: absolute;
-    top: 304px;
-    left: 313px;
-    width: 28px;
-    height: 22px;
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
+   position: absolute;
+   top: 304px;
+   left: 313px;
+   width: 28px;
+   height: 22px;
+   border: none;
+   background-color: transparent;
+   cursor: pointer;
 }
 
 .toggle-btn-show {
-    background-image: url(/src/assets/eyeshow.svg);
-    background-size: 65%;
-    background-repeat: no-repeat;
+   background-image: url(/src/assets/eyeshow.svg);
+   background-size: 65%;
+   background-repeat: no-repeat;
 }
 
 .toggle-btn-hide {
-    background-image: url(/src/assets/eyehide.svg);
-    background-repeat: no-repeat;
-    background-size: 65%;
-    top: 303px;
+   background-image: url(/src/assets/eyehide.svg);
+   background-repeat: no-repeat;
+   background-size: 65%;
+   top: 303px;
 }
 
 .invis-btn {
-    opacity: 0;
-    z-index: -100;
-    position: absolute;
-    top:0;
-    left: 0;
-    border-color: transparent;
+   opacity: 0;
+   z-index: -100;
+   position: absolute;
+   top: 0;
+   left: 0;
+   border-color: transparent;
 }
 
 .error-box {
-    position: absolute;
-    background: white;
-    top:130px;
-    left: 54px;
-    width: 240px;
-    padding-top: 23px;
-    padding: 23px 30px 10px 30px;
-    height: 43px;
-    z-index: 10;
-    text-align: center;
-    font-weight: 800;
-    color: rgb(188, 14, 188);
-    font-size: 12px;
-    border-radius: 6px;
+   position: absolute;
+   background: white;
+   top: 130px;
+   left: 54px;
+   width: 240px;
+   padding-top: 23px;
+   padding: 23px 30px 10px 30px;
+   height: 43px;
+   z-index: 10;
+   text-align: center;
+   font-weight: 800;
+   color: rgb(188, 14, 188);
+   font-size: 12px;
+   border-radius: 6px;
 }
 
 .error-box::after {
-    content: "";
-    width: 0px;
-    height: 0px;
-    position: absolute;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-top: 12px solid #fff;
-    border-bottom: 10px solid transparent;
-    right: 46%;
-    bottom: -18px;
-   }
+   content: "";
+   width: 0px;
+   height: 0px;
+   position: absolute;
+   border-left: 10px solid transparent;
+   border-right: 10px solid transparent;
+   border-top: 12px solid #fff;
+   border-bottom: 10px solid transparent;
+   right: 46%;
+   bottom: -18px;
+}
 
 .error-shadow:before {
-    content: "";
-    z-index: -1;
-    position: absolute;
-    top: 140px;
-    right: 0;
-    bottom: 0;
-    left: 45px;
-    width: 300px;
-    height: 57px;
-    background: linear-gradient(to top left, #070707 0%, #a3a3a3 50% );
-    filter: blur(30px);
-    opacity: var(0.7);
-  }
+   content: "";
+   z-index: -1;
+   position: absolute;
+   top: 140px;
+   right: 0;
+   bottom: 0;
+   left: 45px;
+   width: 300px;
+   height: 57px;
+   background: linear-gradient(to top left, #070707 0%, #a3a3a3 50%);
+   filter: blur(30px);
+   opacity: var(0.7);
+}
 
-  /****FORM****/
+/****FORM****/
 
 /****LOGIN ROUTES****/
 ul.login-routes {
-    padding-inline-start: 0;
-    display: flex;
-    gap: 10px;
+   padding-inline-start: 0;
+   display: flex;
+   gap: 10px;
 }
 
 ul button {
-    width: 91px;
-    height: 31px;
-    border-radius: 4px;
-    border: 2.5px solid;
-    padding-top: 4px;
-    padding-bottom: 1px;
+   width: 91px;
+   height: 31px;
+   border-radius: 4px;
+   border: 2.5px solid;
+   padding-top: 4px;
+   padding-bottom: 1px;
 }
 
 .button-fb {
-    background-color: rgba(0, 51, 255,  0.841);
-    border-color: rgba(2, 2, 254, 0.744);
+   background-color: rgba(0, 51, 255, 0.841);
+   border-color: rgba(2, 2, 254, 0.744);
 }
 
 .button-fb:hover {
-    background-color: rgb(1, 48, 235);
-    border-color: rgb(2, 2, 254);
-    cursor: pointer;
+   background-color: rgb(1, 48, 235);
+   border-color: rgb(2, 2, 254);
+   cursor: pointer;
 }
 
 .button-google {
-    background-color: rgba(255, 255, 255, 0.841);
-    border-color: rgba(218, 218, 218, 0.205);
+   background-color: rgba(255, 255, 255, 0.841);
+   border-color: rgba(218, 218, 218, 0.205);
 }
 
 .button-google:hover {
-    background-color: rgba(248, 248, 248, 0.840);
-    cursor: pointer;
+   background-color: rgba(248, 248, 248, 0.84);
+   cursor: pointer;
 }
 
 .button-apple {
-    background-color: rgba(0, 0, 0, 0.841);
-    border-color: rgba(0, 0, 0, 0.744);
-    padding-top:1.5px;
+   background-color: rgba(0, 0, 0, 0.841);
+   border-color: rgba(0, 0, 0, 0.744);
+   padding-top: 1.5px;
 }
 .button-apple:hover {
-    background-color: rgba(0, 0, 0, 0.79);
-    cursor: pointer;
+   background-color: rgba(0, 0, 0, 0.79);
+   cursor: pointer;
 }
 
 .fblogo,
 .googlelogo,
 .applelogo {
-    width:16px;
+   width: 16px;
 }
 /****LOGIN ROUTES****/
-
 
 /***** CHECK BOX *****/
 
 .stay-container {
-    align-self: flex-start;
-    margin-left: 40px;
-    display: block;
-    position: relative;
-    padding-left: 28px;
-    margin-bottom: 12px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 0.3px;
-    color:rgba(0, 0, 0, 0.896);
+   align-self: flex-start;
+   margin-left: 40px;
+   display: block;
+   position: relative;
+   padding-left: 28px;
+   margin-bottom: 12px;
+   cursor: pointer;
+   font-size: 14px;
+   font-weight: 600;
+   letter-spacing: 0.3px;
+   color: rgba(0, 0, 0, 0.896);
 }
 
 .stay-container input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
-  }
+   position: absolute;
+   opacity: 0;
+   cursor: pointer;
+   height: 0;
+   width: 0;
+}
 
 /* Create a custom checkbox */
 .checkmark {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 20px;
-    width: 20px;
-    border-radius: 5px;
-    background-color: #eee;
-  }
+   position: absolute;
+   top: 0;
+   left: 0;
+   height: 20px;
+   width: 20px;
+   border-radius: 5px;
+   background-color: #eee;
+}
 
 /* On mouse-over, add a grey background color */
 .stay-container:hover input ~ .checkmark {
-    background-color: #ccc;
-  }
+   background-color: #ccc;
+}
 
 /* When the checkbox is checked, add a blue background */
 .stay-container input:checked ~ .checkmark {
-    background-color: #db0e0e;
-  }  
+   background-color: #db0e0e;
+}
 
 /* Create the checkmark/indicator (hidden when not checked) */
 .checkmark:after {
-    content: "";
-    position: absolute;
-    display: none;
-  }
+   content: "";
+   position: absolute;
+   display: none;
+}
 
 /* Show the checkmark when checked */
 .stay-container input:checked ~ .checkmark:after {
-    display: block;
-  }
+   display: block;
+}
 
 /* Style the checkmark/indicator */
 .stay-container .checkmark:after {
-    left: 7px;
-    top: 3px;
-    width: 4px;
-    height: 8px;
-    border: solid white;
-    border-width: 0 3px 3px 0;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
-  }
+   left: 7px;
+   top: 3px;
+   width: 4px;
+   height: 8px;
+   border: solid white;
+   border-width: 0 3px 3px 0;
+   -webkit-transform: rotate(45deg);
+   -ms-transform: rotate(45deg);
+   transform: rotate(45deg);
+}
 
 /***** CHECK BOX *****/
 
-
-  /****LOGIN FINAL****/
+/****LOGIN FINAL****/
 .login-btn-off {
-    position: relative;
-    opacity: 0;
-    width: 64px;
-    height: 64px;
-    border-radius: 19px;
-    bottom: 39px;
-    right: 3px;
-    z-index: -100;
-  }
+   position: relative;
+   opacity: 0;
+   width: 64px;
+   height: 64px;
+   border-radius: 19px;
+   bottom: 39px;
+   right: 3px;
+   z-index: -100;
+}
 
 .login-btn-on {
-    position: relative;
-    opacity: 0;
-    width: 64px;
-    height: 64px;
-    border-radius: 19px;
-    bottom: 39px;
-    right: 3px;
-    z-index: 100;
-    cursor: pointer;
-  }
+   position: relative;
+   opacity: 0;
+   width: 64px;
+   height: 64px;
+   border-radius: 19px;
+   bottom: 39px;
+   right: 3px;
+   z-index: 100;
+   cursor: pointer;
+}
 
-  .case1 {
-      bottom: 80px;
-  }
+.case1 {
+   bottom: 80px;
+}
 
-  /* .case2 {
+/* .case2 {
     top: 450px;
   } */
 
-  .login-btn-container {
-    pointer-events: var(--pointer-on);
-    border: 3px solid;
-    /* top: 590px; */
-    width: 58px;
-    height: 58px;
-    border-radius: 20px;
-    border-color: var(--border-color);
-    background: var(--bg-color);
-    opacity: var(--btn-opacity);
-    margin: 30px auto;
-  }
+.login-btn-container {
+   pointer-events: var(--pointer-on);
+   border: 3px solid;
+   /* top: 590px; */
+   width: 58px;
+   height: 58px;
+   border-radius: 20px;
+   border-color: var(--border-color);
+   background: var(--bg-color);
+   opacity: var(--btn-opacity);
+   margin: 30px auto;
+}
 
-  .login-btn-wrapper{
-    height: 50px;
-  }
+.login-btn-wrapper {
+   height: 50px;                                                                           
+}
+                                       
+.login-btn-wrapper::before {
+   /* These two lines vertically centre the point of the arrow */
+   pointer-events: var(--pointer-on);
+   border-color: var(--arrow-color);
+   border-style: solid;
+   border-width: 3px 3px 0 0;
+   content: " ";
+   display: block;
+   height: 12px;
+   width: 12px;                 
+   left: 2.5px;
+   position: relative;
+   margin-left: 20px;
+   margin-top: 16px;
+   top: 2%;
 
-  .login-btn-wrapper::before {  
-    /* These two lines vertically centre the point of the arrow */
-    pointer-events: var(--pointer-on);
-    border-color: var(--arrow-color);
-    border-style: solid;
-    border-width: 3px 3px 0 0;
-    content: " ";
-    display: block;
-    height: 12px;
-    width: 12px;
-    left: 2.5px;
-    position: relative;
-    margin-left: 20px;
-    margin-top: 16px;
-    top: 2%;
-
-    transform: rotate( 45deg );
-    -webkit-transform: rotate( 45deg );
+   transform: rotate(45deg);
+   -webkit-transform: rotate(45deg);
 }
 
 .login-btn-wrapper::after {
-    /* Shaft of the arrow */
-    pointer-events: var(--pointer-on);
-    background: var(--arrow-color);
-    content: "";
-    display: block;
-    height: 3px;
-    position: relative;
-    width: 18px;
-    bottom: 72px;
-    left: 20px;
+   /* Shaft of the arrow */
+   pointer-events: var(--pointer-on);
+   background: var(--arrow-color);
+   content: "";
+   display: block;
+   height: 3px;
+   position: relative;
+   width: 18px;
+   bottom: 72px;
+   left: 20px;
 }
 
 .login-btn-container:hover,
 .login-btn-wrapper:hover::before,
 .login-btn-wrapper:hover::after {
-    opacity: 1;
+   opacity: 1;
 }
 
 /****LOGIN FINAL****/
 
-
 /**** FOOTER ****/
 .bottom-section {
-    display: flex;
-    flex-direction: column;
-    bottom: 10px;
-    left: 160px;
-    text-transform: uppercase;
-    text-align: center;
-    font-size: 10px;
-    font-family: "FF+Mark", sans-serif;
-    opacity: 0.8;
+   display: flex;
+   flex-direction: column;
+   bottom: 10px;
+   left: 160px;
+   text-transform: uppercase;
+   text-align: center;
+   font-size: 10px;
+   font-family: "FF+Mark", sans-serif;
+   opacity: 0.8;
 }
 
 .bottom-section > div > div {
-    padding-top: 3px;
+   padding-top: 3px;
 }
 
-
 .version {
-    position: relative;
-    bottom: 15px;
-    width: fit-content;
-    left: 315px;
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: 1.5px;
-    color: #ccc;
+   position: relative;
+   bottom: 15px;
+   width: fit-content;
+   left: 315px;
+   font-size: 10px;
+   font-weight: 800;
+   letter-spacing: 1.5px;
+   color: #ccc;
 }
 
 /**** FOOTER ****/
