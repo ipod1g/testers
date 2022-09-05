@@ -61,40 +61,6 @@ function LoginForm({ Login, errorMsg }) {
       );
    }
 
-   const isInputFilled = () => {
-      if (details.name && details.password) {
-         document.documentElement.style.setProperty(
-            "--border-color",
-            "rgb(197 0 0)"
-         );
-         document.documentElement.style.setProperty(
-            "--bg-color",
-            "rgb(197 0 0)"
-         );
-         document.documentElement.style.setProperty("--arrow-color", "#fff");
-         document.documentElement.style.setProperty("--btn-opacity", "0.9");
-         document.documentElement.style.setProperty("--pointer-on", "all");
-      } else {
-         document.documentElement.style.setProperty(
-            "--border-color",
-            "#a3a3a3"
-         );
-         document.documentElement.style.setProperty(
-            "--bg-color",
-            "rgba(255, 255, 255, 0)"
-         );
-         document.documentElement.style.setProperty("--arrow-color", "#a3a3a3");
-         document.documentElement.style.setProperty("--btn-opacity", "0.3");
-         document.documentElement.style.setProperty("--pointer-on", "none");
-      }
-   };
-
-   // useEffect(() => {
-   //    // console.log("useEffect ran");
-   //    isInputFilled();
-   //    return;
-   // }, [details]);
-
    useEffect(() => {
       if (isFirstRun) {
          setIsFirstRun(false);
@@ -144,7 +110,6 @@ function LoginForm({ Login, errorMsg }) {
                            };
                            return updatedDetails;
                         });
-                        isInputFilled();
                         // console.log("E= " + error);
                         // console.log("ES= " + isError);
                      }}
@@ -172,7 +137,6 @@ function LoginForm({ Login, errorMsg }) {
                            return updatedDetails;
                         });
                         setIsError(false);
-                        isInputFilled();
                      }}
                      onFocus={() => setIsPwFocused(true)}
                      onBlur={() => setIsPwFocused(false)}
@@ -192,7 +156,7 @@ function LoginForm({ Login, errorMsg }) {
                   className={
                      isPwFocused
                         ? passwordShown
-                           ? "toggle-btn toggle-btn-show"
+                           ? "toggle-btn toggle-btn-show "
                            : "toggle-btn toggle-btn-hide"
                         : "invis-btn"
                   }
@@ -227,18 +191,15 @@ function LoginForm({ Login, errorMsg }) {
          </div>
          <footer className="bottom-section">
             <div className="login-btn-container case1">
-               <div className="login-btn-wrapper">
-                  <input
-                     form="main-form"
-                     className={
-                        details.name && details.password
-                           ? "login-btn-on"
-                           : "login-btn-off"
-                     }
-                     type="submit"
-                     value=" "
-                  />
-               </div>
+               <button
+                  form="main-form"
+                  type="submit"
+                  className={
+                     details.name && details.password
+                        ? "login-btn--on"
+                        : "login-btn--off"
+                  }
+               ></button>
             </div>
             <div>
                <div>
