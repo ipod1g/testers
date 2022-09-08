@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./App.css";
-import LoginForm from "./components/LoginForm";
+import LoginSection from "./components/LoginSection";
 import Hero from "./components/Hero";
 
 function App() {
@@ -48,7 +48,7 @@ function App() {
                <button onClick={Logout}>Logout</button>
             </div>
          ) : (
-            <LoginForm Login={Login} errorMsg={errorMsg} />
+            <LoginSection Login={Login} errorMsg={errorMsg} />
          )}
          <Hero />
       </div>

@@ -1,8 +1,8 @@
 //For settings and account icon
 import React from "react";
 import "./Hero.css";
-import Background from "../assets/udyr_art.jpg";
 import windowSizeInfo from "./Dimensions";
+import NavMenu from "./NavMenu";
 
 function Hero() {
    /*** HERO ART RESIZE ***/
@@ -17,11 +17,10 @@ function Hero() {
          className="hero-section"
          style={{
             backgroundSize: `${finalDimension[0]} ${finalDimension[1]}`,
-            backgroundImage: `url${Background})`,
-            backgroundRepeat: "no-repeat",
-            width: "100%",
          }}
-      ></section>
+      >
+         <NavMenu />
+      </section>
    );
 }
 
