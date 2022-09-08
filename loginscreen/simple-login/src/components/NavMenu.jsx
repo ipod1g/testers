@@ -1,14 +1,14 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./NavMenu.css";
-import Settings from "./Settings";
+import SettingsButton from "./SettingsButton";
 
 const NavMenu = () => {
-   const [isOpen, setIsOpen] = useState(false);
+   const [isNavOpen, setIsNavOpen] = useState(false);
    const refMenu = useRef();
    const refButton = useRef();
 
    const openOnClick = () => {
-      setIsOpen((prev) => !prev);
+      setIsNavOpen((prev) => !prev);
    };
 
    useEffect(() => {
@@ -17,7 +17,7 @@ const NavMenu = () => {
             !refMenu.current.contains(e.target) &&
             !refButton.current.contains(e.target)
          ) {
-            setIsOpen(false);
+            setIsNavOpen(false);
          }
       };
       document.addEventListener("mousedown", handleClickOutside);
@@ -26,19 +26,22 @@ const NavMenu = () => {
    return (
       <div className="menu-container">
          <div></div>
-         <ul className={isOpen ? "dropdown-menu" : "invis-menu"} ref={refMenu}>
+         <ul
+            className={isNavOpen ? "dropdown-menu" : "invis-menu"}
+            ref={refMenu}
+         >
             <li>
-               <Settings />
+               <SettingsButton setIsNavOpen={setIsNavOpen} />
             </li>
             <li>
                <button className="available-x">Sign Out</button>
             </li>
             <li>
-               <button onClick={() => setIsOpen(false)}>Exit</button>
+               <button onClick={() => setIsNavOpen(false)}>Exit</button>
             </li>
          </ul>
          <button
-            className={isOpen ? "nav-btn active" : "nav-btn"}
+            className={isNavOpen ? "nav-btn active" : "nav-btn"}
             onClick={openOnClick}
             ref={refButton}
          ></button>

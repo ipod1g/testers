@@ -63,31 +63,6 @@ function LoginSection({ Login, errorMsg }) {
                   setIsError={setIsError}
                   setDetails={setDetails}
                />
-               {/* <div className="form-group">
-                  <input
-                     className={isError ? "input--error" : "input"}
-                     type="text"
-                     name="name"
-                     id="name"
-                     onChange={(e) => {
-                        setIsError(false);
-                        setDetails((prev) => {
-                           const updatedDetails = {
-                              ...prev,
-                              name: e.target.value,
-                           };
-                           return updatedDetails;
-                        });
-                     }}
-                     value={details.name}
-                  />
-                  <label
-                     className={details.name ? "Active" : ""}
-                     htmlFor="name"
-                  >
-                     Username
-                  </label>
-               </div> */}
 
                <LoginForm
                   formType="password"

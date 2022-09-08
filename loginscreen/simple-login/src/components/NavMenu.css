@@ -81,7 +81,7 @@
   list-style-type: none;
 }
 
-.menu-container > ul button {
+.menu-container > ul > li > button {
   opacity: 0.7;
   background-color: transparent;
   color: rgb(255, 255, 255);
@@ -97,7 +97,7 @@
   cursor: pointer;
 }
 
-.menu-container > ul button:hover {
+.menu-container > ul > li >  button:hover {
   opacity: 1;
   background-color: rgba(128, 128, 128, 0.10);
 }

@@ -33,7 +33,7 @@ const LoginForm = (props) => {
    return (
       <div className="form-group">
          <input
-            className={props.checkError ? "input--error" : "input"}
+            className={props.isError ? "input--error" : "input"}
             type={
                props.formType === "name"
                   ? "text"

@@ -258,7 +258,7 @@ a:hover {
    height: 57px;
    background: linear-gradient(to top left, #070707 0%, #a3a3a3 50%);
    filter: blur(30px);
-   opacity: var(0.7);
+   opacity: 0.7;
 }
 
 /****FORM****/
