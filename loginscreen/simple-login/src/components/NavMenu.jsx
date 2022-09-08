@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./NavMenu.css";
+import Settings from "./Settings";
 
 const NavMenu = () => {
    const [isOpen, setIsOpen] = useState(false);
@@ -27,13 +28,13 @@ const NavMenu = () => {
          <div></div>
          <ul className={isOpen ? "dropdown-menu" : "invis-menu"} ref={refMenu}>
             <li>
-               <button>Settings</button>
+               <Settings />
             </li>
             <li>
                <button className="available-x">Sign Out</button>
             </li>
             <li>
-               <button>Exit</button>
+               <button onClick={() => setIsOpen(false)}>Exit</button>
             </li>
          </ul>
          <button

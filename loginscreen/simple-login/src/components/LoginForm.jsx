@@ -1,9 +1,37 @@
 import React from "react";
 
 const LoginForm = (props) => {
+   const handleChange = (e) => {
+      if (props.formType === "name") {
+         props.setDetails((prev) => {
+            const updatedDetails = {
+               ...prev,
+
+               name: e.target.value,
+            };
+
+            return updatedDetails;
+         });
+      } else if (props.formType === "password") {
+         props.setDetails((prev) => {
+            const updatedDetails = {
+               ...prev,
+
+               password: e.target.value,
+            };
+
+            return updatedDetails;
+         });
+      }
+      props.setIsError(false);
+   };
+
+   const focusBack = () => {
+      props.setIsPwFocused(true);
+   };
+
    return (
       <div className="form-group">
-         {props.children}
          <input
             className={props.checkError ? "input--error" : "input"}
             type={
@@ -15,25 +43,14 @@ const LoginForm = (props) => {
             }
             name={props.formType}
             id={props.formType}
-            onChange={(e) => {
-               props.setDetails((prev) => {
-                  const updatedDetails = {
-                     ...prev,
-
-                     password: e.target.value, // Have to fix here to depend on props.formType
-                  };
-                  return updatedDetails;
-               });
-               props.setIsError(false);
-            }}
-            onFocus={() => props.setIsPwFocused(true)}
-            onBlur={() => props.setIsPwFocused(false)}
+            onChange={handleChange}
+            onFocus={props.formType === "password" ? focusBack : null}
             ref={props?.refInput}
-            value={props.details.formType}
+            value={props.details}
          />
          {props.children}
          <label
-            className={props.details.formType ? "Active" : ""}
+            className={props.details ? "Active" : ""}
             htmlFor={props.formType}
          >
             {props.formType === "name"
