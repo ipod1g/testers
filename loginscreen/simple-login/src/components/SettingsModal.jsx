@@ -16,7 +16,7 @@ const SettingsModal = ({ open, children, onClose }) => {
 
    return ReactDom.createPortal(
       <>
-         <div style={OVERLAY_STYLES} />
+         <div style={OVERLAY_STYLES} onClick={onClose} />
          <div className="modal">
             <button className="modal-close-btn" onClick={onClose}></button>
             {children}
