@@ -1,14 +1,16 @@
 import React, { useState } from "react";
-import "./Settings.css";
-import SettingsModal from "./SettingsModal";
-import SettingsTab from "./SettingsTab";
-import Select, { components } from "react-select";
 import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { CustomDropdownIndicator } from "./CustomDropdownIndicator";
+import Select, { components } from "react-select";
+import { CSSTransition } from "react-transition-group";
+import SettingsModal from "./SettingsModal";
+import SettingsTab from "./SettingsTab";
+import "./Settings.css";
 import RiotClientLabel from "./RiotClientLabel";
 
 // ********* DROPDOWN STYLING *********
+
 library.add(faCaretDown);
 library.add(faCaretUp);
 
@@ -111,30 +113,38 @@ const Settings = (props) => {
             Settings
          </button>
 
-         <SettingsModal
-            open={isModalOpen}
-            onClose={() => setModalOpen(false)}
-            setModalOpen={setModalOpen}
+         <CSSTransition
+            in={isModalOpen}
+            timeout={800}
+            unmountOnExit
+            classNames="modal-anim"
          >
-            <SettingsTab />
-            <div className="select-placement">
-               <RiotClientLabel />
-               <label className="select-label">RIOT CLIENT LANGUAGE</label>
-               <Select
-                  // defaultMenuIsOpen
-                  components={{
-                     DropdownIndicator: CustomDropdownIndicator,
-                  }}
-                  defaultControlIsFocused
-                  label="Single Select"
-                  defaultValue={options[0]}
-                  options={options}
-                  styles={LANG_TAB_Style}
-                  isSearchable={false}
-                  blurInputOnSelect
-               />
-            </div>
-         </SettingsModal>
+            <SettingsModal
+               open={isModalOpen}
+               onClose={() => setModalOpen(false)}
+               setModalOpen={setModalOpen}
+               variant="primary"
+            >
+               <SettingsTab />
+               <div className="select-placement">
+                  <RiotClientLabel />
+                  <label className="select-label">RIOT CLIENT LANGUAGE</label>
+                  <Select
+                     // defaultMenuIsOpen
+                     components={{
+                        DropdownIndicator: CustomDropdownIndicator,
+                     }}
+                     defaultControlIsFocused
+                     label="Single Select"
+                     defaultValue={options[0]}
+                     options={options}
+                     styles={LANG_TAB_Style}
+                     isSearchable={false}
+                     blurInputOnSelect
+                  />
+               </div>
+            </SettingsModal>
+         </CSSTransition>
       </>
    );
 };

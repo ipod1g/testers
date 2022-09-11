@@ -8,6 +8,7 @@ function LoginSection({ Login, errorMsg }) {
    const [passwordShown, setPasswordShown] = useState(false);
    const [isError, setIsError] = useState(false);
    const [isPwFocused, setIsPwFocused] = useState(false);
+   const idInputRef = useRef(null);
    const passwordInputRef = useRef(null);
    const [isFirstRun, setIsFirstRun] = useState(true);
 
@@ -28,6 +29,14 @@ function LoginSection({ Login, errorMsg }) {
          passwordInputRef.current.focus();
       }
    }, [passwordShown]);
+
+   useEffect(() => {
+      if (isFirstRun) {
+         setIsFirstRun(false);
+      } else {
+         idInputRef.current.focus();
+      }
+   }, [isError]);
 
    const loginRoutes = () => {
       alert("Logined with link");
@@ -62,6 +71,7 @@ function LoginSection({ Login, errorMsg }) {
                   isError={isError}
                   setIsError={setIsError}
                   setDetails={setDetails}
+                  refInput={idInputRef}
                />
 
                <LoginForm

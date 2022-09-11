@@ -14,8 +14,8 @@ const NavMenu = () => {
    useEffect(() => {
       const handleClickOutside = (e) => {
          if (
-            !refMenu.current.contains(e?.target) &&
-            !refButton.current.contains(e?.target)
+            !refMenu.current?.contains(e.target) &&
+            !refButton.current?.contains(e.target)
          ) {
             setIsNavOpen(false);
          }
