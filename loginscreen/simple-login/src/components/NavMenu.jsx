@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./NavMenu.css";
-import SettingsButton from "./SettingsButton";
+import Settings from "./Settings";
 
 const NavMenu = () => {
    const [isNavOpen, setIsNavOpen] = useState(false);
@@ -14,8 +14,8 @@ const NavMenu = () => {
    useEffect(() => {
       const handleClickOutside = (e) => {
          if (
-            !refMenu.current.contains(e.target) &&
-            !refButton.current.contains(e.target)
+            !refMenu.current.contains(e?.target) &&
+            !refButton.current.contains(e?.target)
          ) {
             setIsNavOpen(false);
          }
@@ -31,7 +31,7 @@ const NavMenu = () => {
             ref={refMenu}
          >
             <li>
-               <SettingsButton setIsNavOpen={setIsNavOpen} />
+               <Settings setIsNavOpen={setIsNavOpen} />
             </li>
             <li>
                <button className="available-x">Sign Out</button>
