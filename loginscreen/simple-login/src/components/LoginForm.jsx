@@ -26,10 +26,6 @@ const LoginForm = (props) => {
       props.setIsError(false);
    };
 
-   const focusBack = () => {
-      props.setIsPwFocused(true);
-   };
-
    return (
       <div className="form-group">
          <input
@@ -44,7 +40,8 @@ const LoginForm = (props) => {
             name={props.formType}
             id={props.formType}
             onChange={handleChange}
-            onFocus={props.formType === "password" ? focusBack : null}
+            onBlur={() => props.setIsPwFocused(false)}
+            onFocus={() => props.setIsPwFocused(true)}
             ref={props?.refInput}
             value={props.details}
          />

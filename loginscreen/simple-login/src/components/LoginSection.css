@@ -40,9 +40,10 @@ a {
    text-decoration: none;
    color: rgba(136, 136, 136, 0.662);
    font-weight: 800;
+   cursor: pointer;
 }
 
-a:hover {
+.bottom-section a:hover {
    color: black;
 }
 
@@ -65,7 +66,7 @@ a:hover {
    --bg-color-off: rgba(255, 255, 255, 0);
    --btn-opacity: 0.3;
    --pointer-on: all;
-   --inputfield-color: rgba(236, 236, 236, 0.612);
+   --inputfield-color: rgb(223 223 223 / 60%);
    --inputfield-error: #efb7f36e;
    --inputfield-border-color: transparent;
    --inputfield-border-error: #e3b4e3;
@@ -142,11 +143,17 @@ a:hover {
    outline: none;
    box-shadow: none;
    transition: 100ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+   opacity: 0.5;
 }
 
 .form-group .input {
    border: var(--border-width) solid var(--inputfield-border-color);
    background-color: var(--inputfield-color);
+}
+
+.form-group .input:hover,
+.form-group .input--error:hover  {
+   opacity: 1;
 }
 
 .form-group .input--error {
