@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./App.css";
 import LoginSection from "./components/LoginSection";
 import Hero from "./components/Hero";
+import windowSizeInfo from "./components/Dimensions";
 
 function App() {
    //----TEMP DATABASE ----//
@@ -10,6 +11,12 @@ function App() {
       password: "1234",
    };
    //----TEMP DATABASE ----//
+
+   //----MEDIA QUERY ----//
+   const windowSizeArray1 = windowSizeInfo();
+   const width = windowSizeArray1[0];
+
+   //----MEDIA QUERY ----//
 
    const [user, setUser] = useState({ name: "" });
    const [errorMsg, setError] = useState("");
@@ -50,7 +57,7 @@ function App() {
          ) : (
             <LoginSection Login={Login} errorMsg={errorMsg} />
          )}
-         <Hero />
+         {width > 400 ? <Hero /> : null}
       </div>
    );
 }
