@@ -25,7 +25,12 @@ const NavMenu = () => {
 
    return (
       <div className="menu-container">
-         <div></div>
+         {/* <div></div> */}
+         <button
+            className={isNavOpen ? "nav-btn active" : "nav-btn"}
+            onClick={openOnClick}
+            ref={refButton}
+         ></button>
          <ul
             className={isNavOpen ? "dropdown-menu" : "invis-menu"}
             ref={refMenu}
@@ -40,11 +45,6 @@ const NavMenu = () => {
                <button onClick={() => setIsNavOpen(false)}>Exit</button>
             </li>
          </ul>
-         <button
-            className={isNavOpen ? "nav-btn active" : "nav-btn"}
-            onClick={openOnClick}
-            ref={refButton}
-         ></button>
       </div>
    );
 };
