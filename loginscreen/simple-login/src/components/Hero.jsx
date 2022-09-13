@@ -7,7 +7,7 @@ import NavMenu from "./NavMenu";
 function Hero() {
    /*** HERO ART RESIZE ***/
    const windowSizeArray = windowSizeInfo();
-   const realWidth = windowSizeArray[0];
+   const realWidth = windowSizeArray[0]; // For future use
    const realHeight = windowSizeArray[1];
    const proportionalDimensions = { width: realHeight * 1.71, realHeight };
    const proportionsArray = Object.values(proportionalDimensions);
