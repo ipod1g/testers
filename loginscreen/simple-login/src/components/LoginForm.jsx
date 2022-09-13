@@ -41,11 +41,13 @@ const LoginForm = (props) => {
             id={props.formType}
             onChange={handleChange}
             onBlur={() => props.setIsPwFocused(false)}
-            onFocus={() => props.setIsPwFocused(true)}
+            onFocus={() => {
+               props.setIsPwFocused(true);
+               props.setIsError(false);
+            }}
             ref={props?.refInput}
             value={props.details}
          />
-         {props.children}
          <label
             className={props.details ? "Active" : ""}
             htmlFor={props.formType}

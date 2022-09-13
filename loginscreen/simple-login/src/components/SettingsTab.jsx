@@ -3,6 +3,8 @@ import RiotLogo2 from "../assets/Riot Games RGB Logos (Web)/001_RG 2021 Logomark
 import LOL from "../assets/lol.png";
 import Valorant from "../assets/valorant.png";
 
+// Needs work on making the buttons functional and triggering states
+
 const TAB_STYLES = {
    boxSizing: "border-box",
    position: "fixed",
@@ -89,7 +91,7 @@ const SettingsTab = () => {
             </ul>
          </label>
 
-         <div>
+         <div style={{ minWidth: "131px" }}>
             <ul style={LIST_STYLES_2}>
                <li>
                   <a>Terms of Service</a>
