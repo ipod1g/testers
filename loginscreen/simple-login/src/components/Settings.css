@@ -57,7 +57,8 @@
  } */
 
 .modal {
-   position: fixed;
+   position: fixed;        
+   display: flex;
    top: 50%;
    left: 50%;
    transform: translate(-50%, -50%);
@@ -131,10 +132,11 @@
 }
 
 .select-placement {
-   position: fixed;
+   /* position: fixed; */
    width: 500px;
    top: 60px;
    left: 30%;
+   margin-left: 250px;
  }
 
 li a:hover {
