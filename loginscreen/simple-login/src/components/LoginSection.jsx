@@ -33,7 +33,7 @@ function LoginSection({ Login, errorMsg }) {
    useEffect(() => {
       if (isFirstRun) {
          setIsFirstRun(false);
-      } else {
+      } else if (isError === true) {
          idInputRef.current.focus();
       }
    }, [isError]);
