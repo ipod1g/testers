@@ -6,8 +6,10 @@ import NavMenu from "./NavMenu";
 
 function Hero() {
    /*** HERO ART RESIZE ***/
-   const height = windowSizeInfo();
-   const proportionalDimensions = { width: height * 1.71, height };
+   const windowSizeArray = windowSizeInfo();
+   const realWidth = windowSizeArray[0];
+   const realHeight = windowSizeArray[1];
+   const proportionalDimensions = { width: realHeight * 1.71, realHeight };
    const proportionsArray = Object.values(proportionalDimensions);
    let finalDimension = proportionsArray.map((el) => el + "px");
    /*** HERO ART RESIZE ***/
@@ -15,12 +17,14 @@ function Hero() {
    return (
       <section
          className="hero-section"
-         style={{
-            backgroundSize: `${finalDimension[0]} ${finalDimension[1]}`,
-         }}
-      >
-         <NavMenu />
-      </section>
+         style={
+            realHeight > 600
+               ? {
+                    backgroundSize: `${finalDimension[0]} ${finalDimension[1]}`,
+                 }
+               : { backgroundSize: "1060px 600px" }
+         }
+      ></section>
    );
 }
 
