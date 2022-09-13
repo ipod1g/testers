@@ -3,6 +3,7 @@ import "./App.css";
 import LoginSection from "./components/LoginSection";
 import Hero from "./components/Hero";
 import windowSizeInfo from "./components/Dimensions";
+import NavMenu from "./components/NavMenu";
 
 function App() {
    //----TEMP DATABASE ----//
@@ -58,6 +59,7 @@ function App() {
             <LoginSection Login={Login} errorMsg={errorMsg} />
          )}
          {width > 400 ? <Hero /> : null}
+         <NavMenu />
       </div>
    );
 }
