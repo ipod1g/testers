@@ -2,27 +2,33 @@ import React from "react";
 
 const LoginForm = (props) => {
    const handleChange = (e) => {
-      if (props.formType === "name") {
-         props.setDetails((prev) => {
-            const updatedDetails = {
-               ...prev,
+      // if (props.formType === "username") {
+      //    props.setDetails((prev) => {
+      //       const updatedDetails = {
+      //          ...prev,
 
-               name: e.target.value,
-            };
+      //          name: e.target.value,
+      //       };
 
-            return updatedDetails;
-         });
-      } else if (props.formType === "password") {
-         props.setDetails((prev) => {
-            const updatedDetails = {
-               ...prev,
+      //       return updatedDetails;
+      //    });
+      // } else if (props.formType === "password") {
+      //    props.setDetails((prev) => {
+      //       const updatedDetails = {
+      //          ...prev,
 
-               password: e.target.value,
-            };
+      //          password: e.target.value,
+      //       };
 
-            return updatedDetails;
-         });
-      }
+      //       return updatedDetails;
+      //    });
+      // }
+      props.setDetails(e.target.value);
+      props.setIsError(false);
+   };
+
+   const handleFocus = () => {
+      props.setIsPwFocused?.(true);
       props.setIsError(false);
    };
 
@@ -31,7 +37,7 @@ const LoginForm = (props) => {
          <input
             className={props.isError ? "input--error" : "input"}
             type={
-               props.formType === "name"
+               props.formType === "username"
                   ? "text"
                   : props.pwShown
                   ? "text"
@@ -40,21 +46,17 @@ const LoginForm = (props) => {
             name={props.formType}
             id={props.formType}
             onChange={handleChange}
-            onBlur={() => props.setIsPwFocused(false)}
-            onFocus={() => {
-               props.setIsPwFocused(true);
-               props.setIsError(false);
-            }}
+            onBlur={() => props.setIsPwFocused?.(false)}
+            onFocus={handleFocus}
             ref={props?.refInput}
             value={props.details}
+            autoComplete="false"
          />
          <label
             className={props.details ? "Active" : ""}
             htmlFor={props.formType}
          >
-            {props.formType === "name"
-               ? `user${[props.formType]}`
-               : props.formType}
+            {props.formType}
          </label>
       </div>
    );
