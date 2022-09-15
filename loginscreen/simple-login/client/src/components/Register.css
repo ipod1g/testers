@@ -1,0 +1,200 @@
+/* lighter #d5b26e */
+/* darker fonts #937341 */
+
+html {
+    background-color: #111;
+}
+
+*, :after, :before {
+    box-sizing: inherit;
+    user-select: none;
+}
+
+
+
+.regform-container {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;    
+}
+
+.regform-container::before {
+    content: "";
+    background: url("../assets/reg/bg-welcome.jpg") top;
+    background-size: cover;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: .15;
+    filter: blur(8px);
+}
+
+
+.scene-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1vw;
+}
+
+.header-main {
+    font-size: calc(6vw + 10px);
+    margin-bottom: 15px;
+    color: #ffffff;
+    opacity: 0.9;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 3px;
+}
+
+.scene-content h3 {
+    color: #937341;
+    margin: 0 auto 15px;
+    padding-bottom: 15px;
+}
+
+.scene-content .divider img {
+    max-width: calc(90% + 40px);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    overflow: hidden;
+    z-index: 10;
+    transform: scale(0.8);
+    margin: auto;
+}
+
+#regform {
+    padding: 10px 30px;
+}
+
+.regform-inner {
+    height: 98px;
+}
+
+.regform-inner .form-group .input {
+    opacity: 0.7;
+    background-color: transparent;
+    border-radius: 0;
+    border-bottom: solid 1px #d5b26e;
+    color: #d5b26e;
+}
+
+.regform-inner .form-group .input:hover {
+    opacity: 1;
+    background-color: rgba(43, 59, 69, 0.459);
+    border-radius: 0;
+    border-bottom: solid 1px #d5b26e;
+}
+
+.regform-inner .form-group label {
+    color: #d5b26e;
+    font-family: "Sarabun", sans-serif;
+    letter-spacing: 1px;
+    opacity: 0.9;
+}
+
+.regform-inner .form-group .input:focus{
+    background-color: transparent;
+    border: none;
+    border-bottom: solid 1px #d5b26e;
+}
+
+.regform-inner .form-group .input:active {
+    background-color: transparent;
+    border: none;
+    border-bottom: solid 1px #d5b26e;
+}
+
+.reg-toggle-wrapper {
+    position: relative;
+    top: -40px;
+    left: 265px;
+    z-index: 20;
+    opacity: 0.8;
+    height: 0;
+}
+
+.reg-toggle-wrapper > toggle-btn-show {
+    background-image: url(/src/assets/eyeshow.svg);
+    background-size: 65%;
+    background-repeat: no-repeat;
+}
+
+.reg-toggle-wrapper > toggle-btn-hide {
+    background-image: url(/src/assets/eyehide.svg);
+    background-repeat: no-repeat;
+    background-size: 65%;
+}
+
+.colorsvg-gold {
+    /* filter: invert(99%) sepia(37%) saturate(2993%) hue-rotate(314deg) brightness(90%) contrast(82%); */
+    filter: invert(96%) sepia(75%) saturate(540%) hue-rotate(326deg) brightness(88%) contrast(90%);
+}
+
+.reg-btn {
+    margin: 30px auto;
+    width: 230px;
+    height: 60px;
+}
+
+.reg-btn button {
+    padding: 23px 25px;
+    background: linear-gradient(180deg,#ecc572 0,#815500);
+    font-family: Beaufort for LOL,serif;
+    font-size: 1.8rem;
+    font-weight: 400;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #937341;
+    cursor: pointer;
+    line-height: 1;
+    border: none;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 0 25px rgb(0 0 0 / 11%);
+    transition: color .2s;
+    min-width: 240px;
+    max-width: 100%;
+}
+
+.reg-btn button::before {
+    content: "";
+    display: block;
+    position: absolute;
+    background: #111;
+    z-index: -1;
+    top: 2px;
+    left: 2px;
+    right: 2px;
+    bottom: 2px;
+}
+
+.reg-btn button:hover {
+    color: #c4b998;
+}
+
+.scene-content footer {
+    position: fixed;
+    bottom: 40px;
+    left: 30px;
+}
+
+.scene-content footer img {
+    margin-right: 30px;
+}
+
+
+@media (min-width: 992px) {
+    .scene-content .divider img {
+        transform: none;
+    }
+    .header-main {
+        font-size: 65px;
+    }
+}

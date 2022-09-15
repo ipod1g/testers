@@ -1,27 +1,64 @@
 const express = require("express");
-const mysql = require("mysql");
+const mysql = require("mysql2");
+const cors = require("cors");
+const bodyParser = require("body-parser");
 
 const app = express();
 
 app.use(express.json());
+app.use(bodyParser.json());
+app.use(cors());
 
 const db = mysql.createConnection({
    user: "root",
    host: "localhost",
-   password: "password",
-   database: "riot_db",
+   password: "dennisku10",
+   database: "riotdb",
 });
 
-// app.get("/", (req, res) => {
-//    res.send("hello");
-// });
+// MESSAGE ON SCREEN of server
+app.get("/", (req, res) => {
+   //    const sqlInsert =
+   //       "INSERT INTO users (username, password) VALUES ('test1', 'testpw')";
+   //    db.query(sqlInsert, (err, result) => {
+   //       console.log("error", err);
+   //       console.log("result", result);
+   //    });
+   res.send("You are connected");
+});
 
 app.post("/register", (req, res) => {
+   const username = req.body.username;
+   const password = req.body.password;
+
    db.query(
-      "INSERT INTO user (username, password) VALUES (?,?)",
+      "INSERT INTO users (username, password) VALUES (?,?)",
       [username, password],
       (err, result) => {
          console.log(err);
+      }
+   );
+});
+
+app.post("/login", (req, res) => {
+   const username = req.body.username;
+   const password = req.body.password;
+
+   db.query(
+      "SELECT * FROM users WHERE username = ? AND password = ?",
+      [username, password],
+      (err, result) => {
+         if (err) {
+            res.send({ err: err });
+         }
+
+         if (result.length > 0) {
+            res.send(result);
+         } else {
+            res.send({
+               message: "Your username/password is not in the database",
+            });
+         }
       }
    );
 });

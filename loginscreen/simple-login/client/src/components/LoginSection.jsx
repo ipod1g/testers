@@ -1,10 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import "./LoginSection.css";
 import SocialLoginButton from "./SocialLoginButton";
 import LoginForm from "./LoginForm";
+import Axios from "axios";
 
 function LoginSection({ Login, errorMsg }) {
-   const [details, setDetails] = useState({ name: "", password: "" });
+   const [username, setUsername] = useState("");
+   const [password, setPassword] = useState("");
    const [passwordShown, setPasswordShown] = useState(false);
    const [isError, setIsError] = useState(false);
    const [isPwFocused, setIsPwFocused] = useState(false);
@@ -12,14 +15,29 @@ function LoginSection({ Login, errorMsg }) {
    const passwordInputRef = useRef(null);
    const [isFirstRun, setIsFirstRun] = useState(true);
 
+   const login = () => {
+      Axios.post("http://localhost:3001/login", {
+         username: username,
+         password: password,
+      }).then(
+         (response) => {
+            console.log(response);
+         },
+         (error) => {
+            console.log(error);
+         }
+      );
+   };
+
    const submitHandler = (e) => {
       e.preventDefault();
-      Login(details);
+      login();
       setIsError(true);
-      setDetails((prev) => {
-         const updatedDetails = { ...prev, password: "" };
-         return updatedDetails;
-      });
+      // setDetails((prev) => {
+      //    const updatedDetails = { ...prev, password: "" };
+      //    return updatedDetails;
+      // });
+      // WILL NOW ACTUALLY CONNECT TO DB
    };
 
    useEffect(() => {
@@ -60,32 +78,34 @@ function LoginSection({ Login, errorMsg }) {
             ) : (
                ""
             )}
-            <form
-               id="main-form"
-               onSubmit={submitHandler}
-               className="form-inner"
-            >
-               <LoginForm
-                  formType="name"
-                  details={details.name}
-                  isError={isError}
-                  setIsError={setIsError}
-                  setDetails={setDetails}
-                  refInput={idInputRef}
-               />
+            <div className="form-innerwrap">
+               <form
+                  id="main-form"
+                  onSubmit={submitHandler}
+                  className="form-inner"
+                  autoComplete="off"
+               >
+                  <LoginForm
+                     formType="username"
+                     details={username}
+                     isError={isError}
+                     setIsError={setIsError}
+                     setDetails={setUsername}
+                     refInput={idInputRef}
+                  />
 
-               <LoginForm
-                  formType="password"
-                  details={details.password}
-                  isError={isError}
-                  pwShown={passwordShown}
-                  setIsError={setIsError}
-                  setIsPwFocused={setIsPwFocused}
-                  refInput={passwordInputRef}
-                  setDetails={setDetails}
-               />
+                  <LoginForm
+                     formType="password"
+                     details={password}
+                     isError={isError}
+                     setIsError={setIsError}
+                     setDetails={setPassword}
+                     refInput={passwordInputRef}
+                     setIsPwFocused={setIsPwFocused}
+                     pwShown={passwordShown}
+                  />
 
-               {/* <div className="form-group">
+                  {/* <div className="form-group">
                   <input
                      className={isError ? "input--error" : "input"}
                      type={passwordShown ? "text" : "password"}
@@ -105,37 +125,39 @@ function LoginSection({ Login, errorMsg }) {
                      onBlur={() => setIsPwFocused(false)}
                      ref={passwordInputRef}
                      value={details.password}
-                  />
-                  <label
+                     />
+                     <label
                      className={details.password ? "Active" : ""}
                      htmlFor="password"
-                  >
+                     >
                      Password
-                  </label>
-               </div> */}
-
-               <button
-                  type="button"
-                  className={
-                     isPwFocused
-                        ? passwordShown
-                           ? "toggle-btn toggle-btn-show "
-                           : "toggle-btn toggle-btn-hide"
-                        : "invis-btn"
-                  }
-                  onClick={() => {
-                     setPasswordShown(!passwordShown);
-                  }}
-                  onFocus={() => {
-                     setIsPwFocused(true);
-                  }}
-                  onBlur={() => {
-                     setIsPwFocused(false);
-                  }}
-                  tabIndex="-1"
-               ></button>
-            </form>
-
+                     </label>
+                  </div> */}
+                  <div className="toggle-wrapper">
+                     <button
+                        type="button"
+                        className={
+                           // "toggle-btn toggle-btn-show"
+                           isPwFocused
+                              ? passwordShown
+                                 ? "toggle-btn toggle-btn-show "
+                                 : "toggle-btn toggle-btn-hide"
+                              : "invis-btn"
+                        }
+                        onClick={() => {
+                           setPasswordShown(!passwordShown);
+                        }}
+                        onFocus={() => {
+                           setIsPwFocused(true);
+                        }}
+                        onBlur={() => {
+                           setIsPwFocused(false);
+                        }}
+                        tabIndex="-1"
+                     ></button>
+                  </div>
+               </form>
+            </div>
             <ul className="login-routes">
                {["fb", "google", "apple"].map((social) => (
                   <SocialLoginButton
@@ -159,27 +181,24 @@ function LoginSection({ Login, errorMsg }) {
                   form="main-form"
                   type="submit"
                   className={
-                     details.name && details.password
-                        ? "login-btn--on"
-                        : "login-btn--off"
+                     username && password ? "login-btn--on" : "login-btn--off"
                   }
                ></button>
             </div>
 
-            <div>
-               <div>
-                  <a href="https://recovery.riotgames.com/en?region=NA1">
-                     can't sign in?
-                  </a>
-               </div>
-
-               <div>
-                  <a href="https://signup.leagueoflegends.com/en-gb/signup/index">
-                     create account
-                  </a>
-               </div>
+            <nav>
+               <ul>
+                  <li>
+                     <Link to="/register">can't sign in?</Link>
+                  </li>
+               </ul>
+               <ul>
+                  <li>
+                     <Link to="/register">create account</Link>
+                  </li>
+               </ul>
                <div className="version">V57.0.0</div>
-            </div>
+            </nav>
          </footer>
       </section>
    );
