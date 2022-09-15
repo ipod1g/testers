@@ -108,6 +108,10 @@ a {
    flex-direction: column;
 }
 
+.form-innerwrap {
+   max-height: 130px;
+}
+
 .form-group label {
    position: absolute;
    pointer-events: none;
@@ -190,10 +194,15 @@ a {
    transform: translate(-10px, 11px) scale(0.8);
 }
 
+.toggle-wrapper {
+   position: relative;
+   top: -40px;
+   left: 265px;
+}
+
 .toggle-btn {
-   position: absolute;
-   top: 305px;
-   left: 313px;
+   /* top: 305px;
+   left: 313px; */
    width: 28px;
    height: 22px;
    border: none;
@@ -471,7 +480,7 @@ ul.login-routes button {
    height: 3px;
    position: relative;
    width: 18px;
-   bottom: 20%;
+   bottom: 17%;
    left: 25%;
 }
 
@@ -506,17 +515,28 @@ ul.login-routes button {
    text-transform: uppercase;
    text-align: center;
    font-size: 10px;
-   font-family: "FF+Mark", sans-serif;
+   /* font-family: "FF+Mark", sans-serif; */
+   font-family: "MarkW05-NarrowMedium", sans-serif;
+   letter-spacing: 1px;
    opacity: 0.8;
 }
 
-.bottom-section > div > div {
+.bottom-section > nav {
+   padding-bottom: 40px;
+}
+
+.bottom-section > nav > ul {
    padding-top: 3px;
+   padding-left: 0;
+   margin: 0;
+}
+.bottom-section > nav > ul > li {
+   list-style-type: none;
 }
 
 .version {
    position: relative;
-   bottom: 15px;
+   bottom: 10px;
    width: fit-content;
    left: 315px;
    font-size: 10px;
