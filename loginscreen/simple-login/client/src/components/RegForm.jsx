@@ -15,9 +15,9 @@ const Regform = (props) => {
             name={props.formType}
             id={props.formType}
             onChange={(e) => props.setDetails(e.target.value)}
-            onBlur={() => props.setIsPwFocused(false)}
+            onBlur={() => props.setIsPwFocused?.(false)}
             onFocus={() => {
-               props.setIsPwFocused(true);
+               props.setIsPwFocused?.(true);
             }}
             ref={props?.refInput}
             value={props.details}

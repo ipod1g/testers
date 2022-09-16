@@ -1,7 +1,7 @@
 import React from "react";
 
 const LoginForm = (props) => {
-   const handleChange = (e) => {
+   const changeHandler = (e) => {
       // if (props.formType === "username") {
       //    props.setDetails((prev) => {
       //       const updatedDetails = {
@@ -27,9 +27,8 @@ const LoginForm = (props) => {
       props.setIsError(false);
    };
 
-   const handleFocus = () => {
+   const focusHandler = () => {
       props.setIsPwFocused?.(true);
-      props.setIsError(false);
    };
 
    return (
@@ -45,12 +44,12 @@ const LoginForm = (props) => {
             }
             name={props.formType}
             id={props.formType}
-            onChange={handleChange}
+            onChange={changeHandler}
             onBlur={() => props.setIsPwFocused?.(false)}
-            onFocus={handleFocus}
+            onFocus={focusHandler}
             ref={props?.refInput}
             value={props.details}
-            autoComplete="false"
+            autoComplete="off"
          />
          <label
             className={props.details ? "Active" : ""}
