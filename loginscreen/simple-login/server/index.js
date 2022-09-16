@@ -2,68 +2,29 @@ const express = require("express");
 const mysql = require("mysql2");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+require("dotenv").config();
 
 const app = express();
 
 app.use(express.json());
-app.use(bodyParser.json());
 app.use(cors());
 
-const db = mysql.createConnection({
-   user: "root",
-   host: "localhost",
-   password: "dennisku10",
-   database: "riotdb",
-});
+const db = require("./models");
 
-// MESSAGE ON SCREEN of server
-app.get("/", (req, res) => {
-   //    const sqlInsert =
-   //       "INSERT INTO users (username, password) VALUES ('test1', 'testpw')";
-   //    db.query(sqlInsert, (err, result) => {
-   //       console.log("error", err);
-   //       console.log("result", result);
-   //    });
-   res.send("You are connected");
-});
+// Routers
+const loginRouter = require("./routes/Login");
+app.use("/login", loginRouter);
+const registerRouter = require("./routes/Register");
+app.use("/register", registerRouter);
 
-app.post("/register", (req, res) => {
-   const username = req.body.username;
-   const password = req.body.password;
-
-   db.query(
-      "INSERT INTO users (username, password) VALUES (?,?)",
-      [username, password],
-      (err, result) => {
-         console.log(err);
-      }
-   );
-});
-
-app.post("/login", (req, res) => {
-   const username = req.body.username;
-   const password = req.body.password;
-
-   db.query(
-      "SELECT * FROM users WHERE username = ? AND password = ?",
-      [username, password],
-      (err, result) => {
-         if (err) {
-            res.send({ err: err });
-         }
-
-         if (result.length > 0) {
-            res.send(result);
-         } else {
-            res.send({
-               message: "Your username/password is not in the database",
-            });
-         }
-      }
-   );
-});
-
-// run on 3001
-app.listen(3001, () => {
-   console.log("Running on port 3001");
-});
+// run on 3001 if local
+db.sequelize
+   .sync()
+   .then(() => {
+      app.listen(process.env.PORT || 3001, () => {
+         console.log("Running on port 3001");
+      });
+   })
+   .catch((err) => {
+      console.log(err);
+   });
