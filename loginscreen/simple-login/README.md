@@ -80,9 +80,9 @@
 -  used react-select library
 -  Utilize Lighthouse to check and optimize performance
    -  Before font preloading
-      ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e0766cd5-1297-4139-8e89-e6e959e2fc2c/Untitled.png)
+      https://www.notion.so/-bono-jisoo/Riot-games-login-screen-project-474d4a9192f74b75bec6fcd0ae1b6bc8#7bfc2c95a5304e41bd57c71a18a395ce
    -  After font preloading
-      ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/45e4e083-2dac-49ed-9b83-cb12ed166be1/Untitled.png)
+      https://www.notion.so/-bono-jisoo/Riot-games-login-screen-project-474d4a9192f74b75bec6fcd0ae1b6bc8#2111052ee82d49159dfcf26562b30959
 -  Setting up a light-weight backend with Node.js + MySQL
    -  Learnt deploying with Heroku
    -  Dealing with requests, response
