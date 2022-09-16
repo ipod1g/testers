@@ -8,7 +8,7 @@ export default function windowSizeInfo() {
 
       useEffect(() => {
          function handleWindowResize() {
-            console.log(windowSize);
+            // console.log(windowSize);
             setWindowSize(getWindowSize());
          }
 
