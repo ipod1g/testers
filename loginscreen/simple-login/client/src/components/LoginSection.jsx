@@ -5,15 +5,18 @@ import SocialLoginButton from "./SocialLoginButton";
 import LoginForm from "./LoginForm";
 import Axios from "axios";
 
-function LoginSection({ Login, errorMsg }) {
+function LoginSection() {
    const [username, setUsername] = useState("");
    const [password, setPassword] = useState("");
    const [passwordShown, setPasswordShown] = useState(false);
    const [isError, setIsError] = useState(false);
+   const [errorMsg, setErrorMsg] = useState("");
    const [isPwFocused, setIsPwFocused] = useState(false);
    const idInputRef = useRef(null);
    const passwordInputRef = useRef(null);
    const [isFirstRun, setIsFirstRun] = useState(true);
+
+   // const [loginStatus, setLoginStatus] = useState("");
 
    const login = () => {
       Axios.post("http://localhost:3001/login", {
@@ -22,17 +25,22 @@ function LoginSection({ Login, errorMsg }) {
       }).then(
          (response) => {
             console.log(response);
+            setIsError(false);
+            alert("LOGIN SUCCESS!");
          },
          (error) => {
             console.log(error);
+            setErrorMsg(
+               "Your login credentials don't match an account in our system."
+            );
+            setIsError(true);
          }
       );
    };
 
    const submitHandler = (e) => {
-      e.preventDefault();
       login();
-      setIsError(true);
+      e.preventDefault();
       // setDetails((prev) => {
       //    const updatedDetails = { ...prev, password: "" };
       //    return updatedDetails;
@@ -53,6 +61,7 @@ function LoginSection({ Login, errorMsg }) {
          setIsFirstRun(false);
       } else if (isError === true) {
          idInputRef.current.focus();
+         setPassword("");
       }
    }, [isError]);
 
