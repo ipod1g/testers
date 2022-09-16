@@ -1,6 +1,6 @@
 {
   "name": "simple-login",
-  "version": "0.1.0",
+  "version": "2.1.0",
   "author": "Bono",
   "private": true,
   "dependencies": {
@@ -17,7 +17,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "GENERATE_SOURCEMAP=false react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
