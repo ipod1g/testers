@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import Axios from "axios";
+import { Link } from "react-router-dom";
 import RegForm from "./RegForm";
 import "./Register.css";
 import Divider from "../assets/reg/divider.png";
@@ -28,7 +29,11 @@ const Register = () => {
          password: passwordReg,
       }).then(
          (response) => {
-            console.log(response);
+            if (response.data.message) {
+               alert("Register SUCCESS!");
+            } else {
+               console.log(response.data);
+            }
          },
          (error) => {
             console.log(error);
@@ -38,7 +43,26 @@ const Register = () => {
 
    return (
       <article className="regform-container">
+         <nav className="nav-back">
+            <ul>
+               <li>
+                  <icon className="left-arrow"></icon>
+                  <Link to="/">GO BACK</Link>
+               </li>
+            </ul>
+         </nav>
          <section className="scene-content">
+            <a
+               href="https://www.leagueoflegends.com/en-gb/?_gl=1*1ssl8ty*_ga*MTExNzQ5MzYzNy4xNjYxNjg2NzQ2*_ga_FXBJE5DEDD*MTY2MzMwNTg4NS45LjEuMTY2MzMwNjg3Ny42MC4wLjA.&amp;_ga=2.252011597.574815907.1663179802-1117493637.1661686746"
+               target="_blank"
+            >
+               <img
+                  className="lol-logo-img"
+                  src="https://signup.br.leagueoflegends.com/en-gb/assets/lol-logo.png"
+                  alt="lol logo"
+                  width="120px"
+               />
+            </a>
             <header className="header-main">Register Now</header>
             <h3>Enter your info below</h3>
             <div className="divider">
@@ -100,12 +124,14 @@ const Register = () => {
                </form>
             </div>
             <footer>
-               <img
-                  src={Riotlogofull}
-                  width="100px"
-                  style={{ verticalAlign: "middle" }}
-                  alt="Riotlogofull"
-               />
+               <a href="https://www.riotgames.com" target="_blank">
+                  <img
+                     src={Riotlogofull}
+                     width="100px"
+                     style={{ verticalAlign: "middle" }}
+                     alt="Riotlogofull"
+                  />
+               </a>
                <img
                   src={PEGI}
                   height="50px"
