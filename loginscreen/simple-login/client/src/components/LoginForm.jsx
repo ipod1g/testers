@@ -2,27 +2,6 @@ import React from "react";
 
 const LoginForm = (props) => {
    const changeHandler = (e) => {
-      // if (props.formType === "username") {
-      //    props.setDetails((prev) => {
-      //       const updatedDetails = {
-      //          ...prev,
-
-      //          name: e.target.value,
-      //       };
-
-      //       return updatedDetails;
-      //    });
-      // } else if (props.formType === "password") {
-      //    props.setDetails((prev) => {
-      //       const updatedDetails = {
-      //          ...prev,
-
-      //          password: e.target.value,
-      //       };
-
-      //       return updatedDetails;
-      //    });
-      // }
       props.setDetails(e.target.value);
       props.setIsError(false);
    };
