@@ -32,6 +32,7 @@ html {
     filter: blur(8px);
 }
 
+/***** TOP SECTION *****/
 .nav-back {
     position: fixed;
     top: 30px;
@@ -59,11 +60,21 @@ ul {
     background-image: url("../assets/left-arrow.svg");
 }
 
-.nav-back ul > li > a:hover {
+.nav-back ul > li > a:hover,
+.nav-back ul > li > a:focus {
     color: #000000;
     transition: color .2s;
     filter: invert(66%) sepia(67%) saturate(327%) hue-rotate(352deg) brightness(111%) contrast(89%);
 }
+
+.lol-logo-img {
+    position: fixed;
+    top: 30px;
+    left: 40px;
+}
+/***** TOP SECTION *****/
+
+/***** MAIN SECTION *****/
 
 .scene-content {
     display: flex;
@@ -72,10 +83,10 @@ ul {
     padding: 1vw;
 }
 
-.lol-logo-img {
-    position: fixed;
-    top: 30px;
-    left: 40px;
+.scene-content h3 {
+    color: #937341;
+    margin: 0 auto 15px;
+    padding-bottom: 15px;
 }
 
 .header-main {
@@ -86,12 +97,6 @@ ul {
     text-transform: uppercase;
     font-weight: 600;
     letter-spacing: 3px;
-}
-
-.scene-content h3 {
-    color: #937341;
-    margin: 0 auto 15px;
-    padding-bottom: 15px;
 }
 
 .scene-content .divider img {
@@ -105,6 +110,7 @@ ul {
     margin: auto;
 }
 
+    /**** REGISTRATION FORM ****/
 #regform {
     padding: 10px 30px;
 }
@@ -131,8 +137,16 @@ ul {
 .regform-inner .form-group label {
     color: #d5b26e;
     font-family: "Sarabun", sans-serif;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
     opacity: 0.9;
+    transform: translate(0, 20px) scale(1);
+    transform-origin: top;
+    transition: transform .3s ease-in-out;
+    top: 6px;
+    left: 115px;
+    font-size: 14px;
+    font-weight: 800;
+    padding-left: 0px;
 }
 
 .regform-inner .form-group .input:focus{
@@ -146,6 +160,14 @@ ul {
     border: none;
     border-bottom: solid 1px #d5b26e;
 }
+ 
+.regform-inner .form-group:focus-within label {
+    transform: translate(-110px, 1px) scale(0.70);
+ }
+
+ .regform-inner .form-group .Active {
+    transform: translate(-110px, 1px) scale(0.70);
+ }
 
 .reg-toggle-wrapper {
     position: relative;
@@ -210,12 +232,13 @@ ul {
     bottom: 2px;
 }
 
-.reg-btn button:hover {
+.reg-btn button:hover, .reg-btn button:focus{
     color: #c4b998;
 }
+    /**** REGISTRATION FORM ****/
 
 .scene-content footer {
-    position: fixed;
+    position: absolute;
     bottom: 40px;
     left: 30px;
 }
@@ -223,6 +246,8 @@ ul {
 .scene-content footer img {
     margin-right: 20px;
 }
+
+/***** MAIN SECTION *****/
 
 
 @media (min-width: 992px) {

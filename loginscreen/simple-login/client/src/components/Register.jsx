@@ -29,13 +29,11 @@ const Register = () => {
          password: passwordReg,
       }).then(
          (response) => {
-            if (response.data.message) {
-               alert("Register SUCCESS!");
-            } else {
-               console.log(response.data);
-            }
+            alert("Register SUCCESS!");
+            console.log(response.data);
          },
          (error) => {
+            alert(JSON.stringify(error));
             console.log(error);
          }
       );
@@ -117,6 +115,7 @@ const Register = () => {
                            register();
                            e.preventDefault();
                         }}
+                        tabIndex="0"
                      >
                         Register
                      </button>
