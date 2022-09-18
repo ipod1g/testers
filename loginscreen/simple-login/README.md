@@ -1,5 +1,6 @@
 <aside>
-💡 Login screen inspired by Riot Games Client https://testers4bono.netlify.app/
+💡 Login screen inspired by Riot Games Client [https://testers4bono.netlify.app/](https://testers4bono.netlify.app/)
+GitHub Dev Source [https://github.com/ipod1g/testers/tree/main/loginscreen/simple-login](https://github.com/ipod1g/testers/tree/main/loginscreen/simple-login)
 
 </aside>
 
@@ -19,7 +20,7 @@
 -  express, axios, cors
 -  Node.js
 -  MySQL + sequelize
--  Insomnia
+-  Insomnia, LambdaTest (UI test framework)
 
 ### Notable functions
 
@@ -69,6 +70,7 @@
 -  passing object props and recognizing change of state was an issue due to the way react reads it
 -  React-select library - blur on selection
 -  To improve performance, minify was considered but realized that jsx format doesn’t auto minify on React unlike js
+-  Had this funny error with CSS on modal, turns out it was due to a misinputted ; in between the classes that stopped it from reading the styles underneath
 
 ### Lessons
 
@@ -80,13 +82,16 @@
 -  used react-select library
 -  Utilize Lighthouse to check and optimize performance
    -  Before font preloading
-      https://www.notion.so/-bono-jisoo/Riot-games-login-screen-project-474d4a9192f74b75bec6fcd0ae1b6bc8#7bfc2c95a5304e41bd57c71a18a395ce
+      ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e0766cd5-1297-4139-8e89-e6e959e2fc2c/Untitled.png)
    -  After font preloading
-      https://www.notion.so/-bono-jisoo/Riot-games-login-screen-project-474d4a9192f74b75bec6fcd0ae1b6bc8#2111052ee82d49159dfcf26562b30959
+      ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/45e4e083-2dac-49ed-9b83-cb12ed166be1/Untitled.png)
 -  Setting up a light-weight backend with Node.js + MySQL
    -  Learnt deploying with Heroku
    -  Dealing with requests, response
    -  Insomnia to check for backend functions
+-  On deployment, iOS device had input value not filling bug
+   -  Turns out it was stylesheet reset and was re-deployed
+      -  [https://stackoverflow.com/questions/25610517/ios-devices-issues-with-html-form-input-type-text](https://stackoverflow.com/questions/25610517/ios-devices-issues-with-html-form-input-type-text)
 
 # Version check
 
@@ -116,10 +121,17 @@
    -  Minor clean-up of coding
    -  Slight upgrade to responsive design
       -  Modal still needs work
+   -  Password toggle bug on iOS devices
+-  v2.1.1
+   -  Updated on 18 Sep 2022
+   -  Update registration page styling
+   -  Modal responsiveness upgrade
+   -  Password toggle bug still present on iOS
+   -  Update Favicon
 
 # Future implementation
 
 ---
 
--  Support fully responsive design by adding my touch - since source login screen doesn’t support responsive design
+-  Bug fix on iOS mobile devices
 -  Login loading response
