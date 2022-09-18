@@ -9,7 +9,7 @@ const SettingsModal = ({ open, children, onClose }) => {
          <div className="overlay" onClick={onClose} />
          <div className="modal">
             <button className="modal-close-btn" onClick={onClose}></button>
-            {children}
+            <div className="modal-container">{children}</div>
          </div>
       </div>,
       document.getElementById("portal")

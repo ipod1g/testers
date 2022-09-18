@@ -1,98 +1,71 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import RiotLogo2 from "../assets/Riot Games RGB Logos (Web)/001_RG 2021 Logomark/001.2_RG_2021_LOGOMARK_BLACK_OFFWHITE_CONTAINER.png";
 import LOL from "../assets/lol.png";
 import Valorant from "../assets/valorant.png";
+import windowSizeInfo from "./Dimensions";
+import "./Settings.css";
 
 // Needs work on making the buttons functional and triggering states
 
-const TAB_STYLES = {
-   boxSizing: "border-box",
-   position: "fixed",
-   top: 0,
-   left: 0,
-   padding: "60px 0 0 50px",
-   width: "25%",
-   height: "100%",
-   zIndex: 1000,
-   fontFamily: "FF Mark, sans-serif",
-   textTransform: "uppercase",
-   display: "flex",
-   flexDirection: "column",
-   justifyContent: "space-between",
-};
-
-const LIST_STYLES = {
-   listStyleType: "none",
-   fontSize: "13px",
-   paddingTop: "30px",
-   paddingLeft: "0",
-};
-
-const LIST_CHILD_STYLES = {
-   padding: "4px 0px 4px 12px",
-   width: "200px",
-   margin: "10px 0 10px 0",
-   opacity: "0.3",
-   cursor: "pointer",
-
-   "&:hover": {
-      opacity: "0.8",
-   },
-};
-
-const LIST_CHOSEN_STYLES = {
-   padding: "10px 0 10px 12px",
-   width: "200px",
-   backgroundColor: "rgb(79 79 79 / 50%)",
-   borderRadius: "6px",
-   cursor: "pointer",
-};
-
-const LIST_STYLES_2 = {
-   listStyleType: "none",
-   fontSize: "11px",
-   paddingTop: "30px",
-   paddingLeft: "0",
-};
-
 const SettingsTab = () => {
+   const [settingsNow, setSettingsNow] = useState("client");
+   const windowSizeArray = windowSizeInfo();
+   const screenWidth = windowSizeArray[0];
+
+   if (screenWidth < 680) return null;
+
    return (
-      <div style={TAB_STYLES}>
-         <label style={{ fontSize: "25px", color: "rgb(247 247 247 / 87%)" }}>
+      <div className="settings-tab-container">
+         <div>
             Settings
-            <ul style={LIST_STYLES}>
-               <li style={LIST_CHOSEN_STYLES}>
-                  <img
-                     src={RiotLogo2}
-                     alt="Riot Logo 2"
-                     width="18px"
-                     style={{ verticalAlign: "middle" }}
-                  />
-                  &nbsp;&nbsp; Riot Client
+            <ul>
+               <li>
+                  <button
+                     onClick={() => setSettingsNow("client")}
+                     className={settingsNow === "client" ? "chosen" : "default"}
+                  >
+                     <img
+                        src={RiotLogo2}
+                        alt="Riot Logo 2"
+                        width="18px"
+                        style={{ verticalAlign: "middle" }}
+                     />
+                     &nbsp;&nbsp; Riot Client
+                  </button>
                </li>
-               <li style={LIST_CHILD_STYLES}>
-                  <img
-                     src={LOL}
-                     alt="LOL logo"
-                     width="18px"
-                     style={{ verticalAlign: "middle" }}
-                  />
-                  &nbsp;&nbsp; League of Legends
+               <li>
+                  <button
+                     onClick={() => setSettingsNow("lol")}
+                     className={settingsNow === "lol" ? "chosen" : "default"}
+                  >
+                     <img
+                        src={LOL}
+                        alt="LOL logo"
+                        width="18px"
+                        style={{ verticalAlign: "middle" }}
+                     />
+                     &nbsp;&nbsp; League of Legends
+                  </button>
                </li>
-               <li style={LIST_CHILD_STYLES}>
-                  <img
-                     src={Valorant}
-                     alt="LOL logo"
-                     width="18px"
-                     style={{ verticalAlign: "middle" }}
-                  />
-                  &nbsp;&nbsp; Valorant
+               <li>
+                  <button
+                     onClick={() => setSettingsNow("val")}
+                     className={settingsNow === "val" ? "chosen" : "default"}
+                  >
+                     <img
+                        src={Valorant}
+                        alt="LOL logo"
+                        width="18px"
+                        style={{ verticalAlign: "middle" }}
+                     />
+                     &nbsp;&nbsp; Valorant
+                  </button>
                </li>
             </ul>
-         </label>
+         </div>
 
          <div style={{ minWidth: "131px" }}>
-            <ul style={LIST_STYLES_2}>
+            <ul className="bottom">
                <li>
                   <a>Terms of Service</a>
                </li>
@@ -103,15 +76,7 @@ const SettingsTab = () => {
                   <a>Privacy Notice</a>
                </li>
             </ul>
-            <div
-               style={{
-                  paddingBottom: "50px",
-                  color: "rgb(255 255 255 / 15%)",
-                  fontSize: "12px",
-               }}
-            >
-               V58.0.0.4640299
-            </div>
+            <div className="version-bottom">V58.0.0.4640299</div>
          </div>
       </div>
    );

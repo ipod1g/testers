@@ -1,6 +1,4 @@
-.select-placement {
-   font-family: "FF Mark", sans-serif !important;
-}
+/**** MODAL PANEL ****/
 
 .invis-menu .settings-panel {
    visibility: visible;
@@ -55,8 +53,8 @@
    background-color: rgba(47, 47, 47, 0.6);
    z-index: 1000;
  } */
-
-.modal {
+ 
+ .modal {
    position: fixed;        
    display: flex;
    top: 50%;
@@ -69,7 +67,7 @@
    height: 70%;
    width: 80%;
    border-radius: 8px;
-
+   
 }
 
 .modal-anim-enter {
@@ -81,9 +79,9 @@
    height: 70%;
    width: 80%;
    margin: 0;
- }
+}
 
- .modal-anim-enter-active {
+.modal-anim-enter-active {
    opacity: 1;
    position: fixed;
    top: 50%;
@@ -94,7 +92,7 @@
    width: 80%;
    transition: all 600ms ease;
    margin: 0;   
- }
+}
 
 .modal-close-btn {
    position: fixed;
@@ -125,6 +123,103 @@
    opacity: 1;
 }
 
+.modal-container {
+   display: flex;
+   padding-right: 150px;
+   width: 100%;
+   min-width: 590px;
+}
+/**** MODAL PANEL ****/
+
+
+/**** SETTINGS TAB ****/
+.settings-tab-container {
+   box-sizing: border-box;
+   top: 0;
+   left: 0;
+   width: 25%,;
+   height: 100%;
+   z-index: 1000;
+   font-family: "FF Mark", sans-serif;
+   text-transform: uppercase;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+}
+
+.settings-tab-container > div {
+   font-size: 25px; 
+   color: rgb(247 247 247 / 87%) !important;
+}
+
+.settings-tab-container ul {
+   list-style-type: none;
+   font-size: 13px !important;
+   padding-top: 30px;
+   padding-left: 0;
+}
+
+.settings-tab-container ul .default {
+   padding: 10px 0px 10px 15px;
+   width: 200px;
+   opacity: 0.3;
+   cursor: pointer;
+   background-color: transparent;
+   border: none;
+   border-radius: 6px;
+   font-family: "FF Mark", sans-serif;
+   font-size: 14px;
+   text-transform: uppercase;
+   color: rgb(247 247 247 / 87%);
+   text-align: start;
+   letter-spacing: 0.5px;
+}
+
+
+.settings-tab-container ul .chosen {
+   padding: 6px 0px 8px 15px;
+   margin: 4px 0px 2px 0;
+   width: 200px;
+   opacity: 1;
+   background-color: rgb(79 79 79 / 50%);
+   border: none;
+   border-radius: 6px;
+   cursor: pointer;
+   font-family: "FF Mark", sans-serif; 
+   font-size: 14px;
+   text-transform: uppercase;
+   color: rgb(247 247 247 / 87%);
+   text-align: start;
+   letter-spacing: 0.5px;
+}
+
+.settings-tab-container .default:hover {
+   opacity: 1;
+}
+
+.settings-tab-container .bottom {
+   list-style-type: none;
+   font-size: 11px;
+   padding-top: 30px;
+   padding-left: 0;
+   line-height: 18px;
+}
+
+.bottom a:hover {
+   color: #ffffffeb;
+   opacity: 0.6;
+}
+
+.version-bottom {
+   padding-bottom: 30px;
+   color: rgb(255 255 255 / 15%);
+   font-size: 12px;
+}
+
+/**** SETTINGS TAB ****/
+
+
+/**** SELECT ****/
 .select-label {
    color: #ffffffeb;
    font-size: 12px;
@@ -132,13 +227,34 @@
 }
 
 .select-placement {
-   /* position: fixed; */
-   width: 500px;
-   top: 60px;
-   left: 30%;
-   margin-left: 250px;
- }
+   font-family: "FF Mark", sans-serif !important;
+}
 
-li a:hover {
-   opacity: 1;
+.select-placement {
+   width: 100%;
+   margin-left: 50px;
+}
+/**** SELECT ****/
+
+
+@media (max-width: 680px) {
+   /* TEMP FIX  */
+   .select-placement {
+      position: fixed;
+      top: 40px;
+      left: 10px;
+      width: 60%;
+   }
+
+   /* .settings-tab-container {
+      flex-direction: row;
+   }
+
+   .settings-tab-container ul {
+      display: flex; 
+   }
+
+   .settings-tab-container li button {
+
+   } */
 }
