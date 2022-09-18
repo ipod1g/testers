@@ -10,6 +10,12 @@ const LoginForm = (props) => {
       props.setIsPwFocused?.(true);
    };
 
+   const handleKeyDown = (e) => {
+      if (e.key === " ") {
+         e.preventDefault();
+      }
+   };
+
    return (
       <div className="form-group">
          <input
@@ -24,6 +30,7 @@ const LoginForm = (props) => {
             name={props.formType}
             id={props.formType}
             onChange={changeHandler}
+            onKeyDown={handleKeyDown}
             onBlur={() => props.setIsPwFocused?.(false)}
             onFocus={focusHandler}
             ref={props?.refInput}

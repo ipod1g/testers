@@ -177,7 +177,7 @@ function LoginSection() {
                ))}
             </ul>
 
-            <label className="stay-container">
+            <label className="stay-container" tabIndex={0}>
                <input type="checkbox" value="stay" />
                Stay signed in
                <span className="checkmark"></span>
