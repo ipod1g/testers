@@ -1,6 +1,12 @@
 import React from "react";
 
 const Regform = (props) => {
+   const handleKeyDown = (e) => {
+      if (e.key === " ") {
+         e.preventDefault();
+      }
+   };
+
    return (
       <div className="form-group">
          <input
@@ -19,6 +25,7 @@ const Regform = (props) => {
             onFocus={() => {
                props.setIsPwFocused?.(true);
             }}
+            onKeyDown={handleKeyDown}
             ref={props?.refInput}
             value={props.details}
          />
