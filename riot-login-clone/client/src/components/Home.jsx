@@ -5,8 +5,6 @@ import windowSizeInfo from "./Dimensions";
 import NavMenu from "./NavMenu";
 
 function Home() {
-   const [isError, setIsError] = useState(false);
-
    //----MEDIA QUERY ----//
    const windowSizeArray1 = windowSizeInfo();
    const width = windowSizeArray1[0];

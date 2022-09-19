@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import Axios from "axios";
 import "./LoginSection.css";
 import SocialLoginButton from "./SocialLoginButton";
 import LoginForm from "./LoginForm";
-import Axios from "axios";
+import Loading from "./Loading";
 
 function LoginSection() {
    const [username, setUsername] = useState("");
@@ -15,6 +16,7 @@ function LoginSection() {
    const idInputRef = useRef(null);
    const passwordInputRef = useRef(null);
    const [isFirstRun, setIsFirstRun] = useState(true);
+   const [isLoading, setIsLoading] = useState(false);
 
    // const [loginStatus, setLoginStatus] = useState("");
 
@@ -24,11 +26,13 @@ function LoginSection() {
          password: password,
       }).then(
          (response) => {
+            setIsLoading(false);
             console.log(response);
             setIsError(false);
             alert("LOGIN SUCCESS!");
          },
          (error) => {
+            setIsLoading(false);
             console.log(error);
             setErrorMsg(
                "Your login credentials don't match an account in our system."
@@ -40,6 +44,7 @@ function LoginSection() {
 
    const submitHandler = (e) => {
       login();
+      setIsLoading(true);
       e.preventDefault();
       // setDetails((prev) => {
       //    const updatedDetails = { ...prev, password: "" };
@@ -70,147 +75,125 @@ function LoginSection() {
    };
 
    return (
-      <section className="form-main">
-         <div className="form-outer">
-            <img
-               className="logo-main"
-               src={require("../assets/002_RG_2021_FULL_LOCKUP_RED.png")}
-               alt="Riot games logo"
-            />
-            <h2 className="sign-in">Sign in</h2>
-            {isError !== false ? (
-               <div className="error-shadow">
-                  <span className="error-box">
-                     <span className="error-msg">{errorMsg}</span>
-                  </span>
-               </div>
-            ) : (
-               ""
-            )}
-            <div className="form-innerwrap">
-               <form
-                  id="main-form"
-                  onSubmit={submitHandler}
-                  className="form-inner"
-                  autoComplete="off"
-               >
-                  <LoginForm
-                     formType="username"
-                     details={username}
-                     isError={isError}
-                     setIsError={setIsError}
-                     setDetails={setUsername}
-                     refInput={idInputRef}
+      <>
+         {isLoading ? (
+            <Loading formType={"login"} />
+         ) : (
+            <section className="form-main">
+               <div className="form-outer">
+                  <img
+                     className="logo-main"
+                     src={require("../assets/002_RG_2021_FULL_LOCKUP_RED.png")}
+                     alt="Riot games logo"
                   />
-
-                  <LoginForm
-                     formType="password"
-                     details={password}
-                     isError={isError}
-                     setIsError={setIsError}
-                     setDetails={setPassword}
-                     refInput={passwordInputRef}
-                     setIsPwFocused={setIsPwFocused}
-                     pwShown={passwordShown}
-                  />
-
-                  {/* <div className="form-group">
-                  <input
-                     className={isError ? "input--error" : "input"}
-                     type={passwordShown ? "text" : "password"}
-                     name="password"
-                     id="password"
-                     onChange={(e) => {
-                        setDetails((prev) => {
-                           const updatedDetails = {
-                              ...prev,
-                              password: e.target.value,
-                           };
-                           return updatedDetails;
-                        });
-                        setIsError(false);
-                     }}
-                     onFocus={() => setIsPwFocused(true)}
-                     onBlur={() => setIsPwFocused(false)}
-                     ref={passwordInputRef}
-                     value={details.password}
-                     />
-                     <label
-                     className={details.password ? "Active" : ""}
-                     htmlFor="password"
+                  <h2 className="sign-in">Sign in</h2>
+                  {isError !== false ? (
+                     <div className="error-shadow">
+                        <span className="error-box">
+                           <span className="error-msg">{errorMsg}</span>
+                        </span>
+                     </div>
+                  ) : (
+                     ""
+                  )}
+                  <div className="form-innerwrap">
+                     <form
+                        id="main-form"
+                        onSubmit={submitHandler}
+                        className="form-inner"
+                        autoComplete="off"
                      >
-                     Password
-                     </label>
-                  </div> */}
-                  <div className="toggle-wrapper">
+                        <LoginForm
+                           formType="username"
+                           details={username}
+                           isError={isError}
+                           setIsError={setIsError}
+                           setDetails={setUsername}
+                           refInput={idInputRef}
+                        />
+
+                        <LoginForm
+                           formType="password"
+                           details={password}
+                           isError={isError}
+                           setIsError={setIsError}
+                           setDetails={setPassword}
+                           refInput={passwordInputRef}
+                           setIsPwFocused={setIsPwFocused}
+                           pwShown={passwordShown}
+                        />
+                        <div className="toggle-wrapper">
+                           <button
+                              type="button"
+                              className={
+                                 // "toggle-btn toggle-btn-show"
+                                 isPwFocused
+                                    ? passwordShown
+                                       ? "toggle-btn toggle-btn-show "
+                                       : "toggle-btn toggle-btn-hide"
+                                    : "invis-btn"
+                              }
+                              onClick={() => {
+                                 setPasswordShown(!passwordShown);
+                              }}
+                              onFocus={() => {
+                                 setIsPwFocused(true);
+                              }}
+                              onBlur={() => {
+                                 setIsPwFocused(false);
+                              }}
+                              tabIndex="-1"
+                           ></button>
+                        </div>
+                     </form>
+                  </div>
+                  <ul className="login-routes">
+                     {["fb", "google", "apple"].map((social) => (
+                        <SocialLoginButton
+                           key={social}
+                           social={social}
+                           loginRoutes={loginRoutes}
+                        />
+                     ))}
+                  </ul>
+
+                  <label className="stay-container" tabIndex={0}>
+                     <input type="checkbox" value="stay" />
+                     Stay signed in
+                     <span className="checkmark"></span>
+                  </label>
+               </div>
+
+               <footer className="bottom-section">
+                  <div className="login-btn-container case1">
                      <button
-                        type="button"
+                        form="main-form"
+                        type="submit"
                         className={
-                           // "toggle-btn toggle-btn-show"
-                           isPwFocused
-                              ? passwordShown
-                                 ? "toggle-btn toggle-btn-show "
-                                 : "toggle-btn toggle-btn-hide"
-                              : "invis-btn"
+                           username && password
+                              ? "login-btn--on"
+                              : "login-btn--off"
                         }
-                        onClick={() => {
-                           setPasswordShown(!passwordShown);
-                        }}
-                        onFocus={() => {
-                           setIsPwFocused(true);
-                        }}
-                        onBlur={() => {
-                           setIsPwFocused(false);
-                        }}
-                        tabIndex="-1"
                      ></button>
                   </div>
-               </form>
-            </div>
-            <ul className="login-routes">
-               {["fb", "google", "apple"].map((social) => (
-                  <SocialLoginButton
-                     key={social}
-                     social={social}
-                     loginRoutes={loginRoutes}
-                  />
-               ))}
-            </ul>
 
-            <label className="stay-container" tabIndex={0}>
-               <input type="checkbox" value="stay" />
-               Stay signed in
-               <span className="checkmark"></span>
-            </label>
-         </div>
-
-         <footer className="bottom-section">
-            <div className="login-btn-container case1">
-               <button
-                  form="main-form"
-                  type="submit"
-                  className={
-                     username && password ? "login-btn--on" : "login-btn--off"
-                  }
-               ></button>
-            </div>
-
-            <nav>
-               <ul>
-                  <li>
-                     <Link to="/register">can't sign in?</Link>
-                  </li>
-               </ul>
-               <ul>
-                  <li>
-                     <Link to="/register">create account</Link>
-                  </li>
-               </ul>
-               <div className="version">V57.0.0</div>
-            </nav>
-         </footer>
-      </section>
+                  <nav>
+                     <ul>
+                        <li>
+                           <Link to="/register">can't sign in?</Link>
+                        </li>
+                     </ul>
+                     <ul>
+                        <li>
+                           <Link to="/register">create account</Link>
+                        </li>
+                     </ul>
+                     <div className="version">V57.0.0</div>
+                  </nav>
+               </footer>
+            </section>
+         )}
+      </>
    );
 }
-
 export default LoginSection;

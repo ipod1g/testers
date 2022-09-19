@@ -6,6 +6,7 @@ import "./Register.css";
 import Divider from "../assets/reg/divider.png";
 import PEGI from "../assets/reg/pegi.jpg";
 import Riotlogofull from "../assets/Riot Games RGB Logos (Web)/002_RG 2021 Full Lockup/002_RG_2021_FULL_LOCKUP_OFFWHITE.png";
+import Loading from "./Loading";
 
 const Register = () => {
    const [usernameReg, setUsernameReg] = useState("");
@@ -14,6 +15,7 @@ const Register = () => {
    const [isPwFocused, setIsPwFocused] = useState(false);
    const passwordInputRef = useRef(null);
    const [isFirstRun, setIsFirstRun] = useState(true);
+   const [isLoading, setIsLoading] = useState(false);
 
    useEffect(() => {
       if (isFirstRun) {
@@ -29,10 +31,12 @@ const Register = () => {
          password: passwordReg,
       }).then(
          (response) => {
+            setIsLoading(false);
             alert("Register SUCCESS!");
             console.log(response.data);
          },
          (error) => {
+            setIsLoading(false);
             alert(JSON.stringify(error));
             console.log(error);
          }
@@ -66,62 +70,67 @@ const Register = () => {
             <div className="divider">
                <img src={Divider} alt="divider gold" />
             </div>
-            <div className="regform-innerwrap">
-               <form
-                  id="regform"
-                  onSubmit={register}
-                  className="regform-inner"
-                  autoComplete="off"
-               >
-                  <RegForm
-                     formType="usernameReg"
-                     details={usernameReg}
-                     setDetails={setUsernameReg}
-                  />
-                  <RegForm
-                     formType="passwordReg"
-                     details={passwordReg}
-                     setDetails={setPasswordReg}
-                     refInput={passwordInputRef}
-                     pwShown={passwordShown}
-                     setIsPwFocused={setIsPwFocused}
-                  />
-                  <div className="reg-toggle-wrapper">
-                     <button
-                        type="button"
-                        className={
-                           //    "toggle-btn toggle-btn-hide colorsvg-gold"
-                           isPwFocused
-                              ? passwordShown
-                                 ? "toggle-btn toggle-btn-show colorsvg-gold "
-                                 : "toggle-btn toggle-btn-hide colorsvg-gold"
-                              : "invis-btn"
-                        }
-                        onClick={() => {
-                           setPasswordShown(!passwordShown);
-                        }}
-                        onFocus={() => {
-                           setIsPwFocused(true);
-                        }}
-                        onBlur={() => {
-                           setIsPwFocused(false);
-                        }}
-                        tabIndex="-1"
-                     ></button>
-                  </div>
-                  <div className="reg-btn">
-                     <button
-                        onClick={(e) => {
-                           register();
-                           e.preventDefault();
-                        }}
-                        tabIndex="0"
-                     >
-                        Register
-                     </button>
-                  </div>
-               </form>
-            </div>
+            {isLoading ? (
+               <Loading formType="register" />
+            ) : (
+               <div className="regform-innerwrap">
+                  <form
+                     id="regform"
+                     onSubmit={register}
+                     className="regform-inner"
+                     autoComplete="off"
+                  >
+                     <RegForm
+                        formType="usernameReg"
+                        details={usernameReg}
+                        setDetails={setUsernameReg}
+                     />
+                     <RegForm
+                        formType="passwordReg"
+                        details={passwordReg}
+                        setDetails={setPasswordReg}
+                        refInput={passwordInputRef}
+                        pwShown={passwordShown}
+                        setIsPwFocused={setIsPwFocused}
+                     />
+                     <div className="reg-toggle-wrapper">
+                        <button
+                           type="button"
+                           className={
+                              //    "toggle-btn toggle-btn-hide colorsvg-gold"
+                              isPwFocused
+                                 ? passwordShown
+                                    ? "toggle-btn toggle-btn-show colorsvg-gold "
+                                    : "toggle-btn toggle-btn-hide colorsvg-gold"
+                                 : "invis-btn"
+                           }
+                           onClick={() => {
+                              setPasswordShown(!passwordShown);
+                           }}
+                           onFocus={() => {
+                              setIsPwFocused(true);
+                           }}
+                           onBlur={() => {
+                              setIsPwFocused(false);
+                           }}
+                           tabIndex="-1"
+                        ></button>
+                     </div>
+                     <div className="reg-btn">
+                        <button
+                           onClick={(e) => {
+                              setIsLoading(true);
+                              register();
+                              e.preventDefault();
+                           }}
+                           tabIndex="0"
+                        >
+                           Register
+                        </button>
+                     </div>
+                  </form>
+               </div>
+            )}
             <footer>
                <a href="https://www.riotgames.com" target="_blank">
                   <img

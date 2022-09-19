@@ -15,6 +15,7 @@
       /* chrome firefox opera Safari, Android, iOS 4.2+*/
          url("https://db.onlinewebfonts.com/t/cd7289a9fdf45fdef61c8d0839429b2d.svg#MarkW05-NarrowMedium")
          format("svg"); /* iOS 4.1- */
+   font-display: swap;
 }
 
 @font-face {
@@ -34,6 +35,7 @@
       /* chrome firefox opera Safari, Android, iOS 4.2+*/
          url("https://db.onlinewebfonts.com/t/54be3aa133abb31c88bdaa9e042481aa.svg#FF Mark")
          format("svg"); /* iOS 4.1- */
+   font-display: swap;
 }
 
 a {
@@ -403,7 +405,7 @@ ul.login-routes button {
    width: 7px;
    height: 10px;
    border: solid white;
-   border-width: 0 3px 3px 0;
+   border-width: 0 2px 2px 0;
    -webkit-transform: rotate(45deg);
    -ms-transform: rotate(45deg);
    transform: rotate(45deg);
