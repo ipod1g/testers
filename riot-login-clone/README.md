@@ -128,6 +128,11 @@ GitHub Dev Source [https://github.com/ipod1g/testers/tree/main/loginscreen/simpl
    -  Modal responsiveness upgrade
    -  Password toggle bug still present on iOS
    -  Update Favicon
+-  v2.2.0
+   -  Update on 19 Sep 2022
+   -  Add loading animation when waiting for server response
+   -  Update modal responsiveness
+   -  Password toggle bug on iOS devices
 
 # Future implementation
 
