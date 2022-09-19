@@ -12,7 +12,20 @@ const SettingsTab = () => {
    const windowSizeArray = windowSizeInfo();
    const screenWidth = windowSizeArray[0];
 
-   if (screenWidth < 680) return null;
+   if (screenWidth < 680)
+      return (
+         <div
+            style={{
+               minHeight: "100px",
+               color: "rgb(247 247 247 / 87%)",
+               fontSize: "25px",
+               fontFamily: "FF Mark, sans-serif",
+               textTransform: "uppercase",
+            }}
+         >
+            Settings
+         </div>
+      );
 
    return (
       <div className="settings-tab-container">

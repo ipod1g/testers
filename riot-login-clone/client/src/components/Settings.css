@@ -241,8 +241,8 @@
    /* TEMP FIX  */
    .select-placement {
       position: fixed;
-      top: 40px;
-      left: 10px;
+      top: 100px;
+      left: 0;
       width: 60%;
    }
 
