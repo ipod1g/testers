@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import Axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import RegForm from "./RegForm";
 import "./Register.css";
 import Divider from "../assets/reg/divider.png";
@@ -16,6 +16,7 @@ const Register = () => {
    const passwordInputRef = useRef(null);
    const [isFirstRun, setIsFirstRun] = useState(true);
    const [isLoading, setIsLoading] = useState(false);
+   const navigate = useNavigate();
 
    useEffect(() => {
       if (isFirstRun) {
@@ -34,6 +35,7 @@ const Register = () => {
             setIsLoading(false);
             alert("Register SUCCESS!");
             console.log(response.data);
+            navigate(-1);
          },
          (error) => {
             setIsLoading(false);
