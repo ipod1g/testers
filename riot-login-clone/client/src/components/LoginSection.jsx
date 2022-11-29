@@ -5,6 +5,7 @@ import "./LoginSection.css";
 import SocialLoginButton from "./SocialLoginButton";
 import LoginForm from "./LoginForm";
 import Loading from "./Loading";
+import Version from "./Version";
 
 function LoginSection() {
    const [username, setUsername] = useState("");
@@ -188,7 +189,7 @@ function LoginSection() {
                            <Link to="/register">create account</Link>
                         </li>
                      </ul>
-                     <div className="version">V57.0.0</div>
+                     <Version />
                   </nav>
                </footer>
             </section>
