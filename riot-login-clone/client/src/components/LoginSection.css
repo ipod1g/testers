@@ -1,17 +1,6 @@
 @font-face {
    font-family: "MarkW05-NarrowMedium";
-   src: url("https://db.onlinewebfonts.com/t/cd7289a9fdf45fdef61c8d0839429b2d.eot"); /* IE9*/
-   src: url("https://db.onlinewebfonts.com/t/cd7289a9fdf45fdef61c8d0839429b2d.eot?#iefix")
-         format("embedded-opentype"),
-      /* IE6-IE8 */
-         url("https://db.onlinewebfonts.com/t/cd7289a9fdf45fdef61c8d0839429b2d.woff2")
-         format("woff2"),
-      /* chrome firefox */
-         url("https://db.onlinewebfonts.com/t/cd7289a9fdf45fdef61c8d0839429b2d.woff")
-         format("woff"),
-      /* chrome firefox */
-         url("https://db.onlinewebfonts.com/t/cd7289a9fdf45fdef61c8d0839429b2d.ttf")
-         format("truetype"),
+   src: url("../assets/fonts/MarkW05-NarrowMedium.woff") format('woff'),
       /* chrome firefox opera Safari, Android, iOS 4.2+*/
          url("https://db.onlinewebfonts.com/t/cd7289a9fdf45fdef61c8d0839429b2d.svg#MarkW05-NarrowMedium")
          format("svg"); /* iOS 4.1- */
@@ -20,18 +9,7 @@
 
 @font-face {
    font-family: "FF Mark";
-   src: url("https://db.onlinewebfonts.com/t/54be3aa133abb31c88bdaa9e042481aa.eot"); /* IE9*/
-   src: url("https://db.onlinewebfonts.com/t/54be3aa133abb31c88bdaa9e042481aa.eot?#iefix")
-         format("embedded-opentype"),
-      /* IE6-IE8 */
-         url("https://db.onlinewebfonts.com/t/54be3aa133abb31c88bdaa9e042481aa.woff2")
-         format("woff2"),
-      /* chrome firefox */
-         url("https://db.onlinewebfonts.com/t/54be3aa133abb31c88bdaa9e042481aa.woff")
-         format("woff"),
-      /* chrome firefox */
-         url("https://db.onlinewebfonts.com/t/54be3aa133abb31c88bdaa9e042481aa.ttf")
-         format("truetype"),
+   src: url("../assets/fonts/FF-Mark.woff") format("woff"),
       /* chrome firefox opera Safari, Android, iOS 4.2+*/
          url("https://db.onlinewebfonts.com/t/54be3aa133abb31c88bdaa9e042481aa.svg#FF Mark")
          format("svg"); /* iOS 4.1- */

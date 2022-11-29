@@ -25,7 +25,6 @@ const NavMenu = () => {
 
    return (
       <div className="menu-container">
-         {/* <div></div> */}
          <button
             className={isNavOpen ? "nav-btn active" : "nav-btn"}
             onClick={openOnClick}
