@@ -4,8 +4,10 @@ const bodyParser = require("body-parser");
 require("dotenv").config();
 
 const app = express();
+const cookieParser = require("cookie-parser");
 
 app.use(express.json());
+app.use(cookieParser());
 app.use(cors());
 
 const db = require("./models");
