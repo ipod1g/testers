@@ -500,3 +500,32 @@ ul.login-routes button {
 }
 
 /**** FOOTER ****/
+
+/**** LOGIN MODAL ****/
+.login-modal {
+   position: fixed;        
+   display: flex;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   margin: 0 auto;
+   background-color: rgb(17 14 14);
+   padding: 50px;
+   z-index: 1000;
+   height: 30%;
+   width: 50%;
+   border-radius: 8px;
+}
+
+.login-modal-container {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   width: 100%;
+}
+
+.login-text {
+   font-family: "MarkW05-NarrowMedium", sans-serif;
+   color: #ccc;
+}
+/**** LOGIN MODAL ****/

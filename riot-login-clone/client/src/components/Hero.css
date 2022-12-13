@@ -1,7 +1,7 @@
 .hero-section {
     background-image: url('../assets/v60.0.10.jpg');
-    /* background-size: 1300px 750px; */
     background-repeat: no-repeat;
     background-color: rgba(0, 0, 0, 0.9);
     width:100%;
+    background-size: cover;
 }

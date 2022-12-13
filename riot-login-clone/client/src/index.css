@@ -4,5 +4,11 @@ html, body {
 }
 
 #root {
-    height: 100vh;
+    overflow: hidden;
+}
+
+@media (min-width: 600px) {
+    html, body {
+        margin: 0;
+    }
 }

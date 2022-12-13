@@ -1,12 +1,13 @@
 {
   "name": "riotgames-login-clone",
-  "version": "2.2.0",
+  "version": "3.1.0",
   "author": "Bono",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.2.0",
     "@fortawesome/free-solid-svg-icons": "^6.2.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
+    "@react-oauth/google": "^0.5.0",
     "axios": "^0.27.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

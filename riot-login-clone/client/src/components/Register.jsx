@@ -27,7 +27,7 @@ const Register = () => {
    }, [passwordShown]);
 
    const register = () => {
-      Axios.post("http://localhost:3001/register", {
+      Axios.post("https://riot-clone-login-api.herokuapp.com/register", {
          username: usernameReg,
          password: passwordReg,
       }).then(
@@ -47,15 +47,7 @@ const Register = () => {
 
    return (
       <article className="regform-container">
-         <nav className="nav-back">
-            <ul>
-               <li>
-                  <icon className="left-arrow"></icon>
-                  <Link to="/">GO BACK</Link>
-               </li>
-            </ul>
-         </nav>
-         <section className="scene-content">
+         <header>
             <a
                href="https://www.leagueoflegends.com/en-gb/?_gl=1*1ssl8ty*_ga*MTExNzQ5MzYzNy4xNjYxNjg2NzQ2*_ga_FXBJE5DEDD*MTY2MzMwNTg4NS45LjEuMTY2MzMwNjg3Ny42MC4wLjA.&amp;_ga=2.252011597.574815907.1663179802-1117493637.1661686746"
                target="_blank"
@@ -67,6 +59,16 @@ const Register = () => {
                   width="120px"
                />
             </a>
+            <nav className="nav-back">
+               <ul>
+                  <li>
+                     <icon className="left-arrow"></icon>
+                     <Link to="/">GO BACK</Link>
+                  </li>
+               </ul>
+            </nav>
+         </header>
+         <section className="scene-content">
             <header className="header-main">Register Now</header>
             <h3>Enter your info below</h3>
             <div className="divider">
@@ -75,7 +77,7 @@ const Register = () => {
             {isLoading ? (
                <Loading formType="register" />
             ) : (
-               <div className="regform-innerwrap">
+               <div className="regform-inner--wrapper">
                   <form
                      id="regform"
                      onSubmit={register}
@@ -133,23 +135,23 @@ const Register = () => {
                   </form>
                </div>
             )}
-            <footer>
-               <a href="https://www.riotgames.com" target="_blank">
-                  <img
-                     src={Riotlogofull}
-                     width="100px"
-                     style={{ verticalAlign: "middle" }}
-                     alt="Riotlogofull"
-                  />
-               </a>
-               <img
-                  src={PEGI}
-                  height="50px"
-                  style={{ verticalAlign: "middle" }}
-                  alt="PEGI img"
-               />
-            </footer>
          </section>
+         <footer>
+            <a href="https://www.riotgames.com" target="_blank">
+               <img
+                  src={Riotlogofull}
+                  width="100px"
+                  style={{ verticalAlign: "middle" }}
+                  alt="Riotlogofull"
+               />
+            </a>
+            <img
+               src={PEGI}
+               height="50px"
+               style={{ verticalAlign: "middle" }}
+               alt="PEGI img"
+            />
+         </footer>
       </article>
    );
 };

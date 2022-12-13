@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import { CSSTransition } from "react-transition-group";
+import LoginModal from "./LoginModal";
 import Axios from "axios";
 import "./LoginSection.css";
 import SocialLoginButton from "./SocialLoginButton";
@@ -19,10 +21,11 @@ function LoginSection() {
    const [isFirstRun, setIsFirstRun] = useState(true);
    const [isLoading, setIsLoading] = useState(false);
 
-   // const [loginStatus, setLoginStatus] = useState("");
+   const [loginStatus, setLoginStatus] = useState("");
+   const [loginModalShown, setLoginModalShown] = useState(false);
 
    const login = () => {
-      Axios.post("http://localhost:3001/login", {
+      Axios.post("https://riot-clone-login-api.herokuapp.com/login", {
          username: username,
          password: password,
       }).then(
@@ -30,7 +33,7 @@ function LoginSection() {
             setIsLoading(false);
             console.log(response);
             setIsError(false);
-            alert("LOGIN SUCCESS!");
+            setLoginModalShown(true);
          },
          (error) => {
             setIsLoading(false);
@@ -47,11 +50,6 @@ function LoginSection() {
       login();
       setIsLoading(true);
       e.preventDefault();
-      // setDetails((prev) => {
-      //    const updatedDetails = { ...prev, password: "" };
-      //    return updatedDetails;
-      // });
-      // WILL NOW ACTUALLY CONNECT TO DB
    };
 
    useEffect(() => {
@@ -71,9 +69,7 @@ function LoginSection() {
       }
    }, [isError]);
 
-   const loginRoutes = () => {
-      alert("Logined with link");
-   };
+   const loginRoutes = ["fb", "google", "apple"];
 
    return (
       <>
@@ -127,7 +123,6 @@ function LoginSection() {
                            <button
                               type="button"
                               className={
-                                 // "toggle-btn toggle-btn-show"
                                  isPwFocused
                                     ? passwordShown
                                        ? "toggle-btn toggle-btn-show "
@@ -149,14 +144,27 @@ function LoginSection() {
                      </form>
                   </div>
                   <ul className="login-routes">
-                     {["fb", "google", "apple"].map((social) => (
+                     {loginRoutes.map((social) => (
                         <SocialLoginButton
                            key={social}
                            social={social}
-                           loginRoutes={loginRoutes}
+                           setLoginModalShown={setLoginModalShown}
                         />
                      ))}
                   </ul>
+                  <CSSTransition
+                     in={loginModalShown}
+                     timeout={800}
+                     unmountOnExit
+                     classNames="modal-anim"
+                  >
+                     <LoginModal
+                        open={loginModalShown}
+                        onClose={() => setLoginModalShown(false)}
+                        setModalOpen={setLoginModalShown}
+                        variant="primary"
+                     ></LoginModal>
+                  </CSSTransition>
 
                   <label className="stay-container" tabIndex={0}>
                      <input type="checkbox" value="stay" />
