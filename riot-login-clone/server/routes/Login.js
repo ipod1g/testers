@@ -6,7 +6,7 @@ const bcrypt = require("bcrypt");
 const { createTokens, validateToken } = require("../JWT");
 
 router.get("/", validateToken, (req, res) => {
-   res.json("Login Success");
+   res.json("Login Page");
 });
 
 router.post("/", async (req, res) => {
@@ -36,14 +36,6 @@ router.post("/", async (req, res) => {
          res.json("LOGGED IN");
       }
    });
-
-   // if (password !== dbPassword) {
-   //    res.status(400).json({
-   //       error: "Wrong Username and Password Combination!",
-   //    });
-   // } else {
-   //    res.json("LOGGED IN");
-   // }
 });
 
 module.exports = router;
