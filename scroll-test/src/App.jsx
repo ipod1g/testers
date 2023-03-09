@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
 import './App.css';
 import WindowSize from './WindowSize';
+import Tester from './Tester';
 
 function App() {
   const { scrollY } = useScroll();
@@ -56,7 +57,7 @@ function App() {
 
   useEffect(() => {
     return scroll2.on('change', (latest) => {
-      console.log('sc2: ', latest);
+      // console.log('sc2: ', latest);
       // console.log('sv2 : ', scroll2);
     });
   }, []);
@@ -78,6 +79,9 @@ function App() {
           HI
         </motion.h1>
       </motion.section>
+      {/* <motion.section>
+        <Tester scrollY={scrollY}></Tester>
+      </motion.section> */}
     </div>
   );
 }
