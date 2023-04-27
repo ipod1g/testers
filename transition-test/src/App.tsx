@@ -1,44 +1,57 @@
-import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
-import './App.css';
+import barba from '@barba/core';
+import { AnimatePresence, animate, motion } from 'framer-motion';
 
 function App() {
   const [transition, setTransition] = useState(false);
 
-  const variants = {
-    initial: { scale: 0 },
-    expand: {
-      scale: 10,
-      transition: {
-        duration: 0.5,
-        ease: 'easeOut',
-      },
-    },
+  const fadeInOut = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1 },
   };
 
+  barba.init({
+    schema: {
+      prefix: 'data-barba',
+      wrapper: 'wrapper',
+      container: 'container',
+    },
+    transitions: [
+      {
+        name: 'fade-transition',
+        leave(data) {
+          return animate(fadeInOut.visible, fadeInOut.hidden);
+        },
+        enter(data) {
+          return animate(fadeInOut.hidden, fadeInOut.visible);
+        },
+      },
+    ],
+  });
+
   return (
-    <div className="App">
-      <div className="fixed overflow-hidden w-screen h-screen">
-        <div className="relative w-10 h-10 top-0 right-0 bg-red-200">
-          <button
-            onClick={() => setTransition(!transition)}
-            className=" bg-green-600 absolute z-50"
-          >
-            Hi
-          </button>
-          <AnimatePresence>
-            {transition && (
-              <motion.div
-                variants={variants}
-                initial="initial"
-                animate="expand"
-                exit="initial"
-                className="absolute -top-1/2 -left-1/2 w-[100px] md:h-auto  aspect-square bg-gray-500 rounded-full"
-              ></motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-      </div>
+    <div className="h-screen w-screen bg-blue-300" data-barba="wrapper">
+      <AnimatePresence>
+        <motion.div
+          animate={transition ? 'visible' : 'hidden'}
+          variants={fadeInOut}
+          initial="hidden"
+          exitBeforeEnter
+          data-barba="container"
+          data-barba-namespace="home"
+        >
+          <div>HOME PAGE</div>
+        </motion.div>
+      </AnimatePresence>
+      <motion.div
+        animate={animate}
+        initial={{ opacity: 0 }}
+        exit={{ opacity: 0 }}
+        data-barba="container"
+        data-barba-namespace="about"
+      >
+        <div>ABOUT PAGE</div>
+      </motion.div>
     </div>
   );
 }
