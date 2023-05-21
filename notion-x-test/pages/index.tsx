@@ -1,27 +1,23 @@
-import Image from 'next/image';
-import { Inter } from 'next/font/google';
 import * as React from 'react';
-import { NotionRenderer } from 'react-notion-x';
-import { NotionAPI } from 'notion-client';
 
-const notion = new NotionAPI();
+import { NotionPage } from '@/components/NotionPage';
+import { domain } from '@/lib/config';
+import { resolveNotionPage } from '@/lib/resolve-notion-page';
 
-const inter = Inter({ subsets: ['latin'] });
-
-export default function Home({ recordMap }: { recordMap: any }) {
-  return (
-    <main>
-      <NotionRenderer recordMap={recordMap} fullPage={true} darkMode={false} />
-    </main>
-  );
-}
 export const getStaticProps = async () => {
-  const recordMap = await notion.getPage('067dd719a912471ea9a3ac10710e7fdf');
+  try {
+    const props = await resolveNotionPage(domain);
 
-  return {
-    props: {
-      recordMap,
-    },
-    revalidate: 10,
-  };
+    return { props, revalidate: 10 };
+  } catch (err) {
+    console.error('page error', domain, err);
+
+    // we don't want to publish the error version of this page, so
+    // let next.js know explicitly that incremental SSG failed
+    throw err;
+  }
 };
+
+export default function NotionDomainPage(props) {
+  return <NotionPage {...props} />;
+}
