@@ -58,14 +58,14 @@ function App() {
     <div>
       <h1>Object Test</h1>
       <p>Count: {TEST_COUNT}</p>
-      <p>
-        <div>Destructure reduce</div>
+      <div>
+        <p>Destructure reduce</p>
         <button onClick={() => console.log(destructureReduce())} />
-      </p>
-      <p>
-        <div>Mutable reduce</div>
+      </div>
+      <div>
+        <p>Mutable reduce</p>
         <button onClick={() => console.log(mutableReduce())} />
-      </p>
+      </div>
     </div>
   );
 }
