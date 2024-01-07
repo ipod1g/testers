@@ -1,28 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
+  CellBase,
   EmptySelection,
   EntireColumnsSelection,
+  Props,
   Spreadsheet as SpreadsheetPrimitive,
-  createEmptyMatrix,
-} from 'react-spreadsheet';
+} from '../lib/react-spreadsheet';
 import type { Selection } from 'react-spreadsheet';
-import { DataViewerRenderer } from './DataComponents/DataViewerRenderer';
 import HeaderRow from './HeaderRow';
-import { DataEditorRenderer } from './DataComponents/DataEditorRenderer';
-import type { StringCell } from './types';
-import { columnHeaders } from './config';
-// import * as Matrix from './matrix';
 
-const INITIAL_ROWS = 6;
-const INITIAL_COLUMNS = columnHeaders.length - 1;
-const EMPTY_DATA = createEmptyMatrix<StringCell>(INITIAL_ROWS, INITIAL_COLUMNS);
-
-export default function Spreadsheet() {
-  // fetching data here determines the 'tabs'
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [data, setData] = useState(EMPTY_DATA);
-
+const Spreadsheet = <CellType extends CellBase>(
+  props: Props<CellType>
+): React.ReactElement => {
   const [selected, setSelected] = React.useState<Selection | undefined>(
     new EmptySelection()
   );
@@ -40,13 +29,12 @@ export default function Spreadsheet() {
     <SpreadsheetPrimitive
       selected={selected}
       onSelect={handleSelect}
-      DataViewer={DataViewerRenderer}
-      DataEditor={DataEditorRenderer}
       HeaderRow={() => (
         <HeaderRow handleSelectEntireColumn={handleSelectEntireColumn} />
       )}
-      data={data}
-      // hideRowIndicators
+      {...props}
     />
   );
-}
+};
+
+export default Spreadsheet;
