@@ -28,7 +28,7 @@ export const BookmarkDataEdit: DataEditorComponent<Cell> = ({
   }, [cell, onChange]);
 
   return (
-    <button onClick={handleChange}>
+    <button onClick={handleChange} className="w-full h-full">
       {cell?.value === 'bookmarked' ? (
         <BookmarkFilledIcon width={20} height={20} className="mx-auto" />
       ) : (

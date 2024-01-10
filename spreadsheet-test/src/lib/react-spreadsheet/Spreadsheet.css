@@ -24,6 +24,10 @@
   --border-color: hsl(2deg, 0%, 19%);
 }
 
+.Spreadsheet__cell--borderless {
+  border: none;
+}
+
 .Spreadsheet__active-cell {
   position: absolute;
   border: 2px solid var(--outline-color);
