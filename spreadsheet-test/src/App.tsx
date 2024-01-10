@@ -5,6 +5,7 @@ import type { StringCell } from './Spreadsheet/types';
 import { columnHeaders } from './Spreadsheet/config';
 import { DataViewerRenderer } from './Spreadsheet/DataComponents/DataViewerRenderer';
 import { DataEditorRenderer } from './Spreadsheet/DataComponents/DataEditorRenderer';
+import { CompanyDataInputCell } from './Spreadsheet/DataComponents/CompanyDataComponents';
 
 const INITIAL_ROWS = 6;
 const INITIAL_COLUMNS = columnHeaders.length - 1;
@@ -13,8 +14,27 @@ const EMPTY_DATA = createEmptyMatrix<StringCell>(INITIAL_ROWS, INITIAL_COLUMNS);
 const App = () => {
   // fetching data here determines the 'tabs'
   const [data, setData] = useState(EMPTY_DATA);
+
+  interface TemplatedRowInput extends EventTarget {
+    company: {
+      value: string;
+    };
+    position: {
+      value: string;
+    };
+    appliedDate: {
+      value: string;
+    };
+    linkApply: {
+      value: string;
+    };
+    status: {
+      value: string;
+    };
+  }
+
   const addRow = React.useCallback(
-    (userInputValues: EventTarget) =>
+    (userInputValues: TemplatedRowInput) =>
       setData((data) => {
         const newRow = [
           {
@@ -36,8 +56,6 @@ const App = () => {
             value: userInputValues.status.value,
           },
         ];
-        console.log([...data, newRow]);
-
         return [...data, newRow];
       }),
     [setData]
@@ -45,7 +63,7 @@ const App = () => {
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
-    addRow(e.target);
+    addRow(e.target as TemplatedRowInput);
   }
 
   return (
@@ -57,13 +75,15 @@ const App = () => {
         onChange={setData}
         // hideRowIndicators
       />
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="flex flex-row gap-2">
         <input id="company" defaultValue={'Google'}></input>
         <input id="position" defaultValue={'Software Engineer'}></input>
         <input id="appliedDate" defaultValue={'17/12/2023'}></input>
         <input id="linkApply"></input>
         <input id="status" defaultValue={'applied'}></input>
-        <button className="fixed bottom-0 h-40 bg-white">add</button>
+        <button className="bg-[#363E36] px-9 py-2 rounded-lg mx-10 text-white">
+          Add
+        </button>
       </form>
     </div>
   );
