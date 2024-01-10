@@ -19,11 +19,14 @@ const componentMap = {
   status: StatusDataEdit,
 };
 
+const FallbackDataEdit: DataEditorComponent<Cell> = ({ cell }) => {
+  return <td>{cell?.value}</td>;
+};
+
 export const DataEditorRenderer: DataEditorComponent<Cell> = (props) => {
   const getColumnComponent = (columnName: string) => {
-    const Component = componentMap[columnName as keyof typeof componentMap] || (
-      <div>{props.cell?.value}</div>
-    );
+    const Component =
+      componentMap[columnName as keyof typeof componentMap] || FallbackDataEdit;
     return <Component {...props} />;
   };
 
