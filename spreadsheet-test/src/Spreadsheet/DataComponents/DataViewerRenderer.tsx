@@ -7,11 +7,12 @@ import { LinkDataView } from './LinkDataComponents';
 import { DateDataView } from './DateDataComponents';
 import { columnHeaders } from '../config';
 import { EmptyDataView } from './EmptyDataComponents';
-import { BookmarkDataView } from './BookmarkDataComponents';
+import { BookmarkDataEdit } from './BookmarkDataComponents';
 
 const componentMap = {
   empty: EmptyDataView,
-  bookmark: BookmarkDataView,
+  bookmark: BookmarkDataEdit,
+  // bookmark: BookmarkDataView,
   company: CompanyDataView,
   position: PositionDataView,
   appliedDate: DateDataView,
@@ -19,11 +20,14 @@ const componentMap = {
   status: StatusDataView,
 };
 
+const FallbackDataView: DataViewerComponent<Cell> = ({ cell }) => {
+  return <td>{cell?.value}</td>;
+};
+
 export const DataViewerRenderer: DataViewerComponent<Cell> = (props) => {
   const getColumnComponent = (columnName: string) => {
-    const Component = componentMap[columnName as keyof typeof componentMap] || (
-      <td>{props.cell?.value}</td> // fallback
-    );
+    const Component =
+      componentMap[columnName as keyof typeof componentMap] || FallbackDataView; // fallback
     return <Component {...props} />;
   };
 

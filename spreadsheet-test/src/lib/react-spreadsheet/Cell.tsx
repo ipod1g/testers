@@ -22,6 +22,7 @@ export const Cell: React.FC<Types.CellComponentProps> = ({
   activate,
   setCellDimensions,
   setCellData,
+  edit,
 }): React.ReactElement => {
   const rootRef = React.useRef<HTMLTableCellElement | null>(null);
   const point = React.useMemo(
@@ -39,6 +40,19 @@ export const Cell: React.FC<Types.CellComponentProps> = ({
 
         if (event.shiftKey) {
           select(point);
+        } else if (point.column === 0) {
+          /**
+           * Custom logic to handle direct click to edit
+           */
+          activate(point);
+          setTimeout(() => {
+            edit();
+          }, 1);
+        } else if (point.column === 4 && data?.value.length > 0) {
+          // link
+          setTimeout(() => {
+            activate(point);
+          }, 55);
         } else {
           activate(point);
         }
@@ -107,6 +121,7 @@ export const enhance = (
     | 'select'
     | 'activate'
     | 'setCellDimensions'
+    | 'edit'
   >
 > => {
   return function CellWrapper(props) {
@@ -136,6 +151,9 @@ export const enhance = (
         dispatch(Actions.setCellDimensions(point, dimensions)),
       [dispatch]
     );
+
+    const edit = React.useCallback(() => dispatch(Actions.edit()), [dispatch]);
+
     const active = useSelector((state) => isActive(state.active, point));
     const mode = useSelector((state) => (active ? state.mode : 'view'));
     const data = useSelector((state) => Matrix.get(point, state.model.data));
@@ -161,6 +179,7 @@ export const enhance = (
         data={data}
         select={select}
         activate={activate}
+        edit={edit}
         setCellDimensions={setCellDimensions}
         setCellData={setCellData}
       />
