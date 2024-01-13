@@ -3,7 +3,7 @@ import type { Cell } from '../types';
 import type {
   DataEditorComponent,
   DataViewerComponent,
-} from 'react-spreadsheet';
+} from '../../lib/react-spreadsheet';
 import { Calendar } from '../Calendar';
 
 export const DateDataView: DataViewerComponent<Cell> = ({

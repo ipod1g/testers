@@ -2,7 +2,7 @@ import * as React from 'react';
 import type {
   DataEditorComponent,
   DataViewerComponent,
-} from 'react-spreadsheet';
+} from '../../lib/react-spreadsheet';
 import type { Cell } from '../types';
 import { BookmarkIcon, BookmarkFilledIcon } from '@radix-ui/react-icons';
 

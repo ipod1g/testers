@@ -1,6 +1,9 @@
 import * as React from 'react';
 import Select, { SingleValue, StylesConfig } from 'react-select';
-import { DataEditorComponent, DataViewerComponent } from 'react-spreadsheet';
+import {
+  DataEditorComponent,
+  DataViewerComponent,
+} from '../../lib/react-spreadsheet';
 import { statusOptions } from '../config';
 import type { Cell } from '../types';
 

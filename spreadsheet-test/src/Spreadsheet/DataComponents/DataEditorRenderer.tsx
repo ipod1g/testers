@@ -1,5 +1,5 @@
 import type { Cell } from '../types';
-import type { DataEditorComponent } from 'react-spreadsheet';
+import type { DataEditorComponent } from '../../lib/react-spreadsheet';
 import { CompanyDataEdit } from './CompanyDataComponents';
 import { StatusDataEdit } from './StatusDataComponents';
 import { PositionDataEdit } from './PositionDataComponents';

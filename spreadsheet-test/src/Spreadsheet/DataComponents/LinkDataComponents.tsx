@@ -3,7 +3,7 @@ import type { Cell } from '../types';
 import type {
   DataEditorComponent,
   DataViewerComponent,
-} from 'react-spreadsheet';
+} from '../../lib/react-spreadsheet';
 
 export const LinkDataView: DataViewerComponent<Cell> = ({ cell }) => {
   function isLinkPrefixed(link: string | undefined) {

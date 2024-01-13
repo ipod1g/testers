@@ -3,7 +3,7 @@ import type { Cell } from '../types';
 import type {
   DataEditorComponent,
   DataViewerComponent,
-} from 'react-spreadsheet';
+} from '../../lib/react-spreadsheet';
 
 export const EmptyDataView: DataViewerComponent<Cell> = ({ cell }) => {
   return <span className="w-full">{cell?.value}</span>;

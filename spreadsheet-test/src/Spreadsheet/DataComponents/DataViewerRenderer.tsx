@@ -1,5 +1,5 @@
 import type { Cell } from '../types';
-import type { DataViewerComponent } from 'react-spreadsheet';
+import type { DataViewerComponent } from '../../lib/react-spreadsheet';
 import { CompanyDataView } from './CompanyDataComponents';
 import { StatusDataView } from './StatusDataComponents';
 import { PositionDataView } from './PositionDataComponents';
@@ -28,6 +28,7 @@ export const DataViewerRenderer: DataViewerComponent<Cell> = (props) => {
   const getColumnComponent = (columnName: string) => {
     const Component =
       componentMap[columnName as keyof typeof componentMap] || FallbackDataView; // fallback
+    // @ts-expect-error TODO: Bookmark type to be fixed
     return <Component {...props} />;
   };
 

@@ -1,12 +1,10 @@
 import React from 'react';
 import {
-  CellBase,
   EmptySelection,
   EntireColumnsSelection,
-  Props,
   Spreadsheet as SpreadsheetPrimitive,
 } from '../lib/react-spreadsheet';
-import type { Selection } from 'react-spreadsheet';
+import type { CellBase, Selection, Props } from '../lib/react-spreadsheet';
 import HeaderRow from './HeaderRow';
 
 const Spreadsheet = <CellType extends CellBase>(
