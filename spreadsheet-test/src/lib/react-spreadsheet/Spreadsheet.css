@@ -150,3 +150,7 @@
 .Spreadsheet__floating-rect--copied {
   border: 2px var(--outline-color) dashed;
 }
+
+.Spreadsheet input {
+  outline: none !important;
+}
