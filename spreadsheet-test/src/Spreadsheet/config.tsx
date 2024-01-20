@@ -1,10 +1,10 @@
 import {
-  FileTextIcon,
-  ListBulletIcon,
-  CalendarIcon,
-  Link1Icon,
-  CheckCircledIcon,
-} from '@radix-ui/react-icons';
+  DescriptionOutlined,
+  FormatListBulleted,
+  DateRangeOutlined,
+  Link,
+  CheckCircleOutline,
+} from '@material-ui/icons';
 
 /** Reordering this affects the column orders */
 export const columnHeaders: {
@@ -21,31 +21,31 @@ export const columnHeaders: {
     cellWidth: '64px',
   },
   {
-    icon: <FileTextIcon fontSize={16} />,
+    icon: <DescriptionOutlined fontSize="small" />,
     label: 'Company Name',
     value: 'company',
     cellWidth: '240px',
   },
   {
-    icon: <ListBulletIcon fontSize={16} />,
+    icon: <FormatListBulleted fontSize="small" />,
     label: 'Position',
     value: 'position',
     cellWidth: '270px',
   },
   {
-    icon: <CalendarIcon fontSize={16} />,
+    icon: <DateRangeOutlined fontSize="small" />,
     label: 'Applied Date',
     value: 'appliedDate',
     cellWidth: '180px',
   },
   {
-    icon: <Link1Icon fontSize={16} />,
+    icon: <Link fontSize="small" />,
     label: 'Link to apply',
     value: 'linkApply',
     cellWidth: '240px',
   },
   {
-    icon: <CheckCircledIcon fontSize={16} />,
+    icon: <CheckCircleOutline fontSize="small" />,
     label: 'Status',
     value: 'status',
     cellWidth: '164px',
@@ -84,6 +84,11 @@ export const companies = [
   },
   {
     logo: 'data:image/jpeg;base64,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',
+    value: 'instagram',
+    label: 'Instagram',
+  },
+  {
+    logo: '',
     value: 'instagram',
     label: 'Instagram',
   },
