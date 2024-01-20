@@ -1,4 +1,14 @@
-import { columnHeaders } from './config';
+/* eslint-disable @typescript-eslint/no-unused-vars -- temp for dev */
+import {
+  KeyboardArrowDown,
+  KeyboardArrowUp,
+  UnfoldMore,
+} from "@material-ui/icons";
+import { useState } from "react";
+
+import { columnHeaders } from "./config";
+
+import type { SortingState } from "./types";
 
 type THeaderColumnCellBase = (typeof columnHeaders)[number];
 
@@ -6,7 +16,7 @@ type THeaderColumnCell = THeaderColumnCellBase & {
   handleSelectEntireColumn: () => void;
 };
 
-export default function HeaderRow({
+function HeaderRow({
   handleSelectEntireColumn,
 }: {
   handleSelectEntireColumn: (idx: number) => void;
@@ -37,28 +47,51 @@ function HeaderColumnCell({
   value,
   handleSelectEntireColumn,
 }: THeaderColumnCell) {
+  // function handleSort() {
+  //   if (sortingState.direction === "none") {
+  //     setSortingState({ id: value, direction: "asc" });
+  //   } else if (sortingState.direction === "asc") {
+  //     setSortingState({ id: value, direction: "desc" });
+  //   } else {
+  //     setSortingState({ id: value, direction: "none" });
+  //   }
+  // }
+
+  const isException = value === "empty" || value === "bookmark";
+
   return (
     <th
       style={{
-        border: value === 'empty' || value === 'bookmark' ? 0 : '',
+        border: isException ? 0 : "",
       }}
       className="Spreadsheet__header"
-      // properly separate this with filter button
-      onClick={handleSelectEntireColumn}
-      // tabIndex={value === 'empty' || value === 'bookmark' ? -1 : 0}
     >
-      <span
-        style={{
-          width: cellWidth,
-          maxWidth: cellWidth,
-        }}
-        className={`flex gap-4 items-center pr-5 
-        ${label === 'Company Name' ? 'pl-12' : 'pl-5'}
-        `}
-      >
-        <i>{icon ? icon : null}</i>
-        {value === 'empty' ? '' : label}
-      </span>
+      <div className="flex flex-row">
+        <span
+          onClick={handleSelectEntireColumn}
+          style={{
+            width: cellWidth,
+            maxWidth: cellWidth,
+          }}
+          className="flex gap-4 items-center px-5"
+        >
+          <i>{icon ? icon : null}</i>
+          {value === "empty" ? "" : label}
+        </span>
+        {/* {!isException ? (
+          <span className="w-8" onClick={handleSort}>
+            {sortingState.direction === "desc" ? (
+              <KeyboardArrowUp fontSize="small" />
+            ) : sortingState.direction === "asc" ? (
+              <KeyboardArrowDown fontSize="small" />
+            ) : (
+              <UnfoldMore fontSize="small" />
+            )}
+          </span>
+        ) : null} */}
+      </div>
     </th>
   );
 }
+
+export { HeaderRow };

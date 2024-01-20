@@ -1,9 +1,11 @@
-import React from 'react';
-import type { Cell } from '../types';
+import React, { useCallback } from "react";
+
 import type {
   DataEditorComponent,
   DataViewerComponent,
-} from '../../lib/react-spreadsheet';
+} from "../../lib/react-spreadsheet";
+import type { Cell } from "../types";
+import type { ChangeEvent } from "react";
 
 export const EmptyDataView: DataViewerComponent<Cell> = ({ cell }) => {
   return <span className="w-full">{cell?.value}</span>;
@@ -13,8 +15,8 @@ export const EmptyDataEdit: DataEditorComponent<Cell> = ({
   cell,
   onChange,
 }) => {
-  const handleChange = React.useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
       onChange({ ...cell, value: event.target.value });
     },
     [cell, onChange]

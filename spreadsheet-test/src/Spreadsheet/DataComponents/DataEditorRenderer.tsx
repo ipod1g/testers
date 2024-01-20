@@ -1,13 +1,14 @@
-import type { Cell } from '../types';
-import type { DataEditorComponent } from '../../lib/react-spreadsheet';
-import { CompanyDataEdit } from './CompanyDataComponents';
-import { StatusDataEdit } from './StatusDataComponents';
-import { PositionDataEdit } from './PositionDataComponents';
-import { LinkDataEdit } from './LinkDataComponents';
-import { DateDataEdit } from './DateDataComponents';
-import { columnHeaders } from '../config';
-import { EmptyDataEdit } from './EmptyDataComponents';
-import { BookmarkDataEdit } from './BookmarkDataComponents';
+import { BookmarkDataEdit } from "./BookmarkDataComponents";
+import { CompanyDataEdit } from "./CompanyDataComponents";
+import { DateDataEdit } from "./DateDataComponents";
+import { EmptyDataEdit } from "./EmptyDataComponents";
+import { LinkDataEdit } from "./LinkDataComponents";
+import { PositionDataEdit } from "./PositionDataComponents";
+import { StatusDataEdit } from "./StatusDataComponents";
+import { columnHeaders } from "../config";
+
+import type { DataEditorComponent } from "../../lib/react-spreadsheet";
+import type { Cell } from "../types";
 
 const componentMap = {
   empty: EmptyDataEdit,
@@ -19,14 +20,9 @@ const componentMap = {
   status: StatusDataEdit,
 };
 
-const FallbackDataEdit: DataEditorComponent<Cell> = ({ cell }) => {
-  return <td>{cell?.value}</td>;
-};
-
 export const DataEditorRenderer: DataEditorComponent<Cell> = (props) => {
   const getColumnComponent = (columnName: string) => {
-    const Component =
-      componentMap[columnName as keyof typeof componentMap] || FallbackDataEdit;
+    const Component = componentMap[columnName as keyof typeof componentMap];
     return <Component {...props} />;
   };
 

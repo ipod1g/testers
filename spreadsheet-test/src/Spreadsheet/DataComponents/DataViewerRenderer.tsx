@@ -1,13 +1,14 @@
-import type { Cell } from '../types';
-import type { DataViewerComponent } from '../../lib/react-spreadsheet';
-import { CompanyDataView } from './CompanyDataComponents';
-import { StatusDataView } from './StatusDataComponents';
-import { PositionDataView } from './PositionDataComponents';
-import { LinkDataView } from './LinkDataComponents';
-import { DateDataView } from './DateDataComponents';
-import { columnHeaders } from '../config';
-import { EmptyDataView } from './EmptyDataComponents';
-import { BookmarkDataEdit } from './BookmarkDataComponents';
+import { BookmarkDataEdit } from "./BookmarkDataComponents";
+import { CompanyDataView } from "./CompanyDataComponents";
+import { DateDataView } from "./DateDataComponents";
+import { EmptyDataView } from "./EmptyDataComponents";
+import { LinkDataView } from "./LinkDataComponents";
+import { PositionDataView } from "./PositionDataComponents";
+import { StatusDataView } from "./StatusDataComponents";
+import { columnHeaders } from "../config";
+
+import type { DataViewerComponent } from "../../lib/react-spreadsheet";
+import type { Cell } from "../types";
 
 const componentMap = {
   empty: EmptyDataView,
@@ -20,14 +21,9 @@ const componentMap = {
   status: StatusDataView,
 };
 
-const FallbackDataView: DataViewerComponent<Cell> = ({ cell }) => {
-  return <td>{cell?.value}</td>;
-};
-
 export const DataViewerRenderer: DataViewerComponent<Cell> = (props) => {
   const getColumnComponent = (columnName: string) => {
-    const Component =
-      componentMap[columnName as keyof typeof componentMap] || FallbackDataView; // fallback
+    const Component = componentMap[columnName as keyof typeof componentMap];
     // @ts-expect-error TODO: Bookmark type to be fixed
     return <Component {...props} />;
   };

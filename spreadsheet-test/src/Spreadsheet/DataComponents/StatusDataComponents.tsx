@@ -1,69 +1,72 @@
-import * as React from 'react';
-import Select, { SingleValue, StylesConfig } from 'react-select';
-import {
+import { useCallback, useMemo } from "react";
+import Select from "react-select";
+
+import { statusOptions } from "../config";
+
+import type {
   DataEditorComponent,
   DataViewerComponent,
-} from '../../lib/react-spreadsheet';
-import { statusOptions } from '../config';
-import type { Cell } from '../types';
+} from "../../lib/react-spreadsheet";
+import type { Cell } from "../types";
+import type { SingleValue, StylesConfig } from "react-select";
 
 const colorStyles: StylesConfig<{ color: string }, true> = {
   control: (defaultStyles) => ({
     ...defaultStyles,
-    border: 'none',
-    boxShadow: 'none',
-    backgroundColor: 'transparent',
-    width: '164px',
+    border: "none",
+    boxShadow: "none",
+    backgroundColor: "transparent",
+    width: "164px",
   }),
   singleValue: (defaultStyles, { data }) => ({
     ...defaultStyles,
-    backgroundColor: data?.color,
-    padding: '2px',
-    borderRadius: '24px',
-    width: '120px',
-    textAlign: 'center',
-    ':hover': {
-      cursor: 'pointer',
+    backgroundColor: data.color,
+    padding: "2px",
+    borderRadius: "24px",
+    width: "120px",
+    textAlign: "center",
+    ":hover": {
+      cursor: "pointer",
     },
   }),
   container: (defaultStyles) => {
     return {
       ...defaultStyles,
-      display: 'flex',
+      display: "flex",
     };
   },
   menu: (defaultStyles) => {
     return {
       ...defaultStyles,
-      backgroundColor: '#ffffff',
-      marginTop: '2px',
-      marginLeft: '-10px',
-      padding: '12px 10px',
-      width: '184px',
-      borderBottomLeftRadius: '8px',
-      borderBottomRightRadius: '8px',
+      backgroundColor: "#ffffff",
+      marginTop: "2px",
+      marginLeft: "-10px",
+      padding: "12px 10px",
+      width: "184px",
+      borderBottomLeftRadius: "8px",
+      borderBottomRightRadius: "8px",
     };
   },
   option: (defaultStyles, { data }) => {
     return {
       ...defaultStyles,
-      backgroundColor: data?.color,
-      padding: '2px',
-      margin: '8px 0px',
-      borderRadius: '24px',
-      width: '120px',
-      textAlign: 'center',
-      ':hover': {
+      backgroundColor: data.color,
+      padding: "2px",
+      margin: "8px 0px",
+      borderRadius: "24px",
+      width: "120px",
+      textAlign: "center",
+      ":hover": {
         opacity: 0.7,
-        cursor: 'pointer',
+        cursor: "pointer",
       },
     };
   },
 };
 
 export const StatusDataView: DataViewerComponent<Cell> = ({ cell }) => {
-  const option = React.useMemo(
-    () => cell && statusOptions.find((option) => option.value === cell.value),
+  const option = useMemo(
+    () => cell && statusOptions.find((opt) => opt.value === cell.value),
     [cell]
   );
   return (
@@ -77,12 +80,13 @@ export const StatusDataView: DataViewerComponent<Cell> = ({ cell }) => {
   );
 };
 
+// TODO: add keyboard nav support
 export const StatusDataEdit: DataEditorComponent<Cell> = ({
   cell,
   onChange,
   exitEditMode,
 }) => {
-  const handleChange = React.useCallback(
+  const handleChange = useCallback(
     (
       selection:
         | SingleValue<{
@@ -95,8 +99,8 @@ export const StatusDataEdit: DataEditorComponent<Cell> = ({
     },
     [cell, onChange]
   );
-  const option = React.useMemo(
-    () => cell && statusOptions.find((option) => option.value === cell.value),
+  const option = useMemo(
+    () => cell && statusOptions.find((opt) => opt.value === cell.value),
     [cell]
   );
 
@@ -109,7 +113,9 @@ export const StatusDataEdit: DataEditorComponent<Cell> = ({
       onChange={handleChange}
       options={statusOptions}
       defaultMenuIsOpen
-      onMenuClose={() => exitEditMode()}
+      onMenuClose={() => {
+        exitEditMode();
+      }}
     />
   );
 };

@@ -1,14 +1,16 @@
-import React from 'react';
-import type { Cell } from '../types';
+import { useCallback } from "react";
+
 import type {
   DataEditorComponent,
   DataViewerComponent,
-} from '../../lib/react-spreadsheet';
+} from "../../lib/react-spreadsheet";
+import type { Cell } from "../types";
+import type { ChangeEvent } from "react";
 
 export const LinkDataView: DataViewerComponent<Cell> = ({ cell }) => {
   function isLinkPrefixed(link: string | undefined) {
     return link
-      ? link.startsWith('https://') || link.startsWith('http://')
+      ? link.startsWith("https://") || link.startsWith("http://")
       : false;
   }
 
@@ -27,19 +29,14 @@ export const LinkDataView: DataViewerComponent<Cell> = ({ cell }) => {
 };
 
 export const LinkDataEdit: DataEditorComponent<Cell> = ({ cell, onChange }) => {
-  // need to add like a click indicator after 1 secs to transition to editor
-  // or find a way to overwrite click heirachy
+  const inputValue = cell?.value ?? "";
 
-  const inputValue = cell?.value ?? '';
-
-  const handleChange = React.useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
       onChange({ ...cell, value: event.target.value });
     },
     [cell, onChange]
   );
-
-  // return <LinkDataView cell={cell} />;
 
   return (
     <div>

@@ -1,10 +1,11 @@
-import React from 'react';
-import type { Cell } from '../types';
+import { Calendar } from "../Calendar";
+
 import type {
   DataEditorComponent,
   DataViewerComponent,
-} from '../../lib/react-spreadsheet';
-import { Calendar } from '../Calendar';
+} from "../../lib/react-spreadsheet";
+import type { Cell } from "../types";
+import { useCallback, useState } from "react";
 
 export const DateDataView: DataViewerComponent<Cell> = ({
   cell,
@@ -19,17 +20,17 @@ export const DateDataEdit: DataEditorComponent<Cell> = ({
   onChange,
   // exitEditMode,
 }) => {
-  const [date, setDate] = React.useState<Date | undefined>(
-    new Date(cell?.value ?? '')
+  const [date, setDate] = useState<Date | undefined>(
+    new Date(cell?.value ?? "")
   );
-  const [focus, setFocus] = React.useState<Date>();
+  const [focus, setFocus] = useState<Date>();
 
-  const handleChange = React.useCallback(
+  const handleChange = useCallback(
     (selectedDate: Date | undefined) => {
       setDate(selectedDate);
       onChange({
         ...cell,
-        value: selectedDate ? selectedDate?.toLocaleDateString() : undefined,
+        value: selectedDate ? selectedDate.toLocaleDateString() : undefined,
       });
       // exitEditMode();
     },
@@ -37,7 +38,7 @@ export const DateDataEdit: DataEditorComponent<Cell> = ({
   );
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLDivElement>) => {
-    if (event.key === 'Enter') {
+    if (event.key === "Enter") {
       event.preventDefault();
       handleChange(focus);
     }
@@ -45,7 +46,7 @@ export const DateDataEdit: DataEditorComponent<Cell> = ({
 
   return (
     <div>
-      <p className="mt-2.5">{cell?.value ?? ''}</p>
+      <p className="mt-2.5">{cell?.value ?? ""}</p>
       <div
         onKeyDown={handleKeyPress}
         className="absolute top-full left-0  w-[250px] h-[350px] bg-white rounded-md border"
