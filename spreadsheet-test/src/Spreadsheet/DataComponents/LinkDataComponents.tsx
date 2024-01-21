@@ -42,9 +42,9 @@ export const LinkDataEdit: DataEditorComponent<Cell> = ({ cell, onChange }) => {
     <div>
       <input
         autoFocus
-        type="text"
         className="outline-none w-full h-full text-blue-600"
         onChange={handleChange}
+        type="text"
         value={inputValue}
       />
     </div>

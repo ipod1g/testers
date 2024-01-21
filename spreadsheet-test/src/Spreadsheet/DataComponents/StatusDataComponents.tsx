@@ -71,11 +71,11 @@ export const StatusDataView: DataViewerComponent<Cell> = ({ cell }) => {
   );
   return (
     <Select
-      unstyled
-      styles={colorStyles}
-      value={option}
-      options={statusOptions}
       isDisabled
+      options={statusOptions}
+      styles={colorStyles}
+      unstyled
+      value={option}
     />
   );
 };
@@ -106,16 +106,16 @@ export const StatusDataEdit: DataEditorComponent<Cell> = ({
 
   return (
     <Select
-      unstyled
-      styles={colorStyles}
-      value={option}
+      defaultMenuIsOpen
       // @ts-expect-error Neglected meta type
       onChange={handleChange}
-      options={statusOptions}
-      defaultMenuIsOpen
       onMenuClose={() => {
         exitEditMode();
       }}
+      options={statusOptions}
+      styles={colorStyles}
+      unstyled
+      value={option}
     />
   );
 };

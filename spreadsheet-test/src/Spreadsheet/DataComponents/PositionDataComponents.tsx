@@ -39,17 +39,13 @@ export const PositionDataEdit: DataEditorComponent<Cell> = ({
     <div className="flex items-center w-full">
       <Autocomplete
         className="w-full"
-        value={cell?.value ?? ""}
         disableClearable
-        openOnFocus
-        onChange={handleChange}
         filterOptions={(options, params) => {
           // @ts-expect-error -- fix type value[][]
           const filtered = filter(options, params);
           return filtered.flat();
         }}
-        handleHomeEndKeys
-        options={positionOptions}
+        freeSolo
         getOptionLabel={(option) => {
           //* Value selected with enter, right from the input
           if (typeof option === "string") {
@@ -57,18 +53,22 @@ export const PositionDataEdit: DataEditorComponent<Cell> = ({
           }
           return option.label;
         }}
-        renderOption={(option) => <div className="w-full">{option.label}</div>}
-        freeSolo
+        handleHomeEndKeys
+        onChange={handleChange}
+        openOnFocus
+        options={positionOptions}
         renderInput={(params) => (
           <div ref={params.InputProps.ref}>
             <input
               autoFocus
-              type="text"
               className="w-full h-full"
+              type="text"
               {...params.inputProps}
             />
           </div>
         )}
+        renderOption={(option) => <div className="w-full">{option.label}</div>}
+        value={cell?.value ?? ""}
       />
     </div>
   );

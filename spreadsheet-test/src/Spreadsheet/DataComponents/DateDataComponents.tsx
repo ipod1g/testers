@@ -1,3 +1,5 @@
+import { useCallback, useState } from "react";
+
 import { Calendar } from "../Calendar";
 
 import type {
@@ -5,7 +7,7 @@ import type {
   DataViewerComponent,
 } from "../../lib/react-spreadsheet";
 import type { Cell } from "../types";
-import { useCallback, useState } from "react";
+import type { KeyboardEvent } from "react";
 
 export const DateDataView: DataViewerComponent<Cell> = ({
   cell,
@@ -37,7 +39,7 @@ export const DateDataEdit: DataEditorComponent<Cell> = ({
     [cell, onChange]
   );
 
-  const handleKeyPress = (event: React.KeyboardEvent<HTMLDivElement>) => {
+  const handleKeyPress = (event: KeyboardEvent<HTMLDivElement>) => {
     if (event.key === "Enter") {
       event.preventDefault();
       handleChange(focus);
@@ -47,16 +49,17 @@ export const DateDataEdit: DataEditorComponent<Cell> = ({
   return (
     <div>
       <p className="mt-2.5">{cell?.value ?? ""}</p>
+      {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions -- parent keypress handler required*/}
       <div
-        onKeyDown={handleKeyPress}
         className="absolute top-full left-0  w-[250px] h-[350px] bg-white rounded-md border"
+        onKeyDown={handleKeyPress}
       >
         <Calendar
+          initialFocus
           mode="single"
-          selected={date}
           onDayFocus={setFocus}
           onSelect={handleChange}
-          initialFocus
+          selected={date}
         />
       </div>
     </div>

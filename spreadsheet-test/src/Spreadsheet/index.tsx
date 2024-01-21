@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 
 import { HeaderRow } from "./HeaderRow";
 import {
@@ -8,10 +8,11 @@ import {
 } from "../lib/react-spreadsheet";
 
 import type { CellBase, Selection, Props } from "../lib/react-spreadsheet";
+import type { ReactElement } from "react";
 
-const Spreadsheet = <CellType extends CellBase>(
+function Spreadsheet<CellType extends CellBase>(
   props: Props<CellType>
-): React.ReactElement => {
+): ReactElement {
   const [selected, setSelected] = useState<Selection | undefined>(
     new EmptySelection()
   );
@@ -26,15 +27,16 @@ const Spreadsheet = <CellType extends CellBase>(
 
   return (
     <SpreadsheetPrimitive
-      selected={selected}
-      onSelect={handleSelect}
+      // eslint-disable-next-line react/no-unstable-nested-components -- passing component props
       HeaderRow={() => (
         <HeaderRow handleSelectEntireColumn={handleSelectEntireColumn} />
       )}
+      onSelect={handleSelect}
+      selected={selected}
       {...props}
     />
   );
-};
+}
 
 Spreadsheet.displayName = "Spreadsheet";
 

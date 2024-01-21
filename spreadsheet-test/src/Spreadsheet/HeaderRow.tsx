@@ -1,4 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unused-vars -- temp for dev */
+/* eslint-disable no-unused-vars -- temp for dev*/
+/* eslint-disable @typescript-eslint/no-unused-vars -- temp for dev  */
 import {
   KeyboardArrowDown,
   KeyboardArrowUp,
@@ -16,29 +17,29 @@ type THeaderColumnCell = THeaderColumnCellBase & {
   handleSelectEntireColumn: () => void;
 };
 
-function HeaderRow({
+const HeaderRow = ({
   handleSelectEntireColumn,
 }: {
   handleSelectEntireColumn: (idx: number) => void;
-}) {
+}) => {
   return (
     <tr className="Spreadsheet__cell bg-[#E1E7EA] text-[#606060]">
       {columnHeaders.map((col, idx) => (
         <HeaderColumnCell
+          cellWidth={col.cellWidth}
           handleSelectEntireColumn={() => {
             if (idx === 0) return null;
             handleSelectEntireColumn(idx - 1);
           }}
-          key={col.value + idx}
           icon={col.icon}
+          key={col.value + col.label}
           label={col.label}
           value={col.value}
-          cellWidth={col.cellWidth}
         />
       ))}
     </tr>
   );
-}
+};
 
 function HeaderColumnCell({
   icon,
@@ -61,23 +62,24 @@ function HeaderColumnCell({
 
   return (
     <th
+      className="Spreadsheet__header"
       style={{
         border: isException ? 0 : "",
       }}
-      className="Spreadsheet__header"
     >
       <div className="flex flex-row">
-        <span
+        <button
+          className="flex gap-4 items-center px-5"
           onClick={handleSelectEntireColumn}
           style={{
             width: cellWidth,
             maxWidth: cellWidth,
           }}
-          className="flex gap-4 items-center px-5"
+          type="button"
         >
           <i>{icon ? icon : null}</i>
           {value === "empty" ? "" : label}
-        </span>
+        </button>
         {/* {!isException ? (
           <span className="w-8" onClick={handleSort}>
             {sortingState.direction === "desc" ? (

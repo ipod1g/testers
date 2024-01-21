@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/mouse-events-have-key-events -- extracted from lib */
 import classnames from "classnames";
 import * as React from "react";
 
@@ -95,7 +96,6 @@ export const CustomCell: React.FC<
 
   return (
     <td
-      ref={rootRef}
       className={classnames(
         "Spreadsheet__cell peer/cell group/cell",
         data?.className,
@@ -103,15 +103,16 @@ export const CustomCell: React.FC<
           "Spreadsheet__cell--readonly": data?.readOnly,
         }
       )}
-      onMouseOver={handleMouseOver}
       onMouseDown={handleMouseDown}
+      onMouseOver={handleMouseOver}
+      ref={rootRef}
       tabIndex={0}
     >
       <DataViewer
-        row={row}
-        column={column}
         cell={data}
+        column={column}
         evaluatedCell={evaluatedData}
+        row={row}
         setCellData={setCellData}
       />
     </td>
@@ -199,18 +200,18 @@ export const enhance = (
     return (
       <CellComponent
         {...props}
-        selected={selected}
+        activate={activate}
         active={active}
         copied={copied}
-        dragging={dragging}
-        mode={mode}
-        evaluatedData={evaluatedData}
         data={data}
-        select={select}
-        activate={activate}
+        dragging={dragging}
         edit={edit}
-        setCellDimensions={setCellDimensions}
+        evaluatedData={evaluatedData}
+        mode={mode}
+        select={select}
+        selected={selected}
         setCellData={setCellData}
+        setCellDimensions={setCellDimensions}
       />
     );
   };

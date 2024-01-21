@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import { useCallback } from "react";
 
 import type {
   DataEditorComponent,
@@ -25,9 +25,9 @@ export const EmptyDataEdit: DataEditorComponent<Cell> = ({
   return (
     <input
       autoFocus
-      type="text"
       className="outline-none w-full h-full"
       onChange={handleChange}
+      type="text"
       value={cell?.value}
     />
   );

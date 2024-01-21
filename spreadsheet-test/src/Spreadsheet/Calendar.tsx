@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unstable-nested-components -- from shadcn default */
 import { ChevronLeft, ChevronRight } from "@material-ui/icons";
 import * as React from "react";
 import { DayPicker } from "react-day-picker";
@@ -11,8 +12,7 @@ function Calendar({
 }: CalendarProps) {
   return (
     <DayPicker
-      showOutsideDays={showOutsideDays}
-      className={"p-3"}
+      className="p-3"
       classNames={{
         months: "flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0",
         month: "space-y-4",
@@ -52,6 +52,7 @@ function Calendar({
         IconLeft: () => <ChevronLeft fontSize="small" />,
         IconRight: () => <ChevronRight fontSize="small" />,
       }}
+      showOutsideDays={showOutsideDays}
       {...props}
     />
   );

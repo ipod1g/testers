@@ -1,5 +1,5 @@
 import { CloseOutlined, AddCircleOutline } from "@material-ui/icons";
-import React, { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 
 import { createEmptyMatrix } from "./lib/react-spreadsheet";
 import * as Matrix from "./lib/react-spreadsheet/matrix";
@@ -10,12 +10,13 @@ import { DataEditorRenderer } from "./Spreadsheet/DataComponents/DataEditorRende
 import { DataViewerRenderer } from "./Spreadsheet/DataComponents/DataViewerRenderer";
 
 import type { SortingState, StringCell } from "./Spreadsheet/types";
+import type { Dispatch, SetStateAction } from "react";
 
 const INITIAL_ROWS = 6;
 const INITIAL_COLUMNS = columnHeaders.length - 1;
 const EMPTY_DATA = createEmptyMatrix<StringCell>(INITIAL_ROWS, INITIAL_COLUMNS);
 
-const App = () => {
+function App() {
   //* data from server
   const [data, setData] = useState(EMPTY_DATA);
 
@@ -66,28 +67,32 @@ const App = () => {
   }, [data, sort]);
 
   return (
-    <div id="Spreadsheet__wrapper" className="w-fit relative">
+    <div className="w-fit relative" id="Spreadsheet__wrapper">
       <div className="flex flex-row relative z-10">
         <Spreadsheet
-          DataViewer={DataViewerRenderer}
-          DataEditor={DataEditorRenderer}
           // @ts-expect-error -- custom cell
           Cell={CustomCell}
+          DataEditor={DataEditorRenderer}
+          DataViewer={DataViewerRenderer}
           data={sorted}
           onChange={setData}
           // hideRowIndicators
         />
         <div className="">
-          <th className="Spreadsheet__header"></th>
+          <th className="Spreadsheet__header" />
           {Array(sorted.length)
             .fill("")
             .map((_, idx) => (
-              <div className="h-12 relative flex justify-center items-center peer-hover/row:bg-slate-950">
+              <div
+                className="h-12 relative flex justify-center items-center peer-hover/row:bg-slate-950"
+                key={`deleteRow-${_}`}
+              >
                 <button
+                  className="h-3/5 aspect-square bg-rose-400 hover:cursor-pointer rounded-md flex justify-center items-center"
                   onClick={() => {
                     deleteRow(idx);
                   }}
-                  className="h-3/5 aspect-square bg-rose-400 hover:cursor-pointer rounded-md flex justify-center items-center"
+                  type="button"
                 >
                   <CloseOutlined className="text-white" />
                 </button>
@@ -97,8 +102,9 @@ const App = () => {
       </div>
       <div className="w-full px-12 py-2">
         <button
-          onClick={addRow}
           className="bg-white opacity-80 w-full py-2 rounded-lg hover:opacity-100 shadow-md border"
+          onClick={addRow}
+          type="button"
         >
           <AddCircleOutline color="action" />
         </button>
@@ -141,7 +147,7 @@ const App = () => {
       </div>
     </div>
   );
-};
+}
 
 // eslint-disable-next-line import/no-default-export -- default behaviour
 export default App;
@@ -150,18 +156,19 @@ function SortButton({
   setSort,
   sort,
 }: {
-  setSort: React.Dispatch<React.SetStateAction<SortingState>>;
+  setSort: Dispatch<SetStateAction<SortingState>>;
   sort: SortingState;
 }) {
   return (
     <button
+      className="bg-white opacity-80 w-1/3 py-2 rounded-lg hover:opacity-100 shadow-md border"
       onClick={() => {
         setSort({
           id: sort.id,
           direction: sort.direction,
         });
       }}
-      className="bg-white opacity-80 w-1/3 py-2 rounded-lg hover:opacity-100 shadow-md border"
+      type="button"
     >
       {`${sort.id} sort ${sort.direction}`}
     </button>

@@ -1,7 +1,7 @@
 import Autocomplete, {
   createFilterOptions,
 } from "@material-ui/lab/Autocomplete";
-import React, { useCallback } from "react";
+import { useCallback } from "react";
 
 import { companies } from "../config";
 
@@ -10,6 +10,7 @@ import type {
   DataViewerComponent,
 } from "../../lib/react-spreadsheet";
 import type { Cell } from "../types";
+import type { ChangeEvent } from "react";
 
 const filter = createFilterOptions<typeof companies>();
 
@@ -21,9 +22,9 @@ export const CompanyDataView: DataViewerComponent<Cell> = ({ cell }) => {
   return (
     <div className="flex flex-row gap-2 pl-4 items-center relative">
       {companyLogo ? (
-        <img src={companyLogo} width={24} height={24} />
+        <img alt="company-logo" height={24} src={companyLogo} width={24} />
       ) : (
-        <span className="w-6 h-6"></span>
+        <span className="w-6 h-6" />
       )}
       {cell?.value}
     </div>
@@ -36,7 +37,7 @@ export const CompanyDataEdit: DataEditorComponent<Cell> = ({
   exitEditMode,
 }) => {
   const handleChange = useCallback(
-    (event: React.ChangeEvent<object>, value: string | { label: string }) => {
+    (_event: ChangeEvent<object>, value: string | { label: string }) => {
       if (typeof value === "string") {
         onChange({ ...cell, value });
       } else {
@@ -50,16 +51,13 @@ export const CompanyDataEdit: DataEditorComponent<Cell> = ({
   return (
     <div className="flex items-center ">
       <Autocomplete
-        value={cell?.value ?? ""}
         disableClearable
-        openOnFocus
-        onChange={handleChange}
         filterOptions={(options, params) => {
+          // @ts-expect-error -- fix type value[][]
           const filtered = filter(options, params);
-          return filtered;
+          return filtered.flat();
         }}
-        handleHomeEndKeys
-        options={companies}
+        freeSolo
         getOptionLabel={(option) => {
           // Value selected with enter, right from the input
           if (typeof option === "string") {
@@ -67,32 +65,37 @@ export const CompanyDataEdit: DataEditorComponent<Cell> = ({
           }
           return option.label;
         }}
+        handleHomeEndKeys
+        onChange={handleChange}
+        openOnFocus
+        options={companies}
+        renderInput={(params) => (
+          <div ref={params.InputProps.ref}>
+            <input
+              autoFocus
+              className="w-full h-full"
+              type="text"
+              {...params.inputProps}
+            />
+          </div>
+        )}
         renderOption={(option) => (
           <div className="flex gap-2">
             <img
+              alt="option-logo"
+              className="rounded-sm"
+              height={24}
               src={
                 option.logo
                   ? option.logo
                   : "https://careerhacker-ios.s3-ap-southeast-1.amazonaws.com/rounded_logo.png"
               }
               width={24}
-              height={24}
-              className="rounded-sm"
             />
             {option.label}
           </div>
         )}
-        freeSolo
-        renderInput={(params) => (
-          <div ref={params.InputProps.ref}>
-            <input
-              autoFocus
-              type="text"
-              className="w-full h-full"
-              {...params.inputProps}
-            />
-          </div>
-        )}
+        value={cell?.value ?? ""}
       />
     </div>
   );
