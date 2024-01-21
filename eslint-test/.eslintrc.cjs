@@ -3,7 +3,6 @@ const { resolve } = require("node:path");
 const project = resolve(process.cwd(), "tsconfig.json");
 
 module.exports = {
-  root: true,
   env: { browser: true, es2020: true },
   extends: [
     "eslint:recommended",
@@ -13,6 +12,8 @@ module.exports = {
     "plugin:import/typescript",
     require.resolve("@vercel/style-guide/eslint/node"),
     require.resolve("@vercel/style-guide/eslint/typescript"),
+    require.resolve("@vercel/style-guide/eslint/react"),
+    require.resolve("@vercel/style-guide/eslint/browser"),
   ],
   ignorePatterns: [
     "node_modules",
@@ -28,7 +29,9 @@ module.exports = {
     sourceType: "module",
   },
   plugins: ["react-refresh"],
+  root: true,
   rules: {
+    "react/function-component-definition": "off",
     "unicorn/filename-case": [
       "error",
       {
