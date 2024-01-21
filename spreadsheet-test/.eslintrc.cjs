@@ -32,6 +32,8 @@ module.exports = {
   },
   plugins: ["react-refresh"],
   rules: {
+    "jsx-a11y/no-autofocus": "off",
+    "react/function-component-definition": "off",
     "unicorn/filename-case": [
       "error",
       {
