@@ -5,9 +5,6 @@ import { createEmptyMatrix } from "./lib/react-spreadsheet";
 import * as Matrix from "./lib/react-spreadsheet/matrix";
 import { Spreadsheet } from "./Spreadsheet";
 import { columnHeaders } from "./Spreadsheet/config";
-import { CustomCell } from "./Spreadsheet/CustomCell";
-import { DataEditorRenderer } from "./Spreadsheet/DataComponents/DataEditorRenderer";
-import { DataViewerRenderer } from "./Spreadsheet/DataComponents/DataViewerRenderer";
 
 import type { SortingState, StringCell } from "./Spreadsheet/types";
 import type { Dispatch, SetStateAction } from "react";
@@ -52,6 +49,7 @@ function App() {
       const valueA = a[col - 1]?.value ?? "";
       const valueB = b[col - 1]?.value ?? "";
 
+      if (valueA === "" || valueB === "") return 0;
       if (sort.direction === "asc") {
         if (valueA < valueB) return -1;
         if (valueA > valueB) return 1;
@@ -70,22 +68,20 @@ function App() {
     <div className="w-fit relative" id="Spreadsheet__wrapper">
       <div className="flex flex-row relative z-10">
         <Spreadsheet
-          // @ts-expect-error -- custom cell
-          Cell={CustomCell}
-          DataEditor={DataEditorRenderer}
-          DataViewer={DataViewerRenderer}
           data={sorted}
           onChange={setData}
           // hideRowIndicators
         />
         <div className="">
-          <th className="Spreadsheet__header" />
+          <div className="Spreadsheet__header h-12 max-h-[48px]" />
           {Array(sorted.length)
+            // TODO: combine this to work within Spreadsheet component
             .fill("")
             .map((_, idx) => (
               <div
                 className="h-12 relative flex justify-center items-center peer-hover/row:bg-slate-950"
-                key={`deleteRow-${_}`}
+                // eslint-disable-next-line react/no-array-index-key -- only idx available
+                key={`deleteRow-${idx}`}
               >
                 <button
                   className="h-3/5 aspect-square bg-rose-400 hover:cursor-pointer rounded-md flex justify-center items-center"
