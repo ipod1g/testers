@@ -50,17 +50,6 @@ export const CustomCell: React.FC<
           select(point);
         } else if (
           point.column ===
-          columnHeaders.findIndex((header) => header.value === "bookmark") - 1
-        ) {
-          /**
-           * Custom logic to handle direct click to edit
-           */
-          activate(point);
-          setTimeout(() => {
-            edit();
-          }, 5);
-        } else if (
-          point.column ===
             columnHeaders.findIndex((header) => header.value === "linkApply") -
               1 &&
           data?.value
@@ -68,13 +57,13 @@ export const CustomCell: React.FC<
           // magic number for delaying the click
           setTimeout(() => {
             activate(point);
-          }, 60);
+          }, 70);
         } else {
           activate(point);
         }
       }
     },
-    [mode, setCellDimensions, point, data?.value, select, activate, edit]
+    [mode, setCellDimensions, point, data?.value, select, activate]
   );
 
   const handleMouseOver = React.useCallback(
@@ -104,13 +93,9 @@ export const CustomCell: React.FC<
 
   return (
     <td
-      className={classnames(
-        "Spreadsheet__cell peer/cell group/cell",
-        data?.className,
-        {
-          "Spreadsheet__cell--readonly": data?.readOnly,
-        }
-      )}
+      className={classnames("Spreadsheet__cell", data?.className, {
+        "Spreadsheet__cell--readonly": data?.readOnly,
+      })}
       onMouseDown={handleMouseDown}
       onMouseOver={handleMouseOver}
       ref={rootRef}

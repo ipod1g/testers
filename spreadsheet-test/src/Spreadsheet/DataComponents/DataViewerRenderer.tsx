@@ -1,6 +1,6 @@
-import { BookmarkDataEdit } from "./BookmarkDataComponents";
-import { CompanyDataView } from "./CompanyDataComponents";
+import { BookmarkDataView } from "./BookmarkDataComponents";
 import { CalendarDataView } from "./CalendarDataComponents";
+import { CompanyDataView } from "./CompanyDataComponents";
 import { EmptyDataView } from "./EmptyDataComponents";
 import { LinkDataView } from "./LinkDataComponents";
 import { PositionDataView } from "./PositionDataComponents";
@@ -12,8 +12,7 @@ import type { Cell } from "../types";
 
 const componentMap = {
   empty: EmptyDataView,
-  bookmark: BookmarkDataEdit,
-  // bookmark: BookmarkDataView,
+  bookmark: BookmarkDataView,
   company: CompanyDataView,
   position: PositionDataView,
   appliedDate: CalendarDataView,
@@ -24,7 +23,6 @@ const componentMap = {
 export const DataViewerRenderer: DataViewerComponent<Cell> = (props) => {
   const getColumnComponent = (columnName: string) => {
     const Component = componentMap[columnName as keyof typeof componentMap];
-    // @ts-expect-error TODO: Bookmark type to be fixed
     return <Component {...props} />;
   };
 

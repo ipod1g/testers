@@ -9,9 +9,13 @@ import type { Cell } from "../types";
 
 export const BookmarkDataView: DataViewerComponent<Cell> = ({ cell }) => {
   return cell?.value === "bookmarked" ? (
-    <Bookmark className="mx-auto" height={20} width={20} />
+    <div className="w-full h-full flex justify-center items-center">
+      <Bookmark height={20} width={20} />
+    </div>
   ) : (
-    <BookmarkBorder className="mx-auto" height={20} width={20} />
+    <div className="w-full h-full flex justify-center items-center">
+      <BookmarkBorder height={20} width={20} />
+    </div>
   );
 };
 
@@ -29,7 +33,14 @@ export const BookmarkDataEdit: DataEditorComponent<Cell> = ({
   }, [cell, onChange]);
 
   return (
-    <button className="w-full h-full" onClick={handleChange} type="button">
+    <button
+      autoFocus
+      className="w-full h-full"
+      onFocus={() => {
+        handleChange();
+      }}
+      type="button"
+    >
       {cell?.value === "bookmarked" ? (
         <Bookmark className="mx-auto" height={20} width={20} />
       ) : (
