@@ -1,4 +1,4 @@
-import { CloseOutlined, AddCircleOutline } from "@material-ui/icons";
+import { Delete, AddCircleOutline } from "@material-ui/icons";
 import { useCallback, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 
@@ -28,6 +28,7 @@ function App() {
     });
   }, [setData]);
 
+  // TODO: add are you sure? modal
   const deleteRow = useCallback(
     (idx: number) => {
       setData((_data) => {
@@ -49,16 +50,15 @@ function App() {
       const valueA = a[col - 1]?.value ?? "";
       const valueB = b[col - 1]?.value ?? "";
 
-      if (valueA === "" || valueB === "") return 0;
+      if (valueA === "" && valueB === "") return 0;
+      if (valueA === "") return 1;
+      if (valueB === "") return -1;
+
       if (sortingState.direction === "asc") {
-        if (valueA < valueB) return -1;
-        if (valueA > valueB) return 1;
-      } else {
-        // sort.direction === "desc"
-        if (valueA > valueB) return -1;
-        if (valueA < valueB) return 1;
+        return valueA.localeCompare(valueB);
       }
-      return 0;
+      // sortingState.direction === "desc"
+      return valueB.localeCompare(valueA);
     });
 
     return _sorted;
@@ -73,27 +73,28 @@ function App() {
           // hideRowIndicators
         />
         <div className="">
-          <div className="Spreadsheet__header h-12 max-h-[48px]" />
-          {Array(sorted.length)
-            // TODO: combine this to work within Spreadsheet component
-            .fill("")
-            .map((_, idx) => (
-              <div
-                className="h-12 relative flex justify-center items-center peer-hover/row:bg-slate-950"
-                // eslint-disable-next-line react/no-array-index-key -- only idx available
-                key={`deleteRow-${idx}`}
-              >
-                <button
-                  className="h-3/5 aspect-square bg-rose-400 hover:cursor-pointer rounded-md flex justify-center items-center"
-                  onClick={() => {
-                    deleteRow(idx);
-                  }}
-                  type="button"
+          <div className="h-12 max-h-[48px]" />
+          {sorted.length > 1 &&
+            Array(sorted.length)
+              // TODO: combine this to work within Spreadsheet component
+              .fill("")
+              .map((_, idx) => (
+                <div
+                  className="h-12 relative flex justify-center items-center"
+                  // eslint-disable-next-line react/no-array-index-key -- only idx available
+                  key={`deleteRow-${idx}`}
                 >
-                  <CloseOutlined className="text-white" />
-                </button>
-              </div>
-            ))}
+                  <button
+                    className="h-3/5 w-10 opacity-10 hover:bg-white hover:shadow-md hover:cursor-pointer hover:opacity-100 rounded-r-md flex justify-center items-center"
+                    onClick={() => {
+                      deleteRow(idx);
+                    }}
+                    type="button"
+                  >
+                    <Delete className="text-neutral-700" fontSize="small" />
+                  </button>
+                </div>
+              ))}
         </div>
       </div>
       <div className="w-full px-12 py-2">

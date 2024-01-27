@@ -66,14 +66,22 @@ function HeaderColumnCell({
 
   const isException = value === "empty" || value === "bookmark";
 
-  function handleSortIconRender() {
-    if (sortingState.direction === "desc") {
+  function handleSortIconRender(colValue: string) {
+    if (sortingState.direction === "desc" && sortingState.id === colValue) {
       return <KeyboardArrowUp fontSize="small" />;
     }
-    if (sortingState.direction === "asc") {
+    if (sortingState.direction === "asc" && sortingState.id === colValue) {
       return <KeyboardArrowDown fontSize="small" />;
     }
-    return <UnfoldMore fontSize="small" />;
+    if (sortingState.direction === "none" && sortingState.id === colValue) {
+      return <UnfoldMore fontSize="small" />;
+    }
+    return (
+      <UnfoldMore
+        className="opacity-0 group-hover/header:opacity-100 !transition-opacity "
+        fontSize="small"
+      />
+    );
   }
 
   return (
@@ -83,7 +91,7 @@ function HeaderColumnCell({
         border: isException ? 0 : "",
       }}
     >
-      <div className="flex flex-row">
+      <div className="flex flex-row group/header">
         <button
           className="flex gap-4 items-center px-5"
           onClick={handleSelectEntireColumn}
@@ -104,7 +112,7 @@ function HeaderColumnCell({
             }}
             type="button"
           >
-            {handleSortIconRender()}
+            {handleSortIconRender(value)}
           </button>
         ) : null}
       </div>
