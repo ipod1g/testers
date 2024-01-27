@@ -1,6 +1,6 @@
 import { BookmarkDataEdit } from "./BookmarkDataComponents";
 import { CompanyDataView } from "./CompanyDataComponents";
-import { DateDataView } from "./DateDataComponents";
+import { CalendarDataView } from "./CalendarDataComponents";
 import { EmptyDataView } from "./EmptyDataComponents";
 import { LinkDataView } from "./LinkDataComponents";
 import { PositionDataView } from "./PositionDataComponents";
@@ -16,7 +16,7 @@ const componentMap = {
   // bookmark: BookmarkDataView,
   company: CompanyDataView,
   position: PositionDataView,
-  appliedDate: DateDataView,
+  appliedDate: CalendarDataView,
   linkApply: LinkDataView,
   status: StatusDataView,
 };

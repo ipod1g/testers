@@ -9,15 +9,12 @@ import type {
 import type { Cell } from "../types";
 import type { KeyboardEvent } from "react";
 
-export const DateDataView: DataViewerComponent<Cell> = ({
-  cell,
-  // setCellData,
-}) => {
+export const CalendarDataView: DataViewerComponent<Cell> = ({ cell }) => {
   // if cell value does not fit format make it empty
   return <span>{cell?.value}</span>;
 };
 
-export const DateDataEdit: DataEditorComponent<Cell> = ({
+export const CalendarDataEdit: DataEditorComponent<Cell> = ({
   cell,
   onChange,
   // exitEditMode,
@@ -51,7 +48,7 @@ export const DateDataEdit: DataEditorComponent<Cell> = ({
       <p className="mt-2.5">{cell?.value ?? ""}</p>
       {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions -- parent keypress handler required*/}
       <div
-        className="absolute top-full left-0  w-[250px] h-[350px] bg-white rounded-md border"
+        className="absolute top-full left-0 w-[250px] h-[350px] bg-white rounded-md border select-none"
         onKeyDown={handleKeyPress}
       >
         <Calendar
