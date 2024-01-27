@@ -1,5 +1,8 @@
 import { useCallback, useState } from "react";
 
+import { CustomCell } from "./CustomCell";
+import { DataEditorRenderer } from "./DataComponents/DataEditorRenderer";
+import { DataViewerRenderer } from "./DataComponents/DataViewerRenderer";
 import { HeaderRow } from "./HeaderRow";
 import {
   EmptySelection,
@@ -10,9 +13,12 @@ import {
 import type { CellBase, Selection, Props } from "../lib/react-spreadsheet";
 import type { ReactElement } from "react";
 
-function Spreadsheet<CellType extends CellBase>(
-  props: Props<CellType>
-): ReactElement {
+const Spreadsheet = (
+  props: Omit<
+    Props<CellBase>,
+    "Cell" | "DataEditor" | "DataViewer" | "HeaderRow"
+  >
+): ReactElement => {
   const [selected, setSelected] = useState<Selection | undefined>(
     new EmptySelection()
   );
@@ -27,6 +33,10 @@ function Spreadsheet<CellType extends CellBase>(
 
   return (
     <SpreadsheetPrimitive
+      // @ts-expect-error -- custom cell
+      Cell={CustomCell}
+      DataEditor={DataEditorRenderer}
+      DataViewer={DataViewerRenderer}
       // eslint-disable-next-line react/no-unstable-nested-components -- passing component props
       HeaderRow={() => (
         <HeaderRow handleSelectEntireColumn={handleSelectEntireColumn} />
@@ -36,7 +46,7 @@ function Spreadsheet<CellType extends CellBase>(
       {...props}
     />
   );
-}
+};
 
 Spreadsheet.displayName = "Spreadsheet";
 
