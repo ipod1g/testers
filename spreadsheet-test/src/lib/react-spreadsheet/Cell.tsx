@@ -8,7 +8,11 @@ import { isActive, getOffsetRect } from "./util";
 import useDispatch from "./use-dispatch";
 import useSelector from "./use-selector";
 
-export const Cell: React.FC<Types.CellComponentProps> = ({
+export const Cell: React.FC<
+  Types.CellComponentProps & {
+    edit: () => void;
+  }
+> = ({
   row,
   column,
   DataViewer,
@@ -94,7 +98,11 @@ export const Cell: React.FC<Types.CellComponentProps> = ({
 };
 
 export const enhance = (
-  CellComponent: React.ComponentType<Types.CellComponentProps>
+  CellComponent: React.ComponentType<
+    Types.CellComponentProps & {
+      edit: () => void;
+    }
+  >
 ): React.FC<
   Omit<
     Types.CellComponentProps,
@@ -107,6 +115,7 @@ export const enhance = (
     | "select"
     | "activate"
     | "setCellDimensions"
+    | "edit"
   >
 > => {
   return function CellWrapper(props) {
@@ -137,6 +146,11 @@ export const enhance = (
       [dispatch]
     );
 
+    // add edit for custom cell usage
+    const edit = React.useCallback(() => {
+      dispatch(Actions.edit());
+    }, [dispatch]);
+
     const active = useSelector((state) => isActive(state.active, point));
     const mode = useSelector((state) => (active ? state.mode : "view"));
     const data = useSelector((state) => Matrix.get(point, state.model.data));
@@ -160,6 +174,7 @@ export const enhance = (
         mode={mode}
         evaluatedData={evaluatedData}
         data={data}
+        edit={edit}
         select={select}
         activate={activate}
         setCellDimensions={setCellDimensions}

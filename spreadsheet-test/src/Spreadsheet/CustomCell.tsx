@@ -2,6 +2,7 @@
 import classnames from "classnames";
 import * as React from "react";
 
+import { columnHeaders } from "./config";
 import * as Actions from "../lib/react-spreadsheet/actions";
 import * as Matrix from "../lib/react-spreadsheet/matrix";
 import useDispatch from "../lib/react-spreadsheet/use-dispatch";
@@ -45,22 +46,29 @@ export const CustomCell: React.FC<
       if (mode === "view") {
         setCellDimensions(point, getOffsetRect(event.currentTarget));
 
-        // TODO: handle this logic better
         if (event.shiftKey) {
           select(point);
-        } else if (point.column === 0) {
+        } else if (
+          point.column ===
+          columnHeaders.findIndex((header) => header.value === "bookmark") - 1
+        ) {
           /**
            * Custom logic to handle direct click to edit
            */
           activate(point);
           setTimeout(() => {
             edit();
-          }, 1);
-        } else if (point.column === 4 && data?.value) {
-          // link
+          }, 5);
+        } else if (
+          point.column ===
+            columnHeaders.findIndex((header) => header.value === "linkApply") -
+              1 &&
+          data?.value
+        ) {
+          // magic number for delaying the click
           setTimeout(() => {
             activate(point);
-          }, 55);
+          }, 60);
         } else {
           activate(point);
         }
@@ -138,7 +146,6 @@ export const enhance = (
     | "select"
     | "activate"
     | "setCellDimensions"
-    | "edit"
   >
 > => {
   return function CellWrapper(props) {
