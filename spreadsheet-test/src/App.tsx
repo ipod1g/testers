@@ -1,5 +1,6 @@
 import { CloseOutlined, AddCircleOutline } from "@material-ui/icons";
 import { useCallback, useMemo, useState } from "react";
+import { useSelector } from "react-redux";
 
 import { createEmptyMatrix } from "./lib/react-spreadsheet";
 import * as Matrix from "./lib/react-spreadsheet/matrix";
@@ -7,7 +8,6 @@ import { Spreadsheet } from "./Spreadsheet";
 import { columnHeaders } from "./Spreadsheet/config";
 
 import type { SortingState, StringCell } from "./Spreadsheet/types";
-import type { Dispatch, SetStateAction } from "react";
 
 const INITIAL_ROWS = 6;
 const INITIAL_COLUMNS = columnHeaders.length - 1;
@@ -16,6 +16,10 @@ const EMPTY_DATA = createEmptyMatrix<StringCell>(INITIAL_ROWS, INITIAL_COLUMNS);
 function App() {
   //* data from server
   const [data, setData] = useState(EMPTY_DATA);
+
+  const sortingState = useSelector(
+    (state) => state.sortingState
+  ) as SortingState;
 
   const addRow = useCallback(() => {
     setData((_data) => {
@@ -33,24 +37,20 @@ function App() {
     [setData]
   );
 
-  // this sort should be moved to redux
-  const [sort, setSort] = useState<SortingState>({
-    id: "company",
-    direction: "none",
-  });
-
   const sorted = useMemo(() => {
     const sortedData = [...data];
-    if (sort.direction === "none") return data;
+    if (sortingState.direction === "none") return data;
 
-    const col = columnHeaders.findIndex((header) => header.value === sort.id);
+    const col = columnHeaders.findIndex(
+      (header) => header.value === sortingState.id
+    );
 
     const _sorted = sortedData.sort((a, b) => {
       const valueA = a[col - 1]?.value ?? "";
       const valueB = b[col - 1]?.value ?? "";
 
       if (valueA === "" || valueB === "") return 0;
-      if (sort.direction === "asc") {
+      if (sortingState.direction === "asc") {
         if (valueA < valueB) return -1;
         if (valueA > valueB) return 1;
       } else {
@@ -62,7 +62,7 @@ function App() {
     });
 
     return _sorted;
-  }, [data, sort]);
+  }, [data, sortingState]);
 
   return (
     <div className="w-fit relative" id="Spreadsheet__wrapper">
@@ -104,42 +104,6 @@ function App() {
         >
           <AddCircleOutline color="action" />
         </button>
-        {/* buttons below are for demo */}
-        <SortButton
-          setSort={setSort}
-          sort={{
-            id: "",
-            direction: "none",
-          }}
-        />
-        <SortButton
-          setSort={setSort}
-          sort={{
-            id: "company",
-            direction: "asc",
-          }}
-        />
-        <SortButton
-          setSort={setSort}
-          sort={{
-            id: "company",
-            direction: "desc",
-          }}
-        />
-        <SortButton
-          setSort={setSort}
-          sort={{
-            id: "position",
-            direction: "asc",
-          }}
-        />
-        <SortButton
-          setSort={setSort}
-          sort={{
-            id: "position",
-            direction: "desc",
-          }}
-        />
       </div>
     </div>
   );
@@ -147,26 +111,3 @@ function App() {
 
 // eslint-disable-next-line import/no-default-export -- default behaviour
 export default App;
-
-function SortButton({
-  setSort,
-  sort,
-}: {
-  setSort: Dispatch<SetStateAction<SortingState>>;
-  sort: SortingState;
-}) {
-  return (
-    <button
-      className="bg-white opacity-80 w-1/3 py-2 rounded-lg hover:opacity-100 shadow-md border"
-      onClick={() => {
-        setSort({
-          id: sort.id,
-          direction: sort.direction,
-        });
-      }}
-      type="button"
-    >
-      {`${sort.id} sort ${sort.direction}`}
-    </button>
-  );
-}

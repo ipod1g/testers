@@ -5,9 +5,10 @@ import {
   KeyboardArrowUp,
   UnfoldMore,
 } from "@material-ui/icons";
-import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import { columnHeaders } from "./config";
+import { setSortingState } from "../store/jobSlice.js";
 
 import type { SortingState } from "./types";
 
@@ -48,17 +49,32 @@ function HeaderColumnCell({
   value,
   handleSelectEntireColumn,
 }: THeaderColumnCell) {
-  // function handleSort() {
-  //   if (sortingState.direction === "none") {
-  //     setSortingState({ id: value, direction: "asc" });
-  //   } else if (sortingState.direction === "asc") {
-  //     setSortingState({ id: value, direction: "desc" });
-  //   } else {
-  //     setSortingState({ id: value, direction: "none" });
-  //   }
-  // }
+  const dispatch = useDispatch();
+  const sortingState = useSelector(
+    (state) => state.sortingState
+  ) as SortingState;
+
+  function handleSort() {
+    if (sortingState.direction === "none") {
+      dispatch(setSortingState({ id: value, direction: "asc" }));
+    } else if (sortingState.direction === "asc") {
+      dispatch(setSortingState({ id: value, direction: "desc" }));
+    } else {
+      dispatch(setSortingState({ id: value, direction: "none" }));
+    }
+  }
 
   const isException = value === "empty" || value === "bookmark";
+
+  function handleSortIconRender() {
+    if (sortingState.direction === "desc") {
+      return <KeyboardArrowUp fontSize="small" />;
+    }
+    if (sortingState.direction === "asc") {
+      return <KeyboardArrowDown fontSize="small" />;
+    }
+    return <UnfoldMore fontSize="small" />;
+  }
 
   return (
     <th
@@ -80,17 +96,17 @@ function HeaderColumnCell({
           <i>{icon ? icon : null}</i>
           {value === "empty" ? "" : label}
         </button>
-        {/* {!isException ? (
-          <span className="w-8" onClick={handleSort}>
-            {sortingState.direction === "desc" ? (
-              <KeyboardArrowUp fontSize="small" />
-            ) : sortingState.direction === "asc" ? (
-              <KeyboardArrowDown fontSize="small" />
-            ) : (
-              <UnfoldMore fontSize="small" />
-            )}
-          </span>
-        ) : null} */}
+        {!isException ? (
+          <button
+            className="w-8"
+            onClick={() => {
+              handleSort();
+            }}
+            type="button"
+          >
+            {handleSortIconRender()}
+          </button>
+        ) : null}
       </div>
     </th>
   );
