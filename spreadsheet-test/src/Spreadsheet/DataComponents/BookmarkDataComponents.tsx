@@ -42,9 +42,23 @@ export const BookmarkDataEdit: DataEditorComponent<Cell> = ({
       type="button"
     >
       {cell?.value === "bookmarked" ? (
-        <Bookmark className="mx-auto" height={20} width={20} />
+        <Bookmark
+          className="mx-auto"
+          height={20}
+          onClick={() => {
+            handleChange();
+          }}
+          width={20}
+        />
       ) : (
-        <BookmarkBorder className="mx-auto" height={20} width={20} />
+        <BookmarkBorder
+          className="mx-auto"
+          height={20}
+          onClick={() => {
+            handleChange();
+          }}
+          width={20}
+        />
       )}
     </button>
   );
