@@ -4,19 +4,19 @@ import FormulaParser, {
   FormulaError,
   FormulaParserConfig,
   Value,
-} from 'fast-formula-parser';
-import { PointRange } from '../point-range';
-import { Point } from '../point';
-import * as Matrix from '../matrix';
-import { CellBase } from '../types';
-import { PointSet } from './point-set';
+} from "fast-formula-parser";
+import { PointRange } from "../point-range";
+import { Point } from "../point";
+import * as Matrix from "../matrix";
+import { CellBase } from "../types";
+import { PointSet } from "./point-set";
 
-export const FORMULA_VALUE_PREFIX = '=';
+export const FORMULA_VALUE_PREFIX = "=";
 
 /** Returns whether given value is a formula */
 export function isFormulaValue(value: unknown): value is string {
   return (
-    typeof value === 'string' &&
+    typeof value === "string" &&
     value.startsWith(FORMULA_VALUE_PREFIX) &&
     value.length > 1
   );
@@ -29,7 +29,7 @@ export function extractFormula(value: string): string {
 
 export function createFormulaParser(
   data: Matrix.Matrix<CellBase>,
-  config?: Omit<FormulaParserConfig, 'onCell' | 'onRange'>
+  config?: Omit<FormulaParserConfig, "onCell" | "onRange">
 ): FormulaParser {
   return new FormulaParser({
     ...config,
@@ -44,6 +44,8 @@ export function createFormulaParser(
     },
     onRange: (ref) => {
       const size = Matrix.getSize(data);
+      if (!ref.from || !ref.to) throw new Error("Invalid range");
+
       const start: Point = {
         row: ref.from.row - 1,
         column: ref.from.col - 1,
@@ -78,7 +80,7 @@ export function getReferences(
 
     const references = PointSet.from(
       dependencies.flatMap((reference) => {
-        const isRange = 'from' in reference;
+        const isRange = "from" in reference;
         if (isRange) {
           const { from, to } = reference;
 
@@ -132,6 +134,6 @@ function convertPointToCellRef(point: Point): CellRef {
     row: point.row + 1,
     col: point.column + 1,
     // TODO: fill once we support multiple sheets
-    sheet: 'Sheet1',
+    sheet: "Sheet1",
   };
 }

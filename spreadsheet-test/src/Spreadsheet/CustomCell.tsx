@@ -30,7 +30,6 @@ export const CustomCell: React.FC<
   activate,
   setCellDimensions,
   setCellData,
-  edit,
 }): React.ReactElement => {
   const rootRef = React.useRef<HTMLTableCellElement | null>(null);
   const point = React.useMemo(

@@ -168,7 +168,7 @@ export function split<T>(
   verticalSeparator: string | RegExp = /\r\n|\n|\r/
 ): Matrix<T> {
   // Temporarily replace line breaks inside quotes
-  const replaced = csv.replace(/"([^"]*?)"/g, (match, p1) => {
+  const replaced = csv.replace(/"([^"]*?)"/g, (_match, p1) => {
     return p1.replace(/\n/g, "\\n");
   });
   return replaced.split(verticalSeparator).map((row) =>

@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars -- temp for dev*/
-/* eslint-disable @typescript-eslint/no-unused-vars -- temp for dev  */
 import {
   KeyboardArrowDown,
   KeyboardArrowUp,
@@ -51,6 +49,8 @@ function HeaderColumnCell({
 }: THeaderColumnCell) {
   const dispatch = useDispatch();
   const sortingState = useSelector(
+    // @ts-expect-error -- state coming from js
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return -- state coming from js
     (state) => state.sortingState
   ) as SortingState;
 

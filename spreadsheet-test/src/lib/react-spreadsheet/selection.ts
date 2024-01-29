@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { PointRange } from './point-range';
-import * as Point from './point';
-import * as Matrix from './matrix';
+import { PointRange } from "./point-range";
+import * as Point from "./point";
+import * as Matrix from "./matrix";
 
 /** Selection from a spreadsheet */
 export abstract class Selection {
@@ -29,16 +29,16 @@ export abstract class Selection {
 
 /** Selection of no cells */
 export class EmptySelection extends Selection {
-  toRange(data: Matrix.Matrix<unknown>): PointRange | null {
+  toRange(_data: Matrix.Matrix<unknown>): PointRange | null {
     return null;
   }
-  normalizeTo(data: Matrix.Matrix<unknown>): this {
+  normalizeTo(_data: Matrix.Matrix<unknown>): this {
     return this;
   }
-  hasEntireRow(row: number): boolean {
+  hasEntireRow(_row: number): boolean {
     return false;
   }
-  hasEntireColumn(column: number): boolean {
+  hasEntireColumn(_column: number): boolean {
     return false;
   }
   size(): number {
@@ -58,7 +58,7 @@ export class RangeSelection extends Selection {
     super();
   }
 
-  toRange(data: Matrix.Matrix<unknown>): PointRange | null {
+  toRange(_data: Matrix.Matrix<unknown>): PointRange | null {
     return this.range;
   }
 
@@ -69,11 +69,11 @@ export class RangeSelection extends Selection {
     return nextSelection;
   }
 
-  hasEntireRow(row: number): boolean {
+  hasEntireRow(_row: number): boolean {
     return false;
   }
 
-  hasEntireColumn(column: number): boolean {
+  hasEntireColumn(_column: number): boolean {
     return false;
   }
 
@@ -103,15 +103,15 @@ export class EntireWorksheetSelection extends EntireSelection {
     return getMatrixRange(data);
   }
 
-  normalizeTo(data: Matrix.Matrix<unknown>): this {
+  normalizeTo(_data: Matrix.Matrix<unknown>): this {
     return this;
   }
 
-  hasEntireColumn(column: number): boolean {
+  hasEntireColumn(_column: number): boolean {
     return true;
   }
 
-  hasEntireRow(row: number): boolean {
+  hasEntireRow(_row: number): boolean {
     return true;
   }
 
@@ -119,7 +119,7 @@ export class EntireWorksheetSelection extends EntireSelection {
     return Matrix.getColumnsCount(data) * Matrix.getRowsCount(data);
   }
 
-  has(data: Matrix.Matrix<unknown>, point: Point.Point): boolean {
+  has(_data: Matrix.Matrix<unknown>, _point: Point.Point): boolean {
     return true;
   }
 
@@ -142,10 +142,10 @@ export abstract class EntireAxisSelection extends EntireSelection {
    */
   constructor(start: number, end: number) {
     if (!isIndex(start)) {
-      throw new InvalidIndexError('start');
+      throw new InvalidIndexError("start");
     }
     if (!isIndex(end)) {
-      throw new InvalidIndexError('end');
+      throw new InvalidIndexError("end");
     }
     super();
     this.start = Math.min(start, end);
@@ -186,7 +186,7 @@ export class EntireRowsSelection extends EntireAxisSelection {
     return row >= this.start && row <= this.end;
   }
 
-  hasEntireColumn(column: number): boolean {
+  hasEntireColumn(_column: number): boolean {
     return false;
   }
 
@@ -195,7 +195,7 @@ export class EntireRowsSelection extends EntireAxisSelection {
     return rows * Matrix.getColumnsCount(data);
   }
 
-  has(data: Matrix.Matrix<unknown>, point: Point.Point): boolean {
+  has(_data: Matrix.Matrix<unknown>, point: Point.Point): boolean {
     return point.row >= this.start && point.row <= this.end;
   }
 }
@@ -220,7 +220,7 @@ export class EntireColumnsSelection extends EntireAxisSelection {
     return nextSelection;
   }
 
-  hasEntireRow(row: number): boolean {
+  hasEntireRow(_row: number): boolean {
     return false;
   }
 
@@ -233,7 +233,7 @@ export class EntireColumnsSelection extends EntireAxisSelection {
     return columns * Matrix.getRowsCount(data);
   }
 
-  has(data: Matrix.Matrix<unknown>, point: Point.Point): boolean {
+  has(_data: Matrix.Matrix<unknown>, point: Point.Point): boolean {
     return point.column >= this.start && point.column <= this.end;
   }
 }

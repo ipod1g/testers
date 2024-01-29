@@ -1,6 +1,6 @@
 import { BookmarkDataEdit } from "./BookmarkDataComponents";
-import { CompanyDataEdit } from "./CompanyDataComponents";
 import { CalendarDataEdit } from "./CalendarDataComponents";
+import { CompanyDataEdit } from "./CompanyDataComponents";
 import { EmptyDataEdit } from "./EmptyDataComponents";
 import { LinkDataEdit } from "./LinkDataComponents";
 import { PositionDataEdit } from "./PositionDataComponents";

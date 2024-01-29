@@ -18,6 +18,8 @@ function App() {
   const [data, setData] = useState(EMPTY_DATA);
 
   const sortingState = useSelector(
+    // @ts-expect-error -- state coming from js
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return -- state coming from js
     (state) => state.sortingState
   ) as SortingState;
 

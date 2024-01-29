@@ -1,10 +1,10 @@
-import * as React from 'react';
-import FormulaParser from 'fast-formula-parser';
-import { Point } from './point';
-import { Selection } from './selection';
-import { Model } from './engine';
-import { PointRange } from './point-range';
-import { Matrix } from './matrix';
+import * as React from "react";
+import FormulaParser from "fast-formula-parser";
+import { Point } from "./point";
+import { Selection } from "./selection";
+import { Model } from "./engine";
+import { PointRange } from "./point-range";
+import { Matrix } from "./matrix";
 
 /** The base type of cell data in Spreadsheet */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -31,7 +31,7 @@ export type CellDescriptor<Cell> = {
 } & Point;
 
 /** The spreadsheet's write mode */
-export type Mode = 'view' | 'edit';
+export type Mode = "view" | "edit";
 
 /** Dimensions of an element */
 export type Dimensions = {
@@ -53,10 +53,10 @@ export type StoreState<Cell extends CellBase = CellBase> = {
   cut: boolean;
   active: Point | null;
   mode: Mode;
-  rowDimensions: Record<number, Pick<Dimensions, 'height' | 'top'> | undefined>;
+  rowDimensions: Record<number, Pick<Dimensions, "height" | "top"> | undefined>;
   columnDimensions: Record<
     number,
-    Pick<Dimensions, 'width' | 'left'> | undefined
+    Pick<Dimensions, "width" | "left"> | undefined
   >;
   dragging: boolean;
   lastChanged: Point | null;
