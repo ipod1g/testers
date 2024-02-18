@@ -21,18 +21,18 @@ export const PositionDataView: DataViewerComponent<Cell> = ({ cell }) => {
 export const PositionDataEdit: DataEditorComponent<Cell> = ({
   cell,
   onChange,
+  exitEditMode,
 }) => {
   const handleChange = useCallback(
-    (event: ChangeEvent<object>, value: string | { label: string }) => {
+    (_event: ChangeEvent<object>, value: string | { label: string }) => {
       if (typeof value === "string") {
         onChange({ ...cell, value });
       } else {
         onChange({ ...cell, value: value.label });
-        const target = event.target as HTMLInputElement;
-        target.blur();
+        exitEditMode();
       }
     },
-    [cell, onChange]
+    [cell, exitEditMode, onChange]
   );
 
   return (
