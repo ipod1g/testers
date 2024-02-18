@@ -1,5 +1,9 @@
+import InputBase from "@material-ui/core/InputBase";
+import MenuItem from "@material-ui/core/MenuItem";
+import Select from "@material-ui/core/Select";
+import { createStyles, withStyles } from "@material-ui/core/styles";
+import { KeyboardArrowDown } from "@material-ui/icons";
 import { useCallback, useMemo } from "react";
-import Select from "react-select";
 
 import { statusOptions } from "../config";
 
@@ -8,79 +12,72 @@ import type {
   DataViewerComponent,
 } from "../../lib/react-spreadsheet";
 import type { Cell } from "../types";
-import type { SingleValue, StylesConfig } from "react-select";
+import type { Theme } from "@material-ui/core/styles";
+import type { ChangeEvent, ReactNode } from "react";
 
-const colorStyles: StylesConfig<{ color: string }, true> = {
-  control: (defaultStyles) => ({
-    ...defaultStyles,
-    border: "none",
-    boxShadow: "none",
-    backgroundColor: "transparent",
-    width: "164px",
-  }),
-  singleValue: (defaultStyles, { data }) => ({
-    ...defaultStyles,
-    backgroundColor: data.color,
-    padding: "2px",
-    borderRadius: "24px",
-    width: "120px",
-    textAlign: "center",
-    ":hover": {
-      cursor: "pointer",
-    },
-  }),
-  container: (defaultStyles) => {
-    return {
-      ...defaultStyles,
-      display: "flex",
-    };
-  },
-  menu: (defaultStyles) => {
-    return {
-      ...defaultStyles,
-      backgroundColor: "#ffffff",
-      marginTop: "2px",
-      marginLeft: "-10px",
-      padding: "12px 10px",
-      width: "184px",
-      borderBottomLeftRadius: "8px",
-      borderBottomRightRadius: "8px",
-    };
-  },
-  option: (defaultStyles, { data }) => {
-    return {
-      ...defaultStyles,
-      backgroundColor: data.color,
-      padding: "2px",
-      margin: "8px 0px",
-      borderRadius: "24px",
-      width: "120px",
-      textAlign: "center",
-      ":hover": {
-        opacity: 0.7,
-        cursor: "pointer",
+const StyledInput = withStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      width: "100%",
+      "label + &": {
+        marginTop: theme.spacing(3),
       },
-    };
-  },
-};
+    },
+    input: {
+      borderRadius: 4,
+      position: "relative",
+      backgroundColor: theme.palette.background.paper,
+      fontSize: 16,
+      width: "100%",
+      transition: theme.transitions.create(["border-color", "box-shadow"]),
+      fontFamily: [
+        "-apple-system",
+        "BlinkMacSystemFont",
+        '"Segoe UI"',
+        "Roboto",
+        '"Helvetica Neue"',
+        "Arial",
+        "sans-serif",
+        '"Apple Color Emoji"',
+        '"Segoe UI Emoji"',
+        '"Segoe UI Symbol"',
+      ].join(","),
+      "&:focus": {
+        borderRadius: 4,
+        borderColor: "#80bdff",
+        boxShadow: "0 0 0 0.2rem rgba(0,123,255,.25)",
+      },
+    },
+  })
+)(InputBase);
 
 export const StatusDataView: DataViewerComponent<Cell> = ({ cell }) => {
   const option = useMemo(
-    () => cell && statusOptions.find((opt) => opt.value === cell.value),
+    () =>
+      statusOptions.find((opt) => opt.value === cell?.value) ||
+      statusOptions[0],
     [cell]
   );
+
   return (
-    <Select
-      isDisabled
-      options={statusOptions}
-      styles={colorStyles}
-      unstyled
-      value={option}
-    />
+    <div className="flex justify-between">
+      <div
+        className="flex-grow-0 rounded-full px-[14px] py-[3px] text-center"
+        style={{
+          backgroundColor: option.bgColor,
+          color: option.textColor,
+        }}
+      >
+        {option.label}
+      </div>
+      <div>
+        <KeyboardArrowDown style={{ fontSize: "16px" }} />
+      </div>
+    </div>
   );
 };
 
-// TODO: add keyboard nav support
+//TODO: fix anchor element
 export const StatusDataEdit: DataEditorComponent<Cell> = ({
   cell,
   onChange,
@@ -88,16 +85,16 @@ export const StatusDataEdit: DataEditorComponent<Cell> = ({
 }) => {
   const handleChange = useCallback(
     (
-      selection:
-        | SingleValue<{
-            value: string;
-            label: string;
-          }>
-        | undefined
+      event: ChangeEvent<{
+        name?: string | undefined;
+        value: unknown;
+      }>,
+      _child: ReactNode
     ) => {
-      onChange({ ...cell, value: selection ? selection.value : undefined });
+      onChange({ ...cell, value: event.target.value as string });
+      exitEditMode();
     },
-    [cell, onChange]
+    [cell, exitEditMode, onChange]
   );
   const option = useMemo(
     () => cell && statusOptions.find((opt) => opt.value === cell.value),
@@ -106,16 +103,67 @@ export const StatusDataEdit: DataEditorComponent<Cell> = ({
 
   return (
     <Select
-      defaultMenuIsOpen
-      // @ts-expect-error Neglected meta type
+      // eslint-disable-next-line react/no-unstable-nested-components -- eslint bypass
+      IconComponent={() => <KeyboardArrowDown style={{ fontSize: "16px" }} />}
+      MenuProps={{
+        open: true,
+        disablePortal: true,
+        autoFocus: true,
+        elevation: 0,
+        anchorOrigin: {
+          vertical: "bottom",
+          horizontal: "left",
+        },
+        getContentAnchorEl: null,
+        PaperProps: {
+          style: {
+            border: "2px solid #E4E4E4",
+            borderRadius: "3px",
+            marginLeft: "-10px",
+            padding: "12px 0px",
+            width: "200px",
+            backgroundColor: "#ffffff",
+          },
+        },
+      }}
+      defaultValue=""
+      id="customized-select"
+      input={<StyledInput />}
+      labelId="customized-select-label"
       onChange={handleChange}
-      onMenuClose={() => {
+      onClose={() => {
         exitEditMode();
       }}
-      options={statusOptions}
-      styles={colorStyles}
-      unstyled
-      value={option}
-    />
+      renderValue={(_val) => {
+        return (
+          <div className="flex">
+            <div
+              className="flex-grow-0 rounded-full px-[14px] py-[3px] text-center"
+              style={{
+                backgroundColor: option?.bgColor,
+                color: option?.textColor,
+              }}
+            >
+              {option?.label}
+            </div>
+          </div>
+        );
+      }}
+      value={option?.value || ""}
+    >
+      {statusOptions.map((opt, idx) =>
+        opt.value !== "" ? (
+          // eslint-disable-next-line react/no-array-index-key -- status is duplicate
+          <MenuItem className="" key={`${opt.value}-${idx}`} value={opt.value}>
+            <div
+              className="rounded-full px-[14px] py-[3px] text-center"
+              style={{ backgroundColor: opt.bgColor, color: opt.textColor }}
+            >
+              {opt.label}
+            </div>
+          </MenuItem>
+        ) : null
+      )}
+    </Select>
   );
 };

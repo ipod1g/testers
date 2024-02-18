@@ -17,7 +17,7 @@ export const CalendarDataView: DataViewerComponent<Cell> = ({ cell }) => {
 export const CalendarDataEdit: DataEditorComponent<Cell> = ({
   cell,
   onChange,
-  // exitEditMode,
+  exitEditMode,
 }) => {
   const [date, setDate] = useState<Date | undefined>(
     new Date(cell?.value ?? "")
@@ -31,9 +31,9 @@ export const CalendarDataEdit: DataEditorComponent<Cell> = ({
         ...cell,
         value: selectedDate ? selectedDate.toLocaleDateString() : undefined,
       });
-      // exitEditMode();
+      exitEditMode();
     },
-    [cell, onChange]
+    [cell, exitEditMode, onChange]
   );
 
   const handleKeyPress = (event: KeyboardEvent<HTMLDivElement>) => {

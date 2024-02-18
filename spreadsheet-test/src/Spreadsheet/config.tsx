@@ -55,9 +55,24 @@ export const columnHeaders: {
 ];
 
 export const statusOptions = [
-  { value: "applied", label: "Applied", color: "#CADFE0" },
-  { value: "progress", label: "In Progress", color: "#FFE0BC" },
-  { value: "interview", label: "Interview", color: "#C4F0C3" },
+  {
+    value: "",
+    label: "Select a status",
+    bgColor: "#00000000",
+    textColor: "#818181",
+  },
+  {
+    value: "applied",
+    label: "Applied",
+    bgColor: "#E0F2E5",
+    textColor: "#345431",
+  },
+  {
+    value: "interview",
+    label: "Interview",
+    bgColor: "#FFF1CD",
+    textColor: "#94711B",
+  },
 ];
 
 // will be from fetch
