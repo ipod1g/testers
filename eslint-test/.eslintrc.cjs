@@ -18,9 +18,9 @@ module.exports = {
   ignorePatterns: [
     "node_modules",
     "dist",
-    ".eslintrc.cjs",
-    "vite.config.ts",
-    "vite-env.d.ts",
+    "/**/*.cjs",
+    "/**/*.config.ts",
+    "/**/*.d.ts",
   ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
