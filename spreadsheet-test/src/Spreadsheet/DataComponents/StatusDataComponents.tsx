@@ -5,7 +5,7 @@ import { createStyles, withStyles } from "@material-ui/core/styles";
 import { KeyboardArrowDown } from "@material-ui/icons";
 import { useCallback, useMemo } from "react";
 
-import { statusOptions } from "../config";
+import { columnHeaders, statusOptions } from "../config";
 
 import type {
   DataEditorComponent,
@@ -62,7 +62,9 @@ export const StatusDataView: DataViewerComponent<Cell> = ({ cell }) => {
   return (
     <div className="flex justify-between">
       <div
-        className="flex-grow-0 rounded-full px-[14px] py-[3px] text-center"
+        className={`flex-grow-0 rounded-full px-[14px] py-[3px] text-center ${
+          option.value !== "" ? "font-medium" : ""
+        }`}
         style={{
           backgroundColor: option.bgColor,
           color: option.textColor,
@@ -121,7 +123,9 @@ export const StatusDataEdit: DataEditorComponent<Cell> = ({
             borderRadius: "3px",
             marginLeft: "-10px",
             padding: "12px 0px",
-            width: "200px",
+            width:
+              columnHeaders.find((header) => header.value === "status")
+                ?.cellWidth || "164px",
             backgroundColor: "#ffffff",
           },
         },
