@@ -10,8 +10,8 @@ import type { Cell } from "../types";
 import type { KeyboardEvent } from "react";
 
 export const CalendarDataView: DataViewerComponent<Cell> = ({ cell }) => {
-  // if cell value does not fit format make it empty
-  return <span>{cell?.value}</span>;
+  // TODO: if cell value does not fit format make it empty
+  return <p className="text-center mx-auto">{cell?.value}</p>;
 };
 
 export const CalendarDataEdit: DataEditorComponent<Cell> = ({
