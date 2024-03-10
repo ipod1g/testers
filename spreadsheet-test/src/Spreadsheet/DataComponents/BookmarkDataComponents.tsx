@@ -22,15 +22,18 @@ export const BookmarkDataView: DataViewerComponent<Cell> = ({ cell }) => {
 export const BookmarkDataEdit: DataEditorComponent<Cell> = ({
   cell,
   onChange,
+  exitEditMode,
 }) => {
   const handleChange = useCallback(() => {
     if (cell?.value === "bookmarked") {
       // can use a more definitive string too
       onChange({ ...cell, value: "" });
+      exitEditMode();
     } else {
       onChange({ ...cell, value: "bookmarked" });
+      exitEditMode();
     }
-  }, [cell, onChange]);
+  }, [cell, exitEditMode, onChange]);
 
   return (
     <button
@@ -45,18 +48,14 @@ export const BookmarkDataEdit: DataEditorComponent<Cell> = ({
         <Bookmark
           className="mx-auto"
           height={20}
-          onClick={() => {
-            handleChange();
-          }}
+          onClick={handleChange}
           width={20}
         />
       ) : (
         <BookmarkBorder
           className="mx-auto"
           height={20}
-          onClick={() => {
-            handleChange();
-          }}
+          onClick={handleChange}
           width={20}
         />
       )}
