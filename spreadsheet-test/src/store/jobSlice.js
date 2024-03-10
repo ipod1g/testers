@@ -2,8 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   sortingState: {
-    id: "",
-    direction: "none",
+    id: "status",
+    direction: "asc",
   },
 };
 
