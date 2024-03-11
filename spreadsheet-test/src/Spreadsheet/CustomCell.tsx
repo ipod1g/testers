@@ -92,7 +92,7 @@ export const CustomCell: React.FC<
 
   return (
     <td
-      className={classnames("Spreadsheet__cell", data?.className, {
+      className={classnames(`Spreadsheet__cell max-w-[${columnHeaders[column].cellWidth}]`, data?.className, {
         "Spreadsheet__cell--readonly": data?.readOnly,
       })}
       onMouseDown={handleMouseDown}
