@@ -22,7 +22,7 @@ const HeaderRow = ({
   handleSelectEntireColumn: (idx: number) => void;
 }) => {
   return (
-    <tr className="Spreadsheet__cell bg-[#E1E7EA] text-[#606060]">
+    <tr className="Spreadsheet__cell bg-[#EFEFEF] text-[#606060]">
       {columnHeaders.map((col, idx) => (
         <HeaderColumnCell
           cellWidth={col.cellWidth}
@@ -55,12 +55,11 @@ function HeaderColumnCell({
   ) as SortingState;
 
   function handleSort() {
-    if (sortingState.direction === "none") {
+    if (sortingState.direction === "desc") {
       dispatch(setSortingState({ id: value, direction: "asc" }));
-    } else if (sortingState.direction === "asc") {
+    }
+    if (sortingState.direction === "asc") {
       dispatch(setSortingState({ id: value, direction: "desc" }));
-    } else {
-      dispatch(setSortingState({ id: value, direction: "none" }));
     }
   }
 
@@ -72,9 +71,6 @@ function HeaderColumnCell({
     }
     if (sortingState.direction === "asc" && sortingState.id === colValue) {
       return <KeyboardArrowDown fontSize="small" />;
-    }
-    if (sortingState.direction === "none" && sortingState.id === colValue) {
-      return <UnfoldMore fontSize="small" />;
     }
     return (
       <UnfoldMore
@@ -91,7 +87,7 @@ function HeaderColumnCell({
         border: isException ? 0 : "",
       }}
     >
-      <div className="flex flex-row group/header">
+      <div className="flex flex-row group/header h-full">
         <button
           className="flex gap-4 items-center px-5"
           onClick={handleSelectEntireColumn}
