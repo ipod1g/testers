@@ -5,3 +5,14 @@
 :root {
   background-color: #f7fafc;
 }
+
+.rdp {
+  --rdp-accent-color: #0000ff !important;
+  --rdp-outline: 2px solid var(--rdp-accent-color) !important; /* Outline border for focused elements */
+  --rdp-outline-selected: 3px solid var(--rdp-accent-color); /* Outline border for focused _and_ selected elements */
+}
+
+.rdp-button:focus-visible,
+.rdp-button:focus-within {
+  border: 2px solid #0000ff !important;
+}
