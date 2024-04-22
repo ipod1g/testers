@@ -10,10 +10,8 @@ module.exports = {
     "plugin:react-hooks/recommended",
     "plugin:import/recommended",
     "plugin:import/typescript",
-    require.resolve("@vercel/style-guide/eslint/node"),
-    require.resolve("@vercel/style-guide/eslint/typescript"),
-    require.resolve("@vercel/style-guide/eslint/react"),
-    require.resolve("@vercel/style-guide/eslint/browser"),
+    "plugin:react/recommended",
+    "plugin:react/jsx-runtime",
   ],
   ignorePatterns: [
     "node_modules",
@@ -24,6 +22,7 @@ module.exports = {
   ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
+    ecmaVersion: "latest",
     project: "tsconfig.json",
     tsconfigRootDir: __dirname,
     sourceType: "module",
@@ -32,15 +31,6 @@ module.exports = {
   root: true,
   rules: {
     "react/function-component-definition": "off",
-    "unicorn/filename-case": [
-      "error",
-      {
-        cases: {
-          camelCase: true,
-          pascalCase: true,
-        },
-      },
-    ],
     "@typescript-eslint/consistent-type-imports": "warn",
     "react-refresh/only-export-components": [
       "warn",
@@ -67,8 +57,7 @@ module.exports = {
         "newlines-between": "always",
       },
     ],
-    "import/no-named-as-default": "off",
-    "@typescript-eslint/explicit-function-return-type": "off",
+    "react/jsx-sort-props": "warn",
   },
   settings: {
     "import/resolver": {
