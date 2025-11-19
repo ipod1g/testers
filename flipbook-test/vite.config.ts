@@ -1,6 +1,7 @@
-import react from "@vitejs/plugin-react";
-import { defineConfig } from "vite";
-import viteTsconfigPaths from "vite-tsconfig-paths";
+import react from '@vitejs/plugin-react';
+import { defineConfig } from 'vite';
+import viteTsconfigPaths from 'vite-tsconfig-paths';
+import tailwindcss from '@tailwindcss/vite';
 // import { visualizer } from "rollup-plugin-visualizer";
 
 // https://vitejs.dev/config/
@@ -9,15 +10,13 @@ export default defineConfig({
     port: 3000,
     host: true,
     proxy: {
-      "/api": {
+      '/api': {
         ws: true,
         changeOrigin: true,
-        target: `http://${process.env.DEPLOYMENT === "local-cluster" ? "api" : "localhost"}:8080/`,
+        target: `http://${process.env.DEPLOYMENT === 'local-cluster' ? 'api' : 'localhost'}:8080/`,
         configure: (proxy) => {
-          proxy.on("proxyRes", (proxyRes, req) => {
-            if (
-              !(req.headers.cookie && req.headers.cookie.includes("visitorId"))
-            ) {
+          proxy.on('proxyRes', (proxyRes, req) => {
+            if (!(req.headers.cookie && req.headers.cookie.includes('visitorId'))) {
               // eslint-disable-next-line no-param-reassign
             }
           });
@@ -25,7 +24,7 @@ export default defineConfig({
       },
     },
     headers: {
-      "Document-Policy": "js-profiling",
+      'Document-Policy': 'js-profiling',
     },
   },
   preview: {
@@ -33,13 +32,13 @@ export default defineConfig({
   },
   plugins: [
     react(
-      process.env.NODE_ENV === "production"
+      process.env.NODE_ENV === 'production'
         ? undefined
         : {
             babel: {
               plugins: [
                 [
-                  "babel-plugin-styled-components",
+                  'babel-plugin-styled-components',
                   {
                     displayName: true,
                     fileName: false,
@@ -47,8 +46,9 @@ export default defineConfig({
                 ],
               ],
             },
-          }
+          },
     ),
+    tailwindcss(),
     viteTsconfigPaths(),
     // visualizer({
     //   open: true,

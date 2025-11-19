@@ -1,0 +1,42 @@
+{
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  // NOTE: allow custom labels for routes -- useful for file-based routing
+  "workbench.editor.customLabels.patterns": {
+    "**/src/presentation/routes/**/index.tsx": "${dirname} - ${filename}.${extname}",
+    "**/src/presentation/routes/**/route.ts": "${dirname} - ${filename}.${extname}",
+    "**/src/presentation/routes/**/route.tsx": "${dirname} - ${filename}.${extname}",
+    "**/src/presentation/routes/**/layout.tsx": "${dirname} - ${filename}.${extname}",
+    "**/src/presentation/routes/**/page.tsx": "${dirname} - ${filename}.${extname}",
+    "**/src/presentation/routes/**/loading.tsx": "${dirname} - ${filename}.${extname}",
+    "**/src/presentation/routes/**/not-found.tsx": "${dirname} - ${filename}.${extname}",
+    "**/src/presentation/routes/**/error.tsx": "${dirname} - ${filename}.${extname}"
+  },
+  "files.watcherExclude": {
+    "**/routeTree.gen.ts": true
+  },
+  "search.exclude": {
+    "**/routeTree.gen.ts": true
+  },
+  "files.readonlyInclude": {
+    "**/routeTree.gen.ts": true
+  },
+  "tailwindCSS.classFunctions": ["cva", "cx", "cn", "inputBaseClasses"],
+  "tailwindCSS.classAttributes": [
+    "class",
+    "className",
+    "inputBaseClasses",
+    "inputClasses",
+    "labelClasses",
+    "helperTextClasses",
+    "startSlotClasses",
+    "endSlotClasses"
+  ]
+}
